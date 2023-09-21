@@ -42,5 +42,10 @@
     "unbuild": "^2.0.0",
     "vitest": "^0.34.2"
   },
-  "packageManager": "pnpm@8.6.12"
+  "packageManager": "pnpm@8.6.12",
+  "dependencies": {
+    "applicationinsights": "^2.7.3",
+    "h3": "^1.8.1",
+    "nitropack": "2.5.2"
+  }
 }

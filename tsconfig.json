@@ -4,7 +4,10 @@
     "module": "ESNext",
     "moduleResolution": "Node",
     "esModuleInterop": true,
-    "strict": true
+    "strict": true,
+    "types": [
+      "./src/types.d.ts"
+    ]
   },
   "include": ["src"]
 }
