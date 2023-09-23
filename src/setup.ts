@@ -19,4 +19,4 @@ export function setup() {
         .setInternalLogging(Boolean(process.env.APPINSIGHTS_ENABLE_VERBOSE_LOGGING))
         .setUseDiskRetryCaching(Boolean(process.env.APPINSIGHTS_USE_DISK_RETRY_CACHING))
         .start()
-} 
+}
