@@ -21,7 +21,7 @@
   ],
   "scripts": {
     "build": "unbuild",
-    "dev": "vitest dev",
+    "dev": "pnpm nitro dev ./playground",
     "play": "jiti playground",
     "lint": "eslint --cache --ext .ts,.js,.mjs,.cjs . && prettier -c src test",
     "lint:fix": "eslint --cache --ext .ts,.js,.mjs,.cjs . --fix && prettier -c src test -w",
@@ -46,6 +46,9 @@
   "dependencies": {
     "applicationinsights": "^2.7.3",
     "h3": "^1.8.1",
-    "nitropack": "2.5.2"
+    "nitropack": "^2.6.3"
+  },
+  "resolutions": {
+    "mlly": "1.4.0"
   }
 }
