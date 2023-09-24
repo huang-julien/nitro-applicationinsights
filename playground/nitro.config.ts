@@ -1,8 +1,8 @@
-import { defineNitroConfig } from "nitropack/config"
+import { defineNitroConfig } from 'nitropack/config'
 
 export default defineNitroConfig({
-    plugins: [
-        "../src/plugin"
-    ],
-    srcDir: "./src"
+  plugins: [
+    '../src/plugin'
+  ],
+  srcDir: './src'
 })
