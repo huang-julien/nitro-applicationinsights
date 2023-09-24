@@ -1,8 +1,11 @@
 import { defineNitroPlugin } from 'nitropack/dist/runtime/plugin'
 import { setup } from './setup'
+import middleware from './middleware'
 
 export default defineNitroPlugin((nitro) => {
   setup()
+
+  nitro.h3App.use(middleware)
 
   nitro.hooks.hook('render:response', (response, { event }) => {
     event.__appInsights.client.trackRequest({
