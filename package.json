@@ -1,8 +1,8 @@
 {
-  "name": "packageName",
+  "name": "nitro-applicationinsights",
   "version": "0.0.0",
-  "description": "",
-  "repository": "unjs/packageName",
+  "description": "Application insights plugin for nitro.",
+  "repository": "huang-julien/nitro-applicationinsights",
   "license": "MIT",
   "sideEffects": false,
   "type": "module",
