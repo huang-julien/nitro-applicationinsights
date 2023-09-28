@@ -1,10 +1,11 @@
 import { defineEventHandler, getHeader, getCookie } from 'h3'
-import Traceparent from 'applicationinsights/out/Library/Traceparent'
-import TelemetryClient from 'applicationinsights/out/Library/NodeClient'
-import { useNitroApp } from 'nitropack/dist/runtime/app'
+import Traceparent from 'applicationinsights/out/Library/Traceparent.js'
+import TelemetryClient from 'applicationinsights/out/Library/NodeClient.js'
+import { NitroApp } from 'nitropack/types'
 
 export default defineEventHandler(async (event) => {
-  const nitro = useNitroApp()
+  // @ts-expect-error
+  const nitro = useNitroApp() as NitroApp
   const traceParent = getHeader(event, 'Traceparent')
 
   const trace = new Traceparent(traceParent)
