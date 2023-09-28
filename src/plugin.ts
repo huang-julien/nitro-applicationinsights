@@ -8,21 +8,21 @@ export default defineNitroPlugin((nitro) => {
   nitro.h3App.use(middleware)
 
   nitro.hooks.hook('render:response', (response, { event }) => {
-    event.__appInsights.client.trackRequest({
+    event.$appInsights.client.trackRequest({
       name: `${event.method}: ${event.path}`,
       url: event.path,
       resultCode: response.statusCode ?? 0,
-      duration: Date.now() - event.__appInsights.startTime,
+      duration: Date.now() - event.$appInsights.startTime,
       success: response.statusCode ? response.statusCode < 400 : false,
-      properties: event.__appInsights.properties,
+      properties: event.$appInsights.properties,
       contextObjects: {
-        ...event.__appInsights.client.context.tags,
+        ...event.$appInsights.client.context.tags,
         // needed ?
         // [event.__appInsights.client.context.keys.operationId]: event.__appInsights.trace.traceId,
-        [event.__appInsights.client.context.keys.operationParentId]:
-          event.__appInsights.trace.parentId
+        [event.$appInsights.client.context.keys.operationParentId]:
+          event.$appInsights.trace.parentId
       },
-      id: event.__appInsights.trace.traceId
+      id: event.$appInsights.trace.traceId
     })
   })
 })

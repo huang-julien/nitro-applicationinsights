@@ -41,7 +41,7 @@ export default defineEventHandler(async (event) => {
     { event }
   )
 
-  event.__appInsights = {
+  event.$appInsights = {
     startTime: Date.now(),
     client,
     initialTrace: traceParent ?? trace.toString(),
