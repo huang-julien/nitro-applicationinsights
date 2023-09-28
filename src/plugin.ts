@@ -1,9 +1,36 @@
 import { defineNitroPlugin } from 'nitropack/dist/runtime/plugin'
+import { DistributedTracingModes } from 'applicationinsights'
 import { setup } from './setup'
 import middleware from './middleware'
+import { TNitroAppInsightsConfig } from './types'
 
-export default defineNitroPlugin((nitro) => {
-  setup()
+export default defineNitroPlugin(async (nitro) => {
+  const config: TNitroAppInsightsConfig = {
+    connectionString: undefined,
+    autoCollectRequests: Boolean(process.env.APPINSIGHTS_AUTO_COLLECT_REQUESTS),
+    autoCollectConsole:
+    Boolean(process.env.APPINSIGHTS_AUTO_COLLECT_CONSOLE),
+    autoCollectDependencies:
+    Boolean(process.env.APPINSIGHTS_AUTO_COLLECT_DEPENDENCIES),
+    autoCollectExceptions: Boolean(process.env.APPINSIGHTS_AUTO_COLLECT_EXCEPTIONS),
+    autoCollectPerformance: Boolean(process.env.APPINSIGHTS_AUTO_COLLECT_PERFORMANCE),
+    autoCollectHeartbeat: Boolean(process.env.APPINSIGHTS_AUTO_COLLECT_HEARTBEAT),
+    autoCollectIncomingRequestAzureFunctions: Boolean(process.env.APPINSIGHTS_AUTO_COLLECT_AZURE_FUNCTIONS),
+    autoCollectPreAggregatedMetrics: Boolean(process.env.APPINSIGHTS_AUTO_COLLECT_PREAGGREGATEDMETRICS),
+    autoDependencyCorrelation: false,
+    enableWebInstrumentation: false,
+    distributedTracingMode: DistributedTracingModes.AI_AND_W3C,
+    sendLiveMetrics: false,
+    internalLogging: {
+      enableDebugLogging: false,
+      enableWarningLogging: false
+    },
+    useDiskRetryCaching: Boolean(process.env.APPINSIGHTS_DISK_RETRY_CACHING)
+  }
+
+  await nitro.hooks.callHook('applicationinsights:config', config)
+
+  setup(config)
 
   nitro.h3App.use(middleware)
 
