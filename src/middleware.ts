@@ -47,6 +47,7 @@ export default defineEventHandler(async (event) => {
     client,
     initialTrace: traceParent ?? trace.toString(),
     trace,
-    properties: {}
+    properties: {},
+    shouldTrack: true
   }
 })

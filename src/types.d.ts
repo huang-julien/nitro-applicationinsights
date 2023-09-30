@@ -10,6 +10,10 @@ declare module "h3" {
       trace: Traceparent;
       initialTrace: string;
       properties: Record<string, string>;
+      /**
+       * set false to disable tracking for this request
+       */
+      shouldTrack: boolean
     };
   }
 }
@@ -22,6 +26,7 @@ declare module "nitropack/dist/runtime/types.d.ts" {
       context: { event: H3Event },
     ) => void;
     "applicationinsights:config": (config: TNitroAppInsightsConfig) => void
+    "applicationinsights:trackRequest:before": (trackObject: Parameters<TelemetryClient["trackRequest"]>[0]) => void
   }
 }
 

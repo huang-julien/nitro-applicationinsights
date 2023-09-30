@@ -9,9 +9,9 @@ export default defineNitroPlugin(async (nitro) => {
     connectionString: undefined,
     autoCollectRequests: Boolean(process.env.APPINSIGHTS_AUTO_COLLECT_REQUESTS),
     autoCollectConsole:
-    Boolean(process.env.APPINSIGHTS_AUTO_COLLECT_CONSOLE),
+      Boolean(process.env.APPINSIGHTS_AUTO_COLLECT_CONSOLE),
     autoCollectDependencies:
-    Boolean(process.env.APPINSIGHTS_AUTO_COLLECT_DEPENDENCIES),
+      Boolean(process.env.APPINSIGHTS_AUTO_COLLECT_DEPENDENCIES),
     autoCollectExceptions: Boolean(process.env.APPINSIGHTS_AUTO_COLLECT_EXCEPTIONS),
     autoCollectPerformance: Boolean(process.env.APPINSIGHTS_AUTO_COLLECT_PERFORMANCE),
     autoCollectHeartbeat: Boolean(process.env.APPINSIGHTS_AUTO_COLLECT_HEARTBEAT),
@@ -34,22 +34,28 @@ export default defineNitroPlugin(async (nitro) => {
 
   nitro.h3App.use(middleware)
 
-  nitro.hooks.hook('render:response', (response, { event }) => {
-    event.$appInsights.client.trackRequest({
-      name: `${event.method}: ${event.path}`,
-      url: event.path,
-      resultCode: response.statusCode ?? 0,
-      duration: Date.now() - event.$appInsights.startTime,
-      success: response.statusCode ? response.statusCode < 400 : false,
-      properties: event.$appInsights.properties,
-      contextObjects: {
-        ...event.$appInsights.client.context.tags,
-        // needed ?
-        // [event.__appInsights.client.context.keys.operationId]: event.__appInsights.trace.traceId,
-        [event.$appInsights.client.context.keys.operationParentId]:
-          event.$appInsights.trace.parentId
-      },
-      id: event.$appInsights.trace.traceId
-    })
+  nitro.hooks.hook('render:response', async (response, { event }) => {
+    if (event.$appInsights.shouldTrack) {
+      const trackInfo = {
+        name: `${event.method}: ${event.path}`,
+        url: event.path,
+        resultCode: response.statusCode ?? 0,
+        duration: Date.now() - event.$appInsights.startTime,
+        success: response.statusCode ? response.statusCode < 400 : false,
+        properties: event.$appInsights.properties,
+        contextObjects: {
+          ...event.$appInsights.client.context.tags,
+          // needed ?
+          // [event.__appInsights.client.context.keys.operationId]: event.__appInsights.trace.traceId,
+          [event.$appInsights.client.context.keys.operationParentId]:
+            event.$appInsights.trace.parentId
+        },
+        id: event.$appInsights.trace.traceId
+      }
+
+      await nitro.hooks.callHook('applicationinsights:trackRequest:before', trackInfo)
+
+      event.$appInsights.client.trackRequest(trackInfo)
+    }
   })
 })
