@@ -1,6 +1,6 @@
-import type { TelemetryClient, DistributedTracingModes } from "applicationinsights";
-import type Traceparent from "applicationinsights/out/Library/Traceparent";
-import type { H3Event } from "h3";
+import type { TelemetryClient, DistributedTracingModes } from 'applicationinsights'
+import type Traceparent from 'applicationinsights/out/Library/Traceparent'
+import type { H3Event } from 'h3'
 
 export type TNitroAppInsightsConfig = {
   connectionString?: string
@@ -8,7 +8,7 @@ export type TNitroAppInsightsConfig = {
   autoCollectConsole: boolean | {value: boolean, collectConsoleLogs: boolean}
   autoCollectDependencies: boolean
   autoCollectExceptions: boolean
-  autoCollectPerformance: boolean| {value :boolean , collectExtendedMetrics: boolean}
+  autoCollectPerformance: boolean| {value :boolean, collectExtendedMetrics: boolean}
   autoCollectHeartbeat: boolean
   autoCollectIncomingRequestAzureFunctions: boolean
   autoCollectPreAggregatedMetrics: boolean
@@ -16,10 +16,10 @@ export type TNitroAppInsightsConfig = {
   enableWebInstrumentation: boolean | {value: boolean, WebSnippetConnectionString?: string}
   distributedTracingMode: DistributedTracingModes
   sendLiveMetrics:boolean
-  internalLogging: {enableDebugLogging?: boolean, enableWarningLogging?: boolean} 
+  internalLogging: {enableDebugLogging?: boolean, enableWarningLogging?: boolean}
   useDiskRetryCaching: boolean
 }
-declare module "h3" {
+declare module 'h3' {
   interface H3Event {
     $appInsights: {
       startTime: number;
@@ -35,15 +35,14 @@ declare module "h3" {
   }
 }
 
-declare module "nitropack" {
+declare module 'nitropack' {
   interface NitroRuntimeHooks {
-    "applicationinsights:context:tags": (
+    'applicationinsights:context:tags': (
       client: TelemetryClient,
       tags: Record<string, string>,
       context: { event: H3Event },
     ) => void;
-    "applicationinsights:config": (config: TNitroAppInsightsConfig) => void
-    "applicationinsights:trackRequest:before": (trackObject: Parameters<TelemetryClient["trackRequest"]>[0]) => void
+    'applicationinsights:config': (config: TNitroAppInsightsConfig) => void
+    'applicationinsights:trackRequest:before': (trackObject: Parameters<TelemetryClient['trackRequest']>[0]) => void
   }
 }
-
