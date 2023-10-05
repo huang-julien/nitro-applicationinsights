@@ -1,6 +1,6 @@
 {
   "name": "nitro-applicationinsights",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Application insights plugin for nitro.",
   "repository": "huang-julien/nitro-applicationinsights",
   "license": "MIT",
