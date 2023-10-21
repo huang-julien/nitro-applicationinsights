@@ -35,13 +35,13 @@ export default defineNitroPlugin(async (nitro) => {
 
   setup(config)
 
-  // @ts-expect-error
+  // @ts-expect-error not typed ?
   nitro.hooks.hook('request', async (event: H3Event) => {
     const nitro = useNitroApp() as NitroApp
     const traceParent = getHeader(event, 'Traceparent')
 
     const trace = new Traceparent(traceParent)
-    const client = new TelemetryClient()
+    const client = new TelemetryClient(config.connectionString)
 
     // context should contain Contract tags
     client.addTelemetryProcessor((envelope, context) => {
