@@ -2,7 +2,6 @@ import { DistributedTracingModes } from 'applicationinsights'
 import { getResponseStatus, getHeader, getCookie, H3Event } from 'h3'
 import Traceparent from 'applicationinsights/out/Library/Traceparent.js'
 import TelemetryClient from 'applicationinsights/out/Library/NodeClient.js'
-import { NitroApp } from 'nitropack/types'
 import { defineNitroPlugin } from 'nitropack/dist/runtime/plugin'
 import { setup } from './setup'
 import { TNitroAppInsightsConfig } from './types'
@@ -37,7 +36,6 @@ export default defineNitroPlugin(async (nitro) => {
 
   // @ts-expect-error not typed ?
   nitro.hooks.hook('request', async (event: H3Event) => {
-    const nitro = useNitroApp() as NitroApp
     const traceParent = getHeader(event, 'Traceparent')
 
     const trace = new Traceparent(traceParent)
