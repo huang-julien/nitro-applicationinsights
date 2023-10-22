@@ -1,7 +1,6 @@
 # nitro-applicationinsights
 
-[![npm version][npm-version-src]][https://www.npmjs.com/package/nitro-applicationinsights]
-[![npm downloads][npm-downloads-src]][https://www.npmjs.com/package/nitro-applicationinsights]
+[![npm version](https://badge.fury.io/js/nitro-applicationinsights.svg)](https://badge.fury.io/js/nitro-applicationinsights)
 
 Application insight plugin for [Nitro](https://github.com/unjs/nitro)
 
