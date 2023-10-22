@@ -1,9 +1,7 @@
 # nitro-applicationinsights
 
-[![npm version][npm-version-src]][npm-version-href]
-[![npm downloads][npm-downloads-src]][npm-downloads-href]
-[![bundle][bundle-src]][bundle-href]
-[![Codecov][codecov-src]][codecov-href]
+[![npm version][npm-version-src]][https://www.npmjs.com/package/nitro-applicationinsights]
+[![npm downloads][npm-downloads-src]][https://www.npmjs.com/package/nitro-applicationinsights]
 
 Application insight plugin for [Nitro](https://github.com/unjs/nitro)
 
@@ -22,24 +20,10 @@ yarn add nitro-applicationinsights
 pnpm install nitro-applicationinsights
 ```
 
-Import:
+Re-export the plugin within a plugin file:
 
 ```js
-// ESM
-import applicationInsightsPlugin from "nitro-applicationinsights";
-
-// CommonJS
-const applicationInsightsPlugin = require("nitro-applicationinsights");
-```
-
-## usage
-
-Add the module within your `nitro.config.ts`
-
-```ts
-export default defineNitroConfig({ 
-    plugins: ['nitro-applicationinsights']
-});
+export { default } from "nitro-applicationinsights";
 ```
 
 Et voilà ! You now have application insights node for Nitro
