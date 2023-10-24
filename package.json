@@ -46,7 +46,7 @@
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
     "applicationinsights": "^2.7.3",
     "h3": "^1.8.1",
-    "nitropack": "^2.6.3"
+    "nitropack": "^2.7.0"
   },
   "resolutions": {
     "mlly": "1.4.0"
