@@ -103,7 +103,7 @@ export default defineNitroPlugin(async (nitro) => {
         id: event.$appInsights.trace.traceId
       }
 
-      await nitro.hooks.callHook('applicationinsights:trackRequest:before', trackInfo)
+      await nitro.hooks.callHook('applicationinsights:trackRequest:before', event, trackInfo)
 
       event.$appInsights.client.trackRequest(trackInfo)
     }
