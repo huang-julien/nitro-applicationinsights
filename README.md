@@ -27,6 +27,10 @@ export { default } from "nitro-applicationinsights";
 
 Et voilà ! You now have application insights node for Nitro
 
+## Docs
+
+[Read more nitro-applicationinsights documentation](https://huang-julien-nitro-applicationinsights.nuxt.space/)
+
 ## Development
 
 - Clone this repository
