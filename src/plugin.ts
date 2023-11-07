@@ -86,8 +86,9 @@ export default defineNitroPlugin(async (nitro) => {
   nitro.hooks.hook('afterResponse', async (event: H3Event) => {
     if (event.$appInsights.shouldTrack) {
       const statusCode = getResponseStatus(event)
+      const name = `${event.method}: ${event.path}`
       const trackInfo = {
-        name: `${event.method}: ${event.path}`,
+        name,
         url: event.path,
         resultCode: statusCode,
         duration: Date.now() - event.$appInsights.startTime,
@@ -95,10 +96,9 @@ export default defineNitroPlugin(async (nitro) => {
         properties: event.$appInsights.properties,
         contextObjects: {
           ...event.$appInsights.client.context.tags,
-          // needed ?
-          // [event.__appInsights.client.context.keys.operationId]: event.__appInsights.trace.traceId,
-          [event.$appInsights.client.context.keys.operationParentId]:
-            event.$appInsights.trace.parentId
+            [event.$appInsights.client.context.keys.operationParentId]:
+            event.$appInsights.trace.parentId,
+            [event.$appInsights.client.context.keys.operationName]: name
         },
         id: event.$appInsights.trace.traceId
       }
