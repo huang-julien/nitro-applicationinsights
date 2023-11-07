@@ -96,9 +96,9 @@ export default defineNitroPlugin(async (nitro) => {
         properties: event.$appInsights.properties,
         contextObjects: {
           ...event.$appInsights.client.context.tags,
-            [event.$appInsights.client.context.keys.operationParentId]:
+          [event.$appInsights.client.context.keys.operationParentId]:
             event.$appInsights.trace.parentId,
-            [event.$appInsights.client.context.keys.operationName]: name
+          [event.$appInsights.client.context.keys.operationName]: name
         },
         id: event.$appInsights.trace.traceId
       }
