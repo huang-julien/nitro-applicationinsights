@@ -1,0 +1,1 @@
+{"id":"1ccb33af-2089-4b12-95b1-ad75424fdda4","timestamp":1700262328363,"matcher":{"static":{"/":null,"/api":null,"/api/search":{"prerender":true}},"wildcard":{},"dynamic":{}},"prerendered":["/","/guide/getting-started","/guide/how-does-it-work","/api/hooks","/guide/writing-pages","/guide/configuration"]}
