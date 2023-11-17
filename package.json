@@ -49,6 +49,6 @@
     "nitropack": "^2.7.2"
   },
   "resolutions": {
-    "mlly": "1.4.2"
+    "mlly": "1.4.0"
   }
 }
