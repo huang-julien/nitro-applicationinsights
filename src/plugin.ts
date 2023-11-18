@@ -34,7 +34,6 @@ export default defineNitroPlugin(async (nitro) => {
 
   setup(config)
 
-  // @ts-expect-error not typed ?
   nitro.hooks.hook('request', async (event: H3Event) => {
     const traceParent = getHeader(event, 'Traceparent')
 
@@ -82,7 +81,6 @@ export default defineNitroPlugin(async (nitro) => {
     }
   })
 
-  // @ts-expect-error
   nitro.hooks.hook('afterResponse', async (event: H3Event) => {
     if (event.$appInsights.shouldTrack) {
       const statusCode = getResponseStatus(event)
