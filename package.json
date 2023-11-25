@@ -4,6 +4,7 @@
   "description": "Application insights plugin for nitro.",
   "repository": "huang-julien/nitro-applicationinsights",
   "license": "MIT",
+  "keywords": ["nitro", "applicationinsights", "nitropack", "unjs"],
   "sideEffects": false,
   "type": "module",
   "exports": {
