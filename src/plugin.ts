@@ -96,9 +96,10 @@ export default defineNitroPlugin(async (nitro) => {
           ...event.$appInsights.client.context.tags,
           [event.$appInsights.client.context.keys.operationParentId]:
             event.$appInsights.trace.parentId,
-          [event.$appInsights.client.context.keys.operationName]: name
+          [event.$appInsights.client.context.keys.operationName]: name,
+          [event.$appInsights.client.context.keys.operationId]: event.$appInsights.initialTrace
         },
-        id: event.$appInsights.trace.traceId
+        id: event.$appInsights.trace.traceId,
       }
 
       await nitro.hooks.callHook('applicationinsights:trackRequest:before', event, trackInfo)
