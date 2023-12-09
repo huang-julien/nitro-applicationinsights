@@ -27,7 +27,7 @@ export function getEventTelemetryClient (event: H3Event) {
  * @param event - The H3Event object.
  * @returns The FetchOptions object.
  */
-export function get$FetchInterceptors (event?: H3Event): NitroFetchOptions<any, any> {
+export function create$fetchInterceptors (event?: H3Event): NitroFetchOptions<any, any> {
   let startTime: number | undefined
   const contextObjects: Record<string, string> = {}
   if (event) {
