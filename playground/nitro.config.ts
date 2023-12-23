@@ -1,7 +1,7 @@
 import { defineNitroConfig } from 'nitropack/config'
 
 export default defineNitroConfig({
-  plugins: [
+  modules: [
     '../src/index.ts'
   ]
 })
