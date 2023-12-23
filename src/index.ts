@@ -1,3 +1,3 @@
 export * from './types'
 export * from './utils'
-export { default } from './plugin'
+export { default } from './module'

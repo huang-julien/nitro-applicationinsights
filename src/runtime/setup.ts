@@ -1,5 +1,5 @@
 import * as applicationInsights from 'applicationinsights'
-import type { TNitroAppInsightsConfig } from './types'
+import type { TNitroAppInsightsConfig } from '../types'
 
 export function setup (config: TNitroAppInsightsConfig) {
   // Setup Application Insights using the instrumentation key from the environment variables
