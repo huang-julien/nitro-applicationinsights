@@ -3,8 +3,8 @@ import { getResponseStatus, getHeader, getCookie, H3Event } from 'h3'
 import Traceparent from 'applicationinsights/out/Library/Traceparent.js'
 import TelemetryClient from 'applicationinsights/out/Library/NodeClient.js'
 import { defineNitroPlugin } from 'nitropack/dist/runtime/plugin'
-import { setup } from './setup'
 import { TNitroAppInsightsConfig } from '../types'
+import { setup } from './setup'
 
 export default defineNitroPlugin(async (nitro) => {
   const config: TNitroAppInsightsConfig = {
