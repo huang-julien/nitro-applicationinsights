@@ -1,1 +1,0 @@
-{"id":"dae1426e-c946-4065-ac4c-6ae041548cb6","timestamp":1703012066658,"matcher":{"static":{"/":null,"/api":null,"/api/search":{"prerender":true}},"wildcard":{},"dynamic":{}},"prerendered":["/","/guide/getting-started","/guide/how-does-it-work","/api/hooks","/guide/writing-pages","/guide/configuration"]}
