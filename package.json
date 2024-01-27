@@ -37,21 +37,21 @@
     "test:types": "tsc --noEmit --skipLibCheck"
   },
   "devDependencies": {
-    "@types/node": "^20.11.5",
-    "@vitest/coverage-v8": "^1.2.1",
+    "@types/node": "^20.11.8",
+    "@vitest/coverage-v8": "^1.2.2",
     "changelogen": "^0.5.5",
     "eslint": "^8.56.0",
     "eslint-config-unjs": "^0.2.1",
     "jiti": "^1.21.0",
     "typescript": "^5.3.3",
     "unbuild": "^2.0.0",
-    "vitest": "^1.2.1"
+    "vitest": "^1.2.2"
   },
-  "packageManager": "pnpm@8.14.1",
+  "packageManager": "pnpm@8.15.0",
   "dependencies": {
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
     "applicationinsights": "^2.9.2",
-    "h3": "^1.10.0",
+    "h3": "^1.10.1",
     "nitropack": "^2.8.1"
   },
   "resolutions": {
