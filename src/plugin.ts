@@ -104,7 +104,9 @@ export default defineNitroPlugin(async (nitro) => {
 
       await nitro.hooks.callHook('applicationinsights:trackRequest:before', event, trackInfo)
 
-      event.$appInsights.client.trackRequest(trackInfo)
+      if (event.$appInsights.shouldTrack) {
+        event.$appInsights.client.trackRequest(trackInfo)
+      }
     }
   })
 
