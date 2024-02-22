@@ -8,7 +8,7 @@ import { TNitroAppInsightsConfig } from './types'
 
 export default defineNitroPlugin(async (nitro) => {
   const config: TNitroAppInsightsConfig = {
-    connectionString: undefined,
+    connectionString: process.env.APPINSIGHTS_CONNECTION_STRING,
     autoCollectRequests: Boolean(process.env.APPINSIGHTS_AUTO_COLLECT_REQUESTS),
     autoCollectConsole:
       Boolean(process.env.APPINSIGHTS_AUTO_COLLECT_CONSOLE),
