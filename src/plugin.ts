@@ -111,6 +111,10 @@ export default defineNitroPlugin(async (nitro) => {
   })
 
   nitro.hooks.hook('error', (error) => {
-    ApplicationInsights.defaultClient.trackException({ exception: error })
+    if (ApplicationInsights.defaultClient) {
+      ApplicationInsights.defaultClient.trackException({ exception: error })
+    } else if(import.meta.dev) {
+      console.warn('[nitro-applicationinsights]: Application Insights not initialized, error not tracked.')
+    }
   })
 })
