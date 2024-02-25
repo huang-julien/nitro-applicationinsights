@@ -1,5 +1,5 @@
 import ApplicationInsights, { DistributedTracingModes } from 'applicationinsights'
-import { getResponseStatus, getHeader, getCookie, H3Event } from 'h3'
+import { getResponseStatus, getHeader, getCookie, H3Event, getRequestHeader } from 'h3'
 import Traceparent from 'applicationinsights/out/Library/Traceparent.js'
 import TelemetryClient from 'applicationinsights/out/Library/NodeClient.js'
 import { defineNitroPlugin } from 'nitropack/dist/runtime/plugin'
@@ -95,11 +95,11 @@ export default defineNitroPlugin(async (nitro) => {
         contextObjects: {
           ...event.$appInsights.client.context.tags,
           [event.$appInsights.client.context.keys.operationParentId]:
-            event.$appInsights.trace.parentId,
+            getRequestHeader(event, 'traceparent')?.split('-')[2] ?? event.$appInsights.trace.traceId,
           [event.$appInsights.client.context.keys.operationName]: name,
-          [event.$appInsights.client.context.keys.operationId]: event.$appInsights.initialTrace
+          [event.$appInsights.client.context.keys.operationId]: event.$appInsights.trace.traceId
         },
-        id: event.$appInsights.trace.traceId
+        id: event.$appInsights.trace.spanId
       }
 
       await nitro.hooks.callHook('applicationinsights:trackRequest:before', event, trackInfo)
