@@ -22,7 +22,7 @@ export default defineNitroPlugin(async (nitro) => {
     autoDependencyCorrelation: false,
     enableWebInstrumentation: false,
     distributedTracingMode: DistributedTracingModes.AI_AND_W3C,
-    sendLiveMetrics: false,
+    sendLiveMetrics: Boolean(process.env.APPINSIGHTS_SEND_LIVE_METRICS),
     internalLogging: {
       enableDebugLogging: false,
       enableWarningLogging: false
