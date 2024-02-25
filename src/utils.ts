@@ -31,8 +31,8 @@ export function create$fetchInterceptors (event?: H3Event): NitroFetchOptions<an
   let startTime: number | undefined
   const contextObjects: Record<string, string> = {}
   if (event) {
-    contextObjects[event.$appInsights.client.context.keys.operationId] = event.$appInsights.trace.toString()
-    contextObjects[event.$appInsights.client.context.keys.operationParentId] = event.$appInsights.trace.traceId
+    contextObjects[event.$appInsights.client.context.keys.operationId] = event.$appInsights.trace.traceId
+    contextObjects[event.$appInsights.client.context.keys.operationParentId] = event.$appInsights.trace.spanId
   }
   return {
     onRequest (context) {
