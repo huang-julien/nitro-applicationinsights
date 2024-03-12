@@ -47,7 +47,6 @@ export default defineNitroPlugin(async (nitro) => {
     return true
   })
 
-
   nitro.hooks.hook('request', async (event: H3Event) => {
     const traceParent = getHeader(event, 'Traceparent')
     const trace = new Traceparent(traceParent)
@@ -64,7 +63,6 @@ export default defineNitroPlugin(async (nitro) => {
       [client.context.keys.userId]: aiUser,
       [client.context.keys.deviceId]: aiDevice
     }
- 
 
     await nitro.hooks.callHook(
       'applicationinsights:context:tags',
