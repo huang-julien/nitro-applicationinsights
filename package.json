@@ -37,7 +37,7 @@
     "test:types": "tsc --noEmit --skipLibCheck"
   },
   "devDependencies": {
-    "@types/node": "^20.11.25",
+    "@types/node": "^20.11.26",
     "@vitest/coverage-v8": "^1.3.1",
     "changelogen": "^0.5.5",
     "eslint": "^8.57.0",
@@ -52,7 +52,7 @@
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
     "applicationinsights": "^2.9.5",
     "h3": "^1.11.1",
-    "nitropack": "^2.9.1"
+    "nitropack": "^2.9.3"
   },
   "resolutions": {
     "mlly": "1.6.1"
