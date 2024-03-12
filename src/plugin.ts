@@ -1,7 +1,6 @@
 import ApplicationInsights, { DistributedTracingModes } from 'applicationinsights'
 import { getResponseStatus, getHeader, getCookie, H3Event, getRequestHeader } from 'h3'
 import Traceparent from 'applicationinsights/out/Library/Traceparent.js'
-import TelemetryClient from 'applicationinsights/out/Library/NodeClient.js'
 import { defineNitroPlugin } from 'nitropack/dist/runtime/plugin'
 import { setup } from './setup'
 import { TNitroAppInsightsConfig } from './types'
@@ -34,21 +33,24 @@ export default defineNitroPlugin(async (nitro) => {
 
   setup(config)
 
-  nitro.hooks.hook('request', async (event: H3Event) => {
-    const traceParent = getHeader(event, 'Traceparent')
+  const client = ApplicationInsights.defaultClient
 
-    const trace = new Traceparent(traceParent)
-    const client = new TelemetryClient(config.connectionString)
-
-    // context should contain Contract tags
-    client.addTelemetryProcessor((envelope, context) => {
-      if (context) {
-        for (const [key, val] of Object.entries(context)) {
+  // context should contain Contract tags
+  client.addTelemetryProcessor((envelope, context) => {
+    if (context) {
+      for (const [key, val] of Object.entries(context)) {
+        if (val) {
           envelope.tags[key] = val
         }
       }
-      return true
-    })
+    }
+    return true
+  })
+
+
+  nitro.hooks.hook('request', async (event: H3Event) => {
+    const traceParent = getHeader(event, 'Traceparent')
+    const trace = new Traceparent(traceParent)
 
     // initial traceId for this request
     trace.updateSpanId()
@@ -57,17 +59,17 @@ export default defineNitroPlugin(async (nitro) => {
     const aiUser = getCookie(event, 'ai_user')
     const aiSession = getCookie(event, 'ai_session')
     const aiDevice = getCookie(event, 'ai_device')
-
-    Object.assign(client.context.tags, {
+    const tags = {
       [client.context.keys.sessionId]: aiSession,
       [client.context.keys.userId]: aiUser,
       [client.context.keys.deviceId]: aiDevice
-    })
+    }
+ 
 
     await nitro.hooks.callHook(
       'applicationinsights:context:tags',
       client,
-      client.context.tags,
+      tags,
       { event }
     )
 
@@ -77,7 +79,8 @@ export default defineNitroPlugin(async (nitro) => {
       initialTrace: traceParent ?? trace.toString(),
       trace,
       properties: {},
-      shouldTrack: true
+      shouldTrack: true,
+      tags
     }
   })
 
@@ -93,7 +96,7 @@ export default defineNitroPlugin(async (nitro) => {
         success: statusCode < 400,
         properties: event.$appInsights.properties,
         contextObjects: {
-          ...event.$appInsights.client.context.tags,
+          ...event.$appInsights.tags,
           [event.$appInsights.client.context.keys.operationParentId]:
             getRequestHeader(event, 'traceparent')?.split('-')[2] ?? event.$appInsights.trace.traceId,
           [event.$appInsights.client.context.keys.operationName]: name,
