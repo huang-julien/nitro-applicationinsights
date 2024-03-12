@@ -31,6 +31,7 @@ declare module 'h3' {
        * set false to disable tracking for this request
        */
       shouldTrack: boolean
+      tags: Record<string, string|undefined>
     };
   }
 }
@@ -39,7 +40,7 @@ declare module 'nitropack' {
   interface NitroRuntimeHooks {
     'applicationinsights:context:tags': (
       client: TelemetryClient,
-      tags: Record<string, string>,
+      tags: Record<string, string|undefined>,
       context: { event: H3Event },
     ) => void;
     'applicationinsights:config': (config: TNitroAppInsightsConfig) => void
