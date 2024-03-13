@@ -1,6 +1,5 @@
-import type { TelemetryClient, DistributedTracingModes } from 'applicationinsights'
-import type Traceparent from 'applicationinsights/out/Library/Traceparent'
-import type { H3Event } from 'h3'
+/// <reference types="nitropack" />
+import type { DistributedTracingModes } from 'applicationinsights'
 
 export type TNitroAppInsightsConfig = {
   connectionString?: string
@@ -18,32 +17,4 @@ export type TNitroAppInsightsConfig = {
   sendLiveMetrics:boolean
   internalLogging: {enableDebugLogging?: boolean, enableWarningLogging?: boolean}
   useDiskRetryCaching: boolean
-}
-declare module 'h3' {
-  interface H3Event {
-    $appInsights: {
-      startTime: number;
-      client: TelemetryClient;
-      trace: Traceparent;
-      initialTrace: string;
-      properties: Record<string, string>;
-      /**
-       * set false to disable tracking for this request
-       */
-      shouldTrack: boolean
-      tags: Record<string, string|undefined>
-    };
-  }
-}
-
-declare module 'nitropack' {
-  interface NitroRuntimeHooks {
-    'applicationinsights:context:tags': (
-      client: TelemetryClient,
-      tags: Record<string, string|undefined>,
-      context: { event: H3Event },
-    ) => void;
-    'applicationinsights:config': (config: TNitroAppInsightsConfig) => void
-    'applicationinsights:trackRequest:before': (event: H3Event, trackObject: Parameters<TelemetryClient['trackRequest']>[0]) => void
-  }
 }
