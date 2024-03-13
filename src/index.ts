@@ -1,3 +1,3 @@
 export * from './types'
-export * from './utils'
 export { default } from './plugin'
+import "./augment.d.ts"

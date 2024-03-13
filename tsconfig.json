@@ -6,6 +6,6 @@
     "esModuleInterop": true,
     "strict": true
   },
-  "include": ["src", "./env.d.ts"],
+  "include": ["./src/*", "./src/**/*"],
   "extends": "./playground/tsconfig.json"
 }
