@@ -1,7 +1,5 @@
 /// <reference types="nitropack" />
-import type { TelemetryClient, DistributedTracingModes } from 'applicationinsights'
-import type Traceparent from 'applicationinsights/out/Library/Traceparent'
-import type { H3Event } from 'h3'
+import type { DistributedTracingModes } from 'applicationinsights'
 
 export type TNitroAppInsightsConfig = {
   connectionString?: string

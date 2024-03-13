@@ -1,3 +1,3 @@
+import './augment.d.ts'
 export * from './types'
 export { default } from './plugin'
-import "./augment.d.ts"
