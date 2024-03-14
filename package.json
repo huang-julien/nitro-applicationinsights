@@ -55,9 +55,11 @@
   "packageManager": "pnpm@8.15.4",
   "dependencies": {
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
-    "applicationinsights": "^2.9.5",
-    "h3": "^1.11.1",
-    "nitropack": "^2.9.3"
+    "applicationinsights": "^2.9.5"
+  },
+  "peerDependencies": {
+    "h3": ">=1",
+    "nitropack": ">=2"
   },
   "resolutions": {
     "mlly": "1.6.1"
