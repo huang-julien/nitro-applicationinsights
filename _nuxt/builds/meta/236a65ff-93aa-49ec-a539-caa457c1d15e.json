@@ -1,1 +1,0 @@
-{"id":"236a65ff-93aa-49ec-a539-caa457c1d15e","timestamp":1710539029279,"matcher":{"static":{"/api/search":{"prerender":true}},"wildcard":{},"dynamic":{}},"prerendered":["/","/guide/getting-started","/guide/how-does-it-work","/api/hooks","/utils/create-fetch-interceptor"]}
