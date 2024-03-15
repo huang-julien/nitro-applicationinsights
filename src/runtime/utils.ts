@@ -49,22 +49,24 @@ export function create$fetchInterceptors (event?: H3Event): NitroFetchOptions<an
         })
     },
     onResponse (context) {
+      const requestPath = context.request.toString()
       event?.$appInsights.client.trackDependency({
         dependencyTypeName: 'HTTP',
         duration: startTime ? (Date.now() - startTime) : 0,
-        name: `${context.options.method?.toUpperCase() || 'GET'} ${context.response.url}`,
-        data: context.response.url,
+        name: `${context.options.method || 'GET'} ${requestPath}`,
+        data: requestPath,
         resultCode: context.response.status,
         success: true,
         contextObjects
       })
     },
     onResponseError (context) {
+      const requestPath = context.request.toString()
       event?.$appInsights.client.trackDependency({
         dependencyTypeName: 'HTTP',
         duration: startTime ? (Date.now() - startTime) : 0,
-        name: `${context.options.method?.toUpperCase() || 'GET'} ${context.response.url}`,
-        data: context.response.url,
+        name: `${context.options.method?.toUpperCase() || 'GET'} ${requestPath}`,
+        data: requestPath,
         resultCode: context.response.status,
         success: false,
         contextObjects
