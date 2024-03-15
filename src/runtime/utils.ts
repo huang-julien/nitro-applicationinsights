@@ -52,7 +52,7 @@ export function create$fetchInterceptors (event?: H3Event): NitroFetchOptions<an
       event?.$appInsights.client.trackDependency({
         dependencyTypeName: 'HTTP',
         duration: startTime ? (Date.now() - startTime) : 0,
-        name: `${context.options.method} ${context.response.url}}`,
+        name: `${context.options.method?.toUpperCase() || 'GET'} ${context.response.url}`,
         data: context.response.url,
         resultCode: context.response.status,
         success: true,
@@ -63,7 +63,7 @@ export function create$fetchInterceptors (event?: H3Event): NitroFetchOptions<an
       event?.$appInsights.client.trackDependency({
         dependencyTypeName: 'HTTP',
         duration: startTime ? (Date.now() - startTime) : 0,
-        name: `${context.options.method} ${context.response.url}}`,
+        name: `${context.options.method?.toUpperCase() || 'GET'} ${context.response.url}`,
         data: context.response.url,
         resultCode: context.response.status,
         success: false,
