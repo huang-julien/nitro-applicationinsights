@@ -55,7 +55,8 @@
   "packageManager": "pnpm@8.15.4",
   "dependencies": {
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
-    "applicationinsights": "^2.9.5"
+    "applicationinsights": "^2.9.5",
+    "defu": "^6.1.4"
   },
   "peerDependencies": {
     "h3": ">=1",
