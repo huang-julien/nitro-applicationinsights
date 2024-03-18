@@ -2,33 +2,33 @@ import ApplicationInsights, { DistributedTracingModes } from 'applicationinsight
 import { getResponseStatus, getHeader, getCookie, H3Event, getRequestHeader } from 'h3'
 import Traceparent from 'applicationinsights/out/Library/Traceparent.js'
 import { defineNitroPlugin } from 'nitropack/dist/runtime/plugin'
+import defu from 'defu'
 import { setup } from './setup'
 import { TNitroAppInsightsConfig } from './types'
+import { useRuntimeConfig } from '#imports'
 
 export default defineNitroPlugin(async (nitro) => {
-  const config: TNitroAppInsightsConfig = {
-    connectionString: process.env.APPINSIGHTS_CONNECTION_STRING,
-    autoCollectRequests: Boolean(process.env.APPINSIGHTS_AUTO_COLLECT_REQUESTS),
-    autoCollectConsole:
-      Boolean(process.env.APPINSIGHTS_AUTO_COLLECT_CONSOLE),
-    autoCollectDependencies:
-      Boolean(process.env.APPINSIGHTS_AUTO_COLLECT_DEPENDENCIES),
-    autoCollectExceptions: Boolean(process.env.APPINSIGHTS_AUTO_COLLECT_EXCEPTIONS),
-    autoCollectPerformance: Boolean(process.env.APPINSIGHTS_AUTO_COLLECT_PERFORMANCE),
-    autoCollectHeartbeat: Boolean(process.env.APPINSIGHTS_AUTO_COLLECT_HEARTBEAT),
-    autoCollectIncomingRequestAzureFunctions: Boolean(process.env.APPINSIGHTS_AUTO_COLLECT_AZURE_FUNCTIONS),
-    autoCollectPreAggregatedMetrics: Boolean(process.env.APPINSIGHTS_AUTO_COLLECT_PREAGGREGATEDMETRICS),
+  const { applicationInsights } = useRuntimeConfig()
+  const config: TNitroAppInsightsConfig = defu(applicationInsights, {
+    connectionString: undefined,
+    autoCollectRequests: false,
+    autoCollectConsole: false,
+    autoCollectDependencies: false,
+    autoCollectExceptions: false,
+    autoCollectPerformance: false,
+    autoCollectHeartbeat: false,
+    autoCollectIncomingRequestAzureFunctions: false,
+    autoCollectPreAggregatedMetrics: false,
     autoDependencyCorrelation: false,
     enableWebInstrumentation: false,
     distributedTracingMode: DistributedTracingModes.AI_AND_W3C,
-    sendLiveMetrics: Boolean(process.env.APPINSIGHTS_SEND_LIVE_METRICS),
+    sendLiveMetrics: false,
     internalLogging: {
       enableDebugLogging: false,
       enableWarningLogging: false
     },
-    useDiskRetryCaching: Boolean(process.env.APPINSIGHTS_DISK_RETRY_CACHING)
-  }
-
+    useDiskRetryCaching: false
+  })
   await nitro.hooks.callHook('applicationinsights:config', config)
 
   setup(config)

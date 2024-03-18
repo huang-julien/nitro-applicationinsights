@@ -30,4 +30,8 @@ declare module 'nitropack' {
     'applicationinsights:config': (config: TNitroAppInsightsConfig) => void
     'applicationinsights:trackRequest:before': (event: H3Event, trackObject: Parameters<TelemetryClient['trackRequest']>[0]) => void
   }
+
+  interface NitroRuntimeConfig {
+    applicationinsights?: TNitroAppInsightsConfig
+  }
 }
