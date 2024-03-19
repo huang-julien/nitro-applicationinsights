@@ -2,14 +2,21 @@ import { defineBuildConfig } from 'unbuild'
 
 export default defineBuildConfig({
   entries: [
-    'src/index.ts',
-    'src/runtime'
+    {
+      builder: 'mkdist',
+      input: './src/runtime',
+      outDir: './dist/runtime'
+    },
+    {
+      builder: 'rollup',
+      input: './src/index.ts'
+    }
   ],
   declaration: true,
   rollup: {
-    emitCJS: true
-  },
-  externals: [
-    '#imports'
-  ]
+    emitCJS: true,
+    output: {
+      exports: 'named'
+    }
+  }
 })
