@@ -6,7 +6,7 @@ import { NitroFetchOptions } from 'nitropack'
  * @param {H3Event} event - The event object from h3.
  * @param {Record<string, string>} headers - optional headers to add to the object
  */
-export function getTraceparentHeader (event: H3Event, headers: HeadersInit = {}): HeadersInit {
+export function getTraceparentHeaders (event: H3Event, headers: HeadersInit = {}): HeadersInit {
   return Object.assign(headers, {
     traceparent: event.$appInsights.trace.toString()
   })
@@ -31,13 +31,13 @@ export function create$fetchInterceptors (event?: H3Event): NitroFetchOptions<an
   let startTime: number | undefined
   const contextObjects: Record<string, string> = {}
   if (event) {
-    contextObjects[event.$appInsights.client.context.keys.operationId] = event.$appInsights.trace.toString()
-    contextObjects[event.$appInsights.client.context.keys.operationParentId] = event.$appInsights.trace.traceId
+    contextObjects[event.$appInsights.client.context.keys.operationId] = event.$appInsights.trace.traceId
+    contextObjects[event.$appInsights.client.context.keys.operationParentId] = event.$appInsights.trace.spanId
   }
   return {
     onRequest (context) {
       if (event) {
-        context.options.headers = getTraceparentHeader(event, context.options.headers ?? {})
+        context.options.headers = getTraceparentHeaders(event, context.options.headers ?? {})
       }
       startTime = Date.now()
     },
@@ -49,22 +49,24 @@ export function create$fetchInterceptors (event?: H3Event): NitroFetchOptions<an
         })
     },
     onResponse (context) {
+      const requestPath = context.request.toString()
       event?.$appInsights.client.trackDependency({
         dependencyTypeName: 'HTTP',
         duration: startTime ? (Date.now() - startTime) : 0,
-        name: `${context.options.method} ${context.response.url}}`,
-        data: context.response.url,
+        name: `${context.options.method || 'GET'} ${requestPath}`,
+        data: requestPath,
         resultCode: context.response.status,
         success: true,
         contextObjects
       })
     },
     onResponseError (context) {
+      const requestPath = context.request.toString()
       event?.$appInsights.client.trackDependency({
         dependencyTypeName: 'HTTP',
         duration: startTime ? (Date.now() - startTime) : 0,
-        name: `${context.options.method} ${context.response.url}}`,
-        data: context.response.url,
+        name: `${context.options.method?.toUpperCase() || 'GET'} ${requestPath}`,
+        data: requestPath,
         resultCode: context.response.status,
         success: false,
         contextObjects

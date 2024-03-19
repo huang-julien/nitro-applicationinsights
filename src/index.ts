@@ -1,3 +1,3 @@
+import './augment.d.ts'
 export * from './types'
-export * from './utils'
 export { default } from './module'
