@@ -2,8 +2,8 @@ import ApplicationInsights, { DistributedTracingModes } from 'applicationinsight
 import { getResponseStatus, getHeader, getCookie, H3Event, getRequestHeader } from 'h3'
 import Traceparent from 'applicationinsights/out/Library/Traceparent.js'
 import { defineNitroPlugin } from 'nitropack/dist/runtime/plugin'
-import { TNitroAppInsightsConfig } from '../types'
 import defu from 'defu'
+import { TNitroAppInsightsConfig } from '../types'
 import { setup } from './setup'
 import { useRuntimeConfig } from '#imports'
 
