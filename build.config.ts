@@ -4,7 +4,8 @@ export default defineBuildConfig({
   entries: [
     {
       builder: 'mkdist',
-      input: './runtime'
+      input: './src/runtime',
+      outDir: './dist/runtime'
     },
     {
       builder: 'rollup',
