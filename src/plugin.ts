@@ -8,8 +8,8 @@ import { TNitroAppInsightsConfig } from './types'
 import { useRuntimeConfig } from '#imports'
 
 export default defineNitroPlugin(async (nitro) => {
-  const { applicationInsights } = useRuntimeConfig()
-  const config: TNitroAppInsightsConfig = defu(applicationInsights, {
+  const { applicationinsights } = useRuntimeConfig()
+  const config: TNitroAppInsightsConfig = defu(applicationinsights, {
     connectionString: undefined,
     autoCollectRequests: false,
     autoCollectConsole: false,
