@@ -32,6 +32,23 @@ Re-export the plugin within a plugin file:
 export { default } from "nitro-applicationinsights";
 ```
 
+### ⚠️ Change your nitro configuration
+
+The nitro plugin needs to be transformed. You need to inline it when re-exporting it.
+This issue will be solved once `nitro-applicationinsights` becomes a nitro-module.
+
+#### How to do it ?
+
+To inline nitro-applicationinsights plugin you need to add to `externals.inline`.
+
+```ts
+export default defineNitroConfig({
+    externals: {
+        inline: ['nitro-applicationinsights']
+    }
+})
+```
+
 Et voilà ! You now have application insights node for Nitro
 
 ## Docs
