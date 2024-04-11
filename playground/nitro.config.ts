@@ -1,8 +1,6 @@
 import { defineNitroConfig } from 'nitropack/config'
 
 export default defineNitroConfig({
-  runtimeConfig: {
-     
-  },
+  runtimeConfig: {},
   modules: ['../dist/index']
 })

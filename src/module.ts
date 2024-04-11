@@ -4,7 +4,7 @@ import { resolve, dirname } from 'pathe'
 
 export default <NitroModule>{
   name: 'nitro-applicationinsights',
-  setup(nitro) {
+  setup (nitro) {
     // this fix the detection of applicationinsights as esm while waiting for mlly 2.0
     if (!nitro.options.experimental?.legacyExternals) {
       if (!nitro.options.experimental) {
