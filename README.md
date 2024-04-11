@@ -2,14 +2,14 @@
 
 [![npm version](https://badge.fury.io/js/nitro-applicationinsights.svg)](https://badge.fury.io/js/nitro-applicationinsights)
 
-Application insight plugin for [Nitro](https://github.com/unjs/nitro)
+Application insight module for [Nitro](https://github.com/unjs/nitro)
 
 ## Current features
 
 - application insights configuration at startup
 - utilities for dependency correlation
 - auto-track requests
-- correlate trace to requests
+- correlate traces to requests
 
 ## Usage
 
@@ -26,29 +26,17 @@ yarn add nitro-applicationinsights
 pnpm install nitro-applicationinsights
 ```
 
-Re-export the plugin within a plugin file:
-
-```js
-export { default } from "nitro-applicationinsights";
-```
-
-### ⚠️ Change your nitro configuration
-
-The nitro plugin needs to be transformed. You need to inline it when re-exporting it.
-This issue will be solved once `nitro-applicationinsights` becomes a nitro-module.
-
-#### How to do it ?
-
-To inline nitro-applicationinsights plugin you need to add to `externals.inline`.
+Add `nitro-applicationinsights` to the `modules` in your config.
 
 ```ts
-export default defineNitroConfig({
-    externals: {
-        inline: ['nitro-applicationinsights']
-    }
+export default definenNitroConfig({
+    modules: ['nitro-applicationinsights']
 })
 ```
 
+⚠️ This module force enable `experimental.legacyExternals` in your nitro config.
+
+ 
 Et voilà ! You now have application insights node for Nitro
 
 ## Docs
