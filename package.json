@@ -19,9 +19,14 @@
       "require": "./dist/index.cjs"
     },
     "./runtime": {
-      "types": "./dist/runtime.d.ts",
-      "import": "./dist/runtime.mjs",
-      "require": "./dist/runtime.cjs"
+      "types": "./dist/runtime/index.d.ts",
+      "import": "./dist/runtime/index.mjs",
+      "require": "./dist/runtime/index.js"
+    },
+    "./runtime/plugin": {
+      "types": "./dist/runtime/plugin.d.ts",
+      "import": "./dist/runtime/plugin.mjs",
+      "require": "./dist/runtime/plugin.js"
     }
   },
   "main": "./dist/index.cjs",
@@ -56,6 +61,7 @@
   "dependencies": {
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
     "applicationinsights": "^2.9.5",
+    "pathe": "^1.1.1",
     "defu": "^6.1.4"
   },
   "peerDependencies": {

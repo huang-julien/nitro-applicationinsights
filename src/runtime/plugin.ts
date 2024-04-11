@@ -3,8 +3,8 @@ import { getResponseStatus, getHeader, getCookie, H3Event, getRequestHeader } fr
 import Traceparent from 'applicationinsights/out/Library/Traceparent.js'
 import { defineNitroPlugin } from 'nitropack/dist/runtime/plugin'
 import defu from 'defu'
+import type { TNitroAppInsightsConfig } from '../types'
 import { setup } from './setup'
-import { TNitroAppInsightsConfig } from './types'
 import { useRuntimeConfig } from '#imports'
 
 export default defineNitroPlugin(async (nitro) => {
