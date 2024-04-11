@@ -5,7 +5,14 @@ export default defineBuildConfig({
     {
       builder: 'mkdist',
       input: './src/runtime',
-      outDir: './dist/runtime'
+      outDir: './dist/runtime',
+      format: "cjs"
+    },
+    {
+      builder: 'mkdist',
+      input: './src/runtime',
+      outDir: './dist/runtime',
+      format: "esm"
     },
     {
       builder: 'rollup',
@@ -15,8 +22,5 @@ export default defineBuildConfig({
   declaration: true,
   rollup: {
     emitCJS: true,
-    output: {
-      exports: 'named'
-    }
   }
 })
