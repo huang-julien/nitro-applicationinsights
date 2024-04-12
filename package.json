@@ -39,8 +39,8 @@
     "build": "unbuild",
     "dev": "pnpm nitro dev ./playground",
     "play": "jiti playground",
-    "lint": "pnpm nitro prepare playground && eslint --cache --ext .ts,.js,.mjs,.cjs .",
-    "lint:fix": "pnpm nitro prepare playground && eslint --cache --ext .ts,.js,.mjs,.cjs . --fix",
+    "lint": "pnpm nitro prepare playground && eslint --cache .",
+    "lint:fix": "pnpm nitro prepare playground && eslint --cache . --fix",
     "prepack": "pnpm run build",
     "release": "pnpm test && changelogen --release && npm publish && git push --follow-tags",
     "test": "pnpm lint && pnpm test:types && vitest run --coverage",
@@ -51,7 +51,7 @@
     "@vitest/coverage-v8": "^1.4.0",
     "changelogen": "^0.5.5",
     "eslint": "^9.0.0",
-    "eslint-config-unjs": "^0.2.1",
+    "eslint-config-unjs": "^0.3.0-rc.6",
     "jiti": "^1.21.0",
     "typescript": "^5.4.4",
     "unbuild": "^2.0.0",
@@ -59,7 +59,6 @@
   },
   "packageManager": "pnpm@8.15.6",
   "dependencies": {
-    "@nuxtjs/eslint-config-typescript": "^12.1.0",
     "applicationinsights": "^2.9.5",
     "pathe": "^1.1.1",
     "defu": "^6.1.4"
