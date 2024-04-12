@@ -29,7 +29,7 @@ pnpm install nitro-applicationinsights
 Add `nitro-applicationinsights` to the `modules` in your config.
 
 ```ts
-export default definenNitroConfig({
+export default defineNitroConfig({
     modules: ['nitro-applicationinsights']
 })
 ```
