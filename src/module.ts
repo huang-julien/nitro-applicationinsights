@@ -1,10 +1,8 @@
-import { fileURLToPath } from 'node:url'
 import type { NitroModule } from 'nitropack'
-import { resolve, dirname } from 'pathe'
-
+import { resolvePath } from "mlly"
 export default <NitroModule>{
   name: 'nitro-applicationinsights',
-  setup (nitro) {
+  async setup(nitro) {
     // this fix the detection of applicationinsights as esm while waiting for mlly 2.0
     if (!nitro.options.experimental?.legacyExternals) {
       if (!nitro.options.experimental) {
@@ -12,6 +10,25 @@ export default <NitroModule>{
       }
       nitro.options.experimental.legacyExternals = true
     }
-    nitro.options.plugins.push(resolve(dirname(fileURLToPath(import.meta.url)), './runtime/plugin'))
+
+    if (!nitro.options.externals) {
+      nitro.options.externals = {}
+    }
+
+    nitro.options.externals.inline = nitro.options.externals.inline || []
+    // force inline the plugin and the setup file
+    nitro.options.externals.inline.push((id) => (
+      id.includes('nitro-applicationinsights/runtime/plugin')
+      || id.includes('nitro-applicationinsights/dist/runtime/plugin')
+      || id.includes('nitro-applicationinsights/runtime/setup')
+      || id.includes('nitro-applicationinsights/dist/runtime/setup')
+    ))
+
+    nitro.options.externals.traceInclude = nitro.options.externals.traceInclude || []
+
+    // the main file doesn't seems to be traced
+    nitro.options.externals.traceInclude.push(await resolvePath('applicationinsights/out/applicationinsights.js'))
+
+    nitro.options.plugins.push('nitro-applicationinsights/runtime/plugin')
   }
 }
