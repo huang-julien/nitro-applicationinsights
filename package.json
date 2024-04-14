@@ -60,6 +60,7 @@
   "packageManager": "pnpm@8.15.6",
   "dependencies": {
     "applicationinsights": "^2.9.5",
+    "defu": "^6.1.4",
     "mlly": "^1.6.1",
     "pathe": "^1.1.1"
   },
