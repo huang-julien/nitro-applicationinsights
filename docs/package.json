@@ -12,9 +12,9 @@
   "devDependencies": {
     "@nuxt-themes/docus": "latest",
     "@nuxt/devtools": "^1.1.5",
-    "@nuxt/eslint-config": "^0.3.1",
+    "@nuxt/eslint-config": "^0.3.6",
     "@nuxtjs/plausible": "^1.0.0",
-    "@types/node": "^20.12.5",
+    "@types/node": "^20.12.7",
     "eslint": "^9.0.0",
     "nuxt": "^3.11.2"
   }
