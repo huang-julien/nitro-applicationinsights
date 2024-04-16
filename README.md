@@ -33,9 +33,6 @@ export default defineNitroConfig({
     modules: ['nitro-applicationinsights']
 })
 ```
-
-⚠️ This module force enable `experimental.legacyExternals` in your nitro config.
-
  
 Et voilà ! You now have application insights node for Nitro
 

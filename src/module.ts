@@ -3,14 +3,6 @@ import { resolvePath } from "mlly"
 export default <NitroModule>{
   name: 'nitro-applicationinsights',
   async setup(nitro) {
-    // this fix the detection of applicationinsights as esm while waiting for mlly 2.0
-    if (!nitro.options.experimental?.legacyExternals) {
-      if (!nitro.options.experimental) {
-        nitro.options.experimental = {}
-      }
-      nitro.options.experimental.legacyExternals = true
-    }
-
     if (!nitro.options.externals) {
       nitro.options.externals = {}
     }
