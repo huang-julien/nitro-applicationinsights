@@ -47,6 +47,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.12.7",
+    "nitro-applicationinsights": "link:./",
     "@vitest/coverage-v8": "^1.5.0",
     "changelogen": "^0.5.5",
     "eslint": "^9.0.0",

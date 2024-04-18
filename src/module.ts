@@ -27,6 +27,8 @@ export default <NitroModule>{
     // the main file doesn't seems to be traced
     nitro.options.externals.traceInclude.push(await resolvePath('applicationinsights/out/applicationinsights.js'))
 
-    nitro.options.plugins.push(await resolvePath('nitro-applicationinsights/runtime/plugin'))
+    nitro.options.plugins.push(await resolvePath('nitro-applicationinsights/runtime/plugin', {
+      extensions: ['.ts', '.mjs', '.js']
+    }))
   }
 }
