@@ -7,6 +7,12 @@ export default <NitroModule>{
       nitro.options.externals = {}
     }
 
+    // needed to not inline applicationinsights until mlly 2.0
+    if (!nitro.options.experimental) {
+      nitro.options.experimental = {}
+    }
+    nitro.options.experimental.legacyExternals = true
+
     nitro.options.externals.inline = nitro.options.externals.inline || []
     // force inline the plugin and the setup file
     nitro.options.externals.inline.push((id) => (
@@ -21,6 +27,8 @@ export default <NitroModule>{
     // the main file doesn't seems to be traced
     nitro.options.externals.traceInclude.push(await resolvePath('applicationinsights/out/applicationinsights.js'))
 
-    nitro.options.plugins.push('nitro-applicationinsights/runtime/plugin')
+    nitro.options.plugins.push(await resolvePath('nitro-applicationinsights/runtime/plugin', {
+      extensions: ['.ts', '.mjs', '.js']
+    }))
   }
 }

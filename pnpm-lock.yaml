@@ -43,6 +43,9 @@ devDependencies:
   jiti:
     specifier: ^1.21.0
     version: 1.21.0
+  nitro-applicationinsights:
+    specifier: link:./
+    version: 'link:'
   typescript:
     specifier: ^5.4.5
     version: 5.4.5
