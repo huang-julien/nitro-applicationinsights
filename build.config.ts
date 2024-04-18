@@ -17,10 +17,11 @@ export default defineBuildConfig({
     {
       builder: 'rollup',
       input: './src/index.ts'
-    }
+    },
   ],
   declaration: true,
   rollup: {
-    emitCJS: true
-  }
+    emitCJS: true,
+  },
+  externals: ['#imports'],
 })
