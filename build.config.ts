@@ -6,12 +6,6 @@ export default defineBuildConfig({
       builder: 'mkdist',
       input: './src/runtime',
       outDir: './dist/runtime',
-      format: 'cjs'
-    },
-    {
-      builder: 'mkdist',
-      input: './src/runtime',
-      outDir: './dist/runtime',
       format: 'esm'
     },
     {
