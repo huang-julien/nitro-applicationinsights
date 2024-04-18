@@ -7,6 +7,12 @@ export default <NitroModule>{
       nitro.options.externals = {}
     }
 
+    // needed to not inline applicationinsights until mlly 2.0
+    if (!nitro.options.experimental) {
+      nitro.options.experimental = {}
+    }
+    nitro.options.experimental.legacyExternals = true
+
     nitro.options.externals.inline = nitro.options.externals.inline || []
     // force inline the plugin and the setup file
     nitro.options.externals.inline.push((id) => (
