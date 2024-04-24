@@ -111,9 +111,13 @@ export default <NitroAppPlugin>(async (nitro) => {
     }
   })
 
-  nitro.hooks.hook('error', (error) => {
+  nitro.hooks.hook('error', async (error, ctx) => {
     if (ApplicationInsights.defaultClient) {
-      ApplicationInsights.defaultClient.trackException({ exception: error })
+      if(!('shouldTrack' in ctx)) { ctx.shouldTrack = true }
+      await nitro.hooks.callHook('applicationinsights:trackError:before', error, ctx)
+      if(ctx.shouldTrack) {
+        ApplicationInsights.defaultClient.trackException({ exception: error })
+      }
     }
   })
 })
