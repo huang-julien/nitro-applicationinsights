@@ -36,6 +36,7 @@
   ],
   "scripts": {
     "build": "unbuild",
+    "dev:prepare": "pnpm build --stub && pnpm nitropack prepare && pnpm nitro prepare ./playground",
     "dev": "pnpm nitro dev ./playground",
     "play": "jiti playground",
     "lint": "pnpm nitro prepare playground && eslint --cache .",
