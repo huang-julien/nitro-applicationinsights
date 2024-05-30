@@ -2,7 +2,7 @@ import type { TelemetryClient } from 'applicationinsights'
 import type Traceparent from 'applicationinsights/out/Library/Traceparent'
 import type { H3Event } from 'h3'
 import type { TNitroAppInsightsConfig } from './types'
-import { CapturedErrorContext } from 'nitropack';
+import { CapturedErrorContext, NitroConfig } from 'nitropack';
  
 declare module 'h3' {
   interface H3Event {
@@ -37,4 +37,12 @@ declare module 'nitropack' {
   interface NitroRuntimeConfig {
     applicationinsights?: TNitroAppInsightsConfig
   }
+}
+
+declare module 'nitropack/config' {
+  function defineNitroConfig(config: NitroConfig & {
+      runtimeConfig: {
+        applicationinsights?: TNitroAppInsightsConfig
+      }
+    }): NitroConfig;
 }
