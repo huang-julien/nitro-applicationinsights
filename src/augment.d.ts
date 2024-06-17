@@ -1,4 +1,4 @@
-import type { TelemetryClient } from 'applicationinsights'
+import type { TelemetryClient, Contracts } from 'applicationinsights'
 import type Traceparent from 'applicationinsights/out/Library/Traceparent'
 import type { H3Event } from 'h3'
 import type { TNitroAppInsightsConfig } from './types'
@@ -31,7 +31,7 @@ declare module 'nitropack' {
     'applicationinsights:config': (config: TNitroAppInsightsConfig) => void
     'applicationinsights:trackRequest:before': (event: H3Event, trackObject: Parameters<TelemetryClient['trackRequest']>[0]) => void
     // todo add type augmentation to context
-    'applicationinsights:trackError:before': (error: Error, context: CapturedErrorContext) => void
+    'applicationinsights:trackError:before': (exceptionTelemtry: Contracts.ExceptionTelemetry, context: CapturedErrorContext) => void
   }
 
   interface NitroRuntimeConfig {
