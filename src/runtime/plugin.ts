@@ -115,6 +115,15 @@ export default <NitroAppPlugin>(async (nitro) => {
     if (ApplicationInsights.defaultClient) {
       if(!('shouldTrack' in ctx)) { ctx.shouldTrack = true }
       const exceptionTelemetry: ApplicationInsights.Contracts.ExceptionTelemetry = { exception: error }
+      if (ctx.event) {
+        const { event } = ctx
+        exceptionTelemetry.contextObjects = {
+          ...exceptionTelemetry.contextObjects,
+          ...event.$appInsights.tags,
+          [event.$appInsights.client.context.keys.operationParentId]: event.$appInsights.trace.spanId,
+          [event.$appInsights.client.context.keys.operationId]: event.$appInsights.trace.traceId,
+        }
+      }
       await nitro.hooks.callHook('applicationinsights:trackError:before', exceptionTelemetry, ctx)
       if(ctx.shouldTrack) {
         ApplicationInsights.defaultClient.trackException(exceptionTelemetry)
