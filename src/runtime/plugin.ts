@@ -1,7 +1,7 @@
 import ApplicationInsights, { DistributedTracingModes } from 'applicationinsights'
 import { getResponseStatus, getHeader, getCookie, H3Event, getRequestHeader } from 'h3'
 import Traceparent from 'applicationinsights/out/Library/Traceparent.js'
-import type { NitroAppPlugin } from 'nitropack'
+import type { NitroApp, NitroAppPlugin } from 'nitropack'
 import defu from 'defu'
 import type { TNitroAppInsightsConfig } from '../types'
 import { setup } from './setup'
@@ -82,39 +82,26 @@ export default <NitroAppPlugin>(async (nitro) => {
     }
   })
 
-  nitro.hooks.hook('afterResponse', async (event: H3Event) => {
-    if (event.$appInsights.shouldTrack) {
-      const statusCode = getResponseStatus(event)
-      const name = `${event.method}: ${event.path}`
-      const trackInfo = {
-        name,
-        url: event.path,
-        resultCode: statusCode,
-        duration: Date.now() - event.$appInsights.startTime,
-        success: statusCode < 400,
-        properties: event.$appInsights.properties,
-        contextObjects: {
-          ...event.$appInsights.tags,
-          [event.$appInsights.client.context.keys.operationParentId]:
-            getRequestHeader(event, 'traceparent')?.split('-')[2] ?? event.$appInsights.trace.spanId,
-          [event.$appInsights.client.context.keys.operationName]: name,
-          [event.$appInsights.client.context.keys.operationId]: event.$appInsights.trace.traceId
-        },
-        id: event.$appInsights.trace.spanId
-      }
-
-      await nitro.hooks.callHook('applicationinsights:trackRequest:before', event, trackInfo)
-
-      if (event.$appInsights.shouldTrack) {
-        event.$appInsights.client.trackRequest(trackInfo)
-      }
-    }
+  nitro.hooks.hook('beforeResponse', async (event: H3Event) => {
+    event.waitUntil(trackEvent(nitro, event))
   })
 
   nitro.hooks.hook('error', async (error, ctx) => {
     if (ApplicationInsights.defaultClient) {
       if(!('shouldTrack' in ctx)) { ctx.shouldTrack = true }
-      const exceptionTelemetry: ApplicationInsights.Contracts.ExceptionTelemetry = { exception: error }
+      const exceptionTelemetry: ApplicationInsights.Contracts.ExceptionTelemetry = { exception: error , contextObjects: {
+        ...ctx.event?.$appInsights.tags, 
+      }}
+
+      if(ctx.event) {
+        exceptionTelemetry.contextObjects = {
+          ...exceptionTelemetry.contextObjects,
+          [ctx.event.$appInsights.client.context.keys.operationParentId]: ctx.event.$appInsights.trace.traceId,
+          [ctx.event.$appInsights.client.context.keys.operationName]: `${ctx.event.method}: ${ctx.event.path}`,
+          [ctx.event.$appInsights.client.context.keys.operationId]: ctx.event.$appInsights.trace.traceId
+        }
+      }
+
       await nitro.hooks.callHook('applicationinsights:trackError:before', exceptionTelemetry, ctx)
       if(ctx.shouldTrack) {
         ApplicationInsights.defaultClient.trackException(exceptionTelemetry)
@@ -122,3 +109,33 @@ export default <NitroAppPlugin>(async (nitro) => {
     }
   })
 })
+
+
+async function trackEvent(nitro: NitroApp, event: H3Event) {
+  if (event.$appInsights.shouldTrack) {
+    const statusCode = getResponseStatus(event)
+    const name = `${event.method}: ${event.path}`
+    const trackInfo = {
+      name,
+      url: event.path,
+      resultCode: statusCode,
+      duration: Date.now() - event.$appInsights.startTime,
+      success: statusCode < 400,
+      properties: event.$appInsights.properties,
+      contextObjects: {
+        ...event.$appInsights.tags,
+        [event.$appInsights.client.context.keys.operationParentId]:
+          getRequestHeader(event, 'traceparent')?.split('-')[2] ?? event.$appInsights.trace.spanId,
+        [event.$appInsights.client.context.keys.operationName]: name,
+        [event.$appInsights.client.context.keys.operationId]: event.$appInsights.trace.traceId
+      },
+      id: event.$appInsights.trace.spanId
+    }
+
+    await nitro.hooks.callHook('applicationinsights:trackRequest:before', event, trackInfo)
+
+    if (event.$appInsights.shouldTrack) {
+      event.$appInsights.client.trackRequest(trackInfo)
+    }
+  }
+}
