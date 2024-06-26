@@ -125,7 +125,7 @@ async function trackEvent(nitro: NitroApp, event: H3Event) {
       contextObjects: {
         ...event.$appInsights.tags,
         [event.$appInsights.client.context.keys.operationParentId]:
-          getRequestHeader(event, 'traceparent')?.split('-')[2] ?? event.$appInsights.trace.traceId,
+          getRequestHeader(event, 'traceparent')?.split('-')[2] ?? event.$appInsights.trace.spanId,
         [event.$appInsights.client.context.keys.operationName]: name,
         [event.$appInsights.client.context.keys.operationId]: event.$appInsights.trace.traceId
       },
