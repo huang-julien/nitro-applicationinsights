@@ -1,9 +1,11 @@
 import { defineConfig } from 'nitro-test-utils/config'
-
-const rootDir = new URL('fixtures/basic', import.meta.url).pathname
+import { resolvePathSync } from 'mlly'
+import { dirname } from 'pathe'
 
 export default defineConfig({
     nitro: {
-        rootDir 
+        rootDir: dirname(resolvePathSync('./fixtures/basic/nitro.config.ts', {
+            url: import.meta.url
+        })),
     }
 })

@@ -43,17 +43,17 @@
     "lint:fix": "pnpm nitro prepare playground && eslint --cache . --fix",
     "prepack": "pnpm run build",
     "release": "pnpm test && changelogen --release && npm publish && git push --follow-tags",
-    "test": "pnpm lint && pnpm test:types && vitest run --coverage",
+    "test": "pnpm lint && pnpm test:types && vitest run --coverage --c ./test/vitest.config.ts",
     "test:types": "tsc --noEmit --skipLibCheck"
   },
   "devDependencies": {
     "@types/node": "^20.14.2",
-    "nitro-applicationinsights": "link:./",
     "@vitest/coverage-v8": "^1.6.0",
     "changelogen": "^0.5.5",
     "eslint": "^9.5.0",
     "eslint-config-unjs": "^0.3.2",
     "jiti": "^1.21.6",
+    "nitro-applicationinsights": "link:./",
     "typescript": "^5.4.5",
     "unbuild": "^2.0.0",
     "vitest": "^1.6.0"
@@ -63,6 +63,7 @@
     "applicationinsights": "^2.9.5",
     "defu": "^6.1.4",
     "mlly": "^1.7.1",
+    "nitro-test-utils": "^0.5.0",
     "pathe": "^1.1.2"
   },
   "peerDependencies": {
