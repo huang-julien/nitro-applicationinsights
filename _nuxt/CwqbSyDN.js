@@ -1,1 +1,0 @@
-import{l as n,c as t,e as o,Z as c}from"./CylD11rP.js";const r={};function a(e,s){return t(),o("p",null,[c(e.$slots,"default",{},void 0,!0)])}const l=n(r,[["render",a],["__scopeId","data-v-63bfa697"]]);export{l as default};
