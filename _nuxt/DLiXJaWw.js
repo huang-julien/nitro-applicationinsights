@@ -1,1 +1,0 @@
-import{l as t,c as n,e as c,Z as o}from"./C8CLm2e_.js";const r={};function a(e,s){return n(),c("tr",null,[o(e.$slots,"default",{},void 0,!0)])}const l=t(r,[["render",a],["__scopeId","data-v-a0e7c17a"]]);export{l as default};
