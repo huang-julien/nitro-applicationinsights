@@ -114,7 +114,7 @@ export default <NitroAppPlugin>(async (nitro) => {
 async function trackEvent(nitro: NitroApp, event: H3Event) {
   if (event.$appInsights.shouldTrack) {
     const statusCode = getResponseStatus(event)
-    const name = `${event.method}: ${event.path}`
+    const name = `${event.method}: ${event.context.matchedRoute ?? event.path}`
     const trackInfo = {
       name,
       url: event.path,
