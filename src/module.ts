@@ -1,5 +1,6 @@
 import type { NitroModule } from 'nitropack'
 import { resolvePath } from "mlly"
+import defu from 'defu'
 export default <NitroModule>{
   name: 'nitro-applicationinsights',
   async setup(nitro) {
@@ -7,23 +8,18 @@ export default <NitroModule>{
       nitro.options.externals = {}
     }
 
-    // needed to not inline applicationinsights until mlly 2.0
-    if (!nitro.options.experimental) {
-      nitro.options.experimental = {}
-    }
-    nitro.options.experimental.legacyExternals = true
+    nitro.options.alias['#applicationinsights'] = await resolvePath('nitro-applicationinsights/runtime/applicationinsights', {
+      extensions: ['.ts', '.mjs', '.js']
+    })
 
     nitro.options.externals.inline = nitro.options.externals.inline || []
     // force inline the plugin and the setup file
     nitro.options.externals.inline.push((id) => (
       id.includes('nitro-applicationinsights/runtime/plugin')
       || id.includes('nitro-applicationinsights/dist/runtime/plugin')
-      || id.includes('nitro-applicationinsights/runtime/setup')
-      || id.includes('nitro-applicationinsights/dist/runtime/setup')
     ))
 
     nitro.options.externals.traceInclude = nitro.options.externals.traceInclude || []
-
     // the main file doesn't seems to be traced
     nitro.options.externals.traceInclude.push(await resolvePath('applicationinsights/out/applicationinsights.js'))
 
