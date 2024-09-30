@@ -11,12 +11,19 @@ declare module 'h3' {
       client: TelemetryClient;
       trace: Traceparent;
       initialTrace: string;
+      /**
+       * @deprecated use requestTelemetry.properties
+       */
       properties: Record<string, string>;
       /**
        * set false to disable tracking for this request
        */
       shouldTrack: boolean
+      /**
+       * @deprecated use requestTelemetry.contextObject
+       */
       tags: Record<string, string|undefined>
+      requestTelemetry: Contracts.RequestTelemetry & Contracts.Identified
     };
   }
 }
