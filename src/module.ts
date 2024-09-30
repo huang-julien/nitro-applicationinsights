@@ -1,6 +1,6 @@
 import type { NitroModule } from 'nitropack'
 import { resolvePath } from "mlly"
-import defu from 'defu'
+
 export default <NitroModule>{
   name: 'nitro-applicationinsights',
   async setup(nitro) {
