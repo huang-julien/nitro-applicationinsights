@@ -1,11 +1,15 @@
 {
+  "extends": "./.nitro/types/tsconfig.json",
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "Node",
     "esModuleInterop": true,
-    "strict": true
+    "strict": true,
+    "paths": {
+      "#applicationinsights": ["./src/runtime/applicationinsights"],
+      "#imports": ["./.nitro/types/nitro-imports"],
+    }
   },
-  "include": ["./src/*", "./src/**/*"],
-  "extends": "./.nitro/types/tsconfig.json"
+  "include": ["./src/*", "./src/**/*"]
 }

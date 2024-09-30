@@ -1,12 +1,13 @@
-import ApplicationInsights, { DistributedTracingModes } from 'applicationinsights'
 import { getResponseStatus, getHeader, getCookie, H3Event, getRequestHeader } from 'h3'
 import Traceparent from 'applicationinsights/out/Library/Traceparent.js'
 import type { NitroApp, NitroAppPlugin } from 'nitropack'
 import defu from 'defu'
 import type { TNitroAppInsightsConfig } from '../types'
-import { setup } from './setup'
 import { useRuntimeConfig } from '#imports'
+import _Applicationinsights from '#applicationinsights'
+import type { Contracts } from '#applicationinsights'
 
+const Applicationinsights = _Applicationinsights as typeof import('applicationinsights')
 export default <NitroAppPlugin>(async (nitro) => {
   const { applicationinsights } = useRuntimeConfig()
   const config: TNitroAppInsightsConfig = defu(applicationinsights, {
@@ -21,7 +22,7 @@ export default <NitroAppPlugin>(async (nitro) => {
     autoCollectPreAggregatedMetrics: false,
     autoDependencyCorrelation: false,
     enableWebInstrumentation: false,
-    distributedTracingMode: DistributedTracingModes.AI_AND_W3C,
+    distributedTracingMode: Applicationinsights.DistributedTracingModes.AI_AND_W3C,
     sendLiveMetrics: false,
     internalLogging: {
       enableDebugLogging: false,
@@ -33,7 +34,7 @@ export default <NitroAppPlugin>(async (nitro) => {
 
   setup(config)
 
-  const client = ApplicationInsights.defaultClient
+  const client = Applicationinsights.defaultClient
 
   // context should contain Contract tags
   client.addTelemetryProcessor((envelope, context) => {
@@ -87,9 +88,9 @@ export default <NitroAppPlugin>(async (nitro) => {
   })
 
   nitro.hooks.hook('error', async (error, ctx) => {
-    if (ApplicationInsights.defaultClient) {
+    if (Applicationinsights.defaultClient) {
       if(!('shouldTrack' in ctx)) { ctx.shouldTrack = true }
-      const exceptionTelemetry: ApplicationInsights.Contracts.ExceptionTelemetry = { exception: error , contextObjects: {
+      const exceptionTelemetry: Contracts.ExceptionTelemetry = { exception: error , contextObjects: {
         ...ctx.event?.$appInsights.tags, 
       }}
 
@@ -104,7 +105,7 @@ export default <NitroAppPlugin>(async (nitro) => {
 
       await nitro.hooks.callHook('applicationinsights:trackError:before', exceptionTelemetry, ctx)
       if(ctx.shouldTrack) {
-        ApplicationInsights.defaultClient.trackException(exceptionTelemetry)
+        Applicationinsights.defaultClient.trackException(exceptionTelemetry)
       }
     }
   })
@@ -138,4 +139,54 @@ async function trackEvent(nitro: NitroApp, event: H3Event) {
       event.$appInsights.client.trackRequest(trackInfo)
     }
   }
+}
+
+
+export function setup (config: TNitroAppInsightsConfig) {
+  // Setup Application Insights using the instrumentation key from the environment variables
+  const configuration = Applicationinsights
+    .setup(config.connectionString)
+    .setAutoCollectRequests(config.autoCollectRequests)
+    .setAutoCollectDependencies(config.autoCollectDependencies)
+    .setAutoCollectExceptions(config.autoCollectExceptions)
+    .setAutoCollectHeartbeat(config.autoCollectHeartbeat)
+    .setAutoCollectIncomingRequestAzureFunctions(config.autoCollectIncomingRequestAzureFunctions)
+    .setAutoCollectPreAggregatedMetrics(config.autoCollectPreAggregatedMetrics)
+    .setDistributedTracingMode(config.distributedTracingMode)
+    .setSendLiveMetrics(config.sendLiveMetrics)
+    .setUseDiskRetryCaching(config.useDiskRetryCaching)
+
+  if (typeof config.autoCollectPerformance === 'object') {
+    configuration.setAutoCollectPerformance(
+      config.autoCollectPerformance.value, config.autoCollectPerformance.collectExtendedMetrics)
+  } else {
+    configuration.setAutoCollectPerformance(
+      config.autoCollectPerformance)
+  }
+
+  if (typeof config.autoDependencyCorrelation === 'object') {
+    configuration.setAutoDependencyCorrelation(config.autoDependencyCorrelation.value, config.autoDependencyCorrelation.useAsyncHooks)
+  } else {
+    configuration.setAutoDependencyCorrelation(config.autoDependencyCorrelation)
+  }
+
+  if (typeof config.enableWebInstrumentation === 'object') {
+    configuration.enableWebInstrumentation(config.enableWebInstrumentation.value, config.enableWebInstrumentation.WebSnippetConnectionString)
+  } else {
+    configuration.enableWebInstrumentation(config.enableWebInstrumentation)
+  }
+
+  if (typeof config.autoCollectConsole === 'object') {
+    configuration.setAutoCollectConsole(config.autoCollectConsole.value, config.autoCollectConsole.collectConsoleLogs)
+  } else {
+    configuration.setAutoCollectConsole(config.autoCollectConsole)
+  }
+
+  if (typeof config.internalLogging === 'object') {
+    configuration.setInternalLogging(config.internalLogging.enableDebugLogging, config.internalLogging.enableWarningLogging)
+  } else {
+    configuration.setInternalLogging(config.internalLogging)
+  }
+
+  return configuration.start()
 }
