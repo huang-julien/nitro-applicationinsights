@@ -96,10 +96,10 @@ export default <NitroAppPlugin>(async (nitro) => {
 
       if(ctx.event) {
         exceptionTelemetry.contextObjects = {
-          ...exceptionTelemetry.contextObjects,
           [ctx.event.$appInsights.client.context.keys.operationParentId]: ctx.event.$appInsights.trace.traceId,
           [ctx.event.$appInsights.client.context.keys.operationName]: `${ctx.event.method}: ${ctx.event.path}`,
-          [ctx.event.$appInsights.client.context.keys.operationId]: ctx.event.$appInsights.trace.traceId
+          [ctx.event.$appInsights.client.context.keys.operationId]: ctx.event.$appInsights.trace.traceId,
+          ...exceptionTelemetry.contextObjects,
         }
       }
 
@@ -124,11 +124,11 @@ async function trackEvent(nitro: NitroApp, event: H3Event) {
       success: statusCode < 400,
       properties: event.$appInsights.properties,
       contextObjects: {
-        ...event.$appInsights.tags,
         [event.$appInsights.client.context.keys.operationParentId]:
           getRequestHeader(event, 'traceparent')?.split('-')[2] ?? event.$appInsights.trace.spanId,
         [event.$appInsights.client.context.keys.operationName]: name,
-        [event.$appInsights.client.context.keys.operationId]: event.$appInsights.trace.traceId
+        [event.$appInsights.client.context.keys.operationId]: event.$appInsights.trace.traceId,
+        ...event.$appInsights.tags,
       },
       id: event.$appInsights.trace.spanId
     }
