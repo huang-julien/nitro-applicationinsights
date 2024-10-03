@@ -71,7 +71,6 @@ export default <NitroAppPlugin>(async (nitro) => {
       tags,
       { event }
     )
-
     event.$appInsights = {
       startTime: Date.now(),
       client,
@@ -79,7 +78,23 @@ export default <NitroAppPlugin>(async (nitro) => {
       trace,
       properties: {},
       shouldTrack: true,
-      tags
+      tags,
+      requestTelemetry: {
+        name: `${event.method}: ${event.context.matchedRoute?.path ?? event.path}`,
+        url: event.path,
+        resultCode: 0,
+        duration: 0,
+        success: true,
+        properties: {},
+        contextObjects: {
+          [client.context.keys.operationParentId]:
+            getRequestHeader(event, 'traceparent')?.split('-')[2] ?? trace.spanId,
+          [client.context.keys.operationName]: `${event.method}: ${event.context.matchedRoute?.path ?? event.path}`,
+          [client.context.keys.operationId]: trace.traceId,
+          ...tags,
+        },
+        id: trace.spanId
+      }
     }
   })
 
@@ -89,12 +104,14 @@ export default <NitroAppPlugin>(async (nitro) => {
 
   nitro.hooks.hook('error', async (error, ctx) => {
     if (Applicationinsights.defaultClient) {
-      if(!('shouldTrack' in ctx)) { ctx.shouldTrack = true }
-      const exceptionTelemetry: Contracts.ExceptionTelemetry = { exception: error , contextObjects: {
-        ...ctx.event?.$appInsights.tags, 
-      }}
+      if (!('shouldTrack' in ctx)) { ctx.shouldTrack = true }
+      const exceptionTelemetry: Contracts.ExceptionTelemetry = {
+        exception: error, contextObjects: {
+          ...ctx.event?.$appInsights?.requestTelemetry?.contextObjects,
+        }
+      }
 
-      if(ctx.event) {
+      if (ctx.event) {
         exceptionTelemetry.contextObjects = {
           [ctx.event.$appInsights.client.context.keys.operationParentId]: ctx.event.$appInsights.trace.traceId,
           [ctx.event.$appInsights.client.context.keys.operationName]: `${ctx.event.method}: ${ctx.event.path}`,
@@ -104,7 +121,7 @@ export default <NitroAppPlugin>(async (nitro) => {
       }
 
       await nitro.hooks.callHook('applicationinsights:trackError:before', exceptionTelemetry, ctx)
-      if(ctx.shouldTrack) {
+      if (ctx.shouldTrack) {
         Applicationinsights.defaultClient.trackException(exceptionTelemetry)
       }
     }
@@ -115,34 +132,23 @@ export default <NitroAppPlugin>(async (nitro) => {
 async function trackEvent(nitro: NitroApp, event: H3Event) {
   if (event.$appInsights.shouldTrack) {
     const statusCode = getResponseStatus(event)
-    const name = `${event.method}: ${event.context.matchedRoute?.path ?? event.path}`
-    const trackInfo = {
-      name,
-      url: event.path,
-      resultCode: statusCode,
-      duration: Date.now() - event.$appInsights.startTime,
-      success: statusCode < 400,
-      properties: event.$appInsights.properties,
-      contextObjects: {
-        [event.$appInsights.client.context.keys.operationParentId]:
-          getRequestHeader(event, 'traceparent')?.split('-')[2] ?? event.$appInsights.trace.spanId,
-        [event.$appInsights.client.context.keys.operationName]: name,
-        [event.$appInsights.client.context.keys.operationId]: event.$appInsights.trace.traceId,
-        ...event.$appInsights.tags,
-      },
-      id: event.$appInsights.trace.spanId
-    }
+    event.$appInsights.requestTelemetry.resultCode = statusCode
+    event.$appInsights.requestTelemetry.duration = Date.now() - event.$appInsights.startTime
 
-    await nitro.hooks.callHook('applicationinsights:trackRequest:before', event, trackInfo)
+    // compatibility with deprectaed properties and tags
+    event.$appInsights.requestTelemetry.properties = { ...event.$appInsights.properties, ...event.$appInsights.requestTelemetry.properties }
+    event.$appInsights.requestTelemetry.contextObjects = { ...event.$appInsights.tags, ...event.$appInsights.requestTelemetry.contextObjects }
+
+    await nitro.hooks.callHook('applicationinsights:trackRequest:before', event, event.$appInsights.requestTelemetry)
 
     if (event.$appInsights.shouldTrack) {
-      event.$appInsights.client.trackRequest(trackInfo)
+      event.$appInsights.client.trackRequest(event.$appInsights.requestTelemetry)
     }
   }
 }
 
 
-export function setup (config: TNitroAppInsightsConfig) {
+export function setup(config: TNitroAppInsightsConfig) {
   // Setup Application Insights using the instrumentation key from the environment variables
   const configuration = Applicationinsights
     .setup(config.connectionString)
