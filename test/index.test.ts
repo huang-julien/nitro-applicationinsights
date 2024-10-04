@@ -1,7 +1,15 @@
 import { expect, it, describe } from 'vitest'
-import { $fetch } from 'nitro-test-utils/e2e'
+import { $fetchRaw as $fetch, setup } from 'nitro-test-utils/e2e'
+import { dirname } from 'pathe'
+import { resolvePathSync } from 'mlly'
 
 const dummyTrace = '00-0af7651916cd43dd8448eb211c80319c-b7ad6b7169203331-01'
+
+await setup({
+  rootDir: dirname(resolvePathSync('./fixtures/basic/nitro.config.ts', {
+    url: import.meta.url
+  }))
+})
 
 describe('trace', () => {
   it('expect to have the same trace id', async () => {
@@ -38,7 +46,7 @@ describe('trace', () => {
       dependencyTrace: string
     }>('/with-dependency')
 
-    expect(data).toBeDefined() 
+    expect(data).toBeDefined()
     expect(data!.dependencyTrace.split('-')[1]).toBe(data!.trace.split('-')[1])
   })
 })
