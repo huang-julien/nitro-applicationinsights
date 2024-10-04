@@ -60,7 +60,7 @@
   },
   "packageManager": "pnpm@9.12.0",
   "dependencies": {
-    "applicationinsights": "^2.9.6",
+    "applicationinsights": "^3.3.0",
     "defu": "^6.1.4",
     "mlly": "^1.7.1",
     "nitro-test-utils": "^0.9.0",
