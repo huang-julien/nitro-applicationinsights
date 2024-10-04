@@ -47,27 +47,27 @@
     "test:types": "tsc --noEmit --skipLibCheck"
   },
   "devDependencies": {
-    "@types/node": "^20.16.1",
+    "@types/node": "^20.16.10",
     "@vitest/coverage-v8": "^2.1.2",
-    "changelogen": "^0.5.5",
-    "eslint": "^9.9.1",
-    "eslint-config-unjs": "^0.3.2",
-    "jiti": "^2.0.0",
+    "changelogen": "^0.5.7",
+    "eslint": "^9.11.1",
+    "eslint-config-unjs": "^0.4.1",
+    "jiti": "^2.2.1",
     "nitro-applicationinsights": "link:./",
-    "typescript": "^5.5.4",
+    "typescript": "^5.6.2",
     "unbuild": "^2.0.0",
     "vitest": "^2.1.2"
   },
-  "packageManager": "pnpm@9.9.0",
+  "packageManager": "pnpm@9.12.0",
   "dependencies": {
     "applicationinsights": "^2.9.6",
     "defu": "^6.1.4",
     "mlly": "^1.7.1",
-    "nitro-test-utils": "^0.7.0",
+    "nitro-test-utils": "^0.9.0",
     "pathe": "^1.1.2"
   },
   "peerDependencies": {
-    "h3": ">=1.12.0",
+    "h3": ">=1.13.0",
     "nitropack": ">=2.9.7"
   }
 }
