@@ -1,5 +1,5 @@
 import { expect, it, describe } from 'vitest'
-import { $fetch } from 'nitro-test-utils/e2e'
+import { $fetchRaw as $fetch } from 'nitro-test-utils/e2e'
 
 const dummyTrace = '00-0af7651916cd43dd8448eb211c80319c-b7ad6b7169203331-01'
 
