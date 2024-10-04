@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.12.1...chore/0.13.0
+
+[compare changes](https://github.com/huang-julien/nitro-applicationinsights/compare/v0.12.1...chore/0.13.0)
+
+### 🚀 Enhancements
+
+- Add new requestTelemetry object to allow telemetry modification ([#110](https://github.com/huang-julien/nitro-applicationinsights/pull/110))
+
+### 🏡 Chore
+
+- 0.13.0 ([61f94b9](https://github.com/huang-julien/nitro-applicationinsights/commit/61f94b9))
+
+### ❤️ Contributors
+
+- Julien Huang ([@huang-julien](http://github.com/huang-julien))
+
 ## v0.12.0...chore/0.12.1
 
 [compare changes](https://github.com/huang-julien/nitro-applicationinsights/compare/v0.12.0...chore/0.12.1)
