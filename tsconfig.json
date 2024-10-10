@@ -6,10 +6,6 @@
     "moduleResolution": "Node",
     "esModuleInterop": true,
     "strict": true,
-    "paths": {
-      "#applicationinsights": ["./src/runtime/applicationinsights"],
-      "#imports": ["./.nitro/types/nitro-imports"],
-    }
   },
   "include": ["./src/*", "./src/**/*"]
 }
