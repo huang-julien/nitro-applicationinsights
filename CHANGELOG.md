@@ -1,6 +1,30 @@
 # Changelog
 
 
+## v0.13.0...chore/0.14.0
+
+[compare changes](https://github.com/huang-julien/nitro-applicationinsights/compare/v0.13.0...chore/0.14.0)
+
+### 🚀 Enhancements
+
+- Add #applicationinsights to ts config paths ([#114](https://github.com/huang-julien/nitro-applicationinsights/pull/114))
+
+### 💅 Refactors
+
+- Use export statement ([#113](https://github.com/huang-julien/nitro-applicationinsights/pull/113))
+
+### 🏡 Chore
+
+- 0.14.0 ([d93357c](https://github.com/huang-julien/nitro-applicationinsights/commit/d93357c))
+
+### 🤖 CI
+
+- **studio:** Remove with constraint ([e2b59f7](https://github.com/huang-julien/nitro-applicationinsights/commit/e2b59f7))
+
+### ❤️ Contributors
+
+- Julien Huang ([@huang-julien](http://github.com/huang-julien))
+
 ## v0.12.1...chore/0.13.0
 
 [compare changes](https://github.com/huang-julien/nitro-applicationinsights/compare/v0.12.1...chore/0.13.0)
