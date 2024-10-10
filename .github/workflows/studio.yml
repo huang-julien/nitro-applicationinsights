@@ -49,8 +49,6 @@ jobs:
         if: ${{ steps.pkgman.outputs.package_manager == 'pnpm' }}
         name: Install pnpm
         id: pnpm-install
-        with:
-          version: 7
 
       - uses: actions/setup-node@v4
         with:
