@@ -1,5 +1,6 @@
 import type { NitroModule } from 'nitropack'
 import { resolvePath } from "mlly"
+import defu from 'defu'
 
 export default <NitroModule>{
   name: 'nitro-applicationinsights',
@@ -26,5 +27,19 @@ export default <NitroModule>{
     nitro.options.plugins.push(await resolvePath('nitro-applicationinsights/runtime/plugin', {
       extensions: ['.ts', '.mjs', '.js']
     }))
+
+    nitro.options = defu(nitro.options, {
+      typescript: {
+        tsConfig: {
+          compilerOptions: {
+            paths: {
+              '#applicationinsights': [await resolvePath('nitro-applicationinsights/runtime/applicationinsights', {
+                extensions: ['.ts', '.mjs', '.js']
+              })]
+            }
+          }
+        }
+      }
+    })
   }
 }
