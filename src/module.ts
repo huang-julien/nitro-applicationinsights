@@ -1,6 +1,8 @@
-import type { NitroModule } from 'nitropack'
+import type { NitroConfig, NitroModule } from 'nitropack'
 import { resolvePath } from "mlly"
 import defu from 'defu'
+import MagicString from 'magic-string'
+import plugin from './runtime/plugin'
 
 export default <NitroModule>{
   name: 'nitro-applicationinsights',
@@ -39,7 +41,35 @@ export default <NitroModule>{
             }
           }
         }
+      },
+      rollupConfig: {
+        plugins: [
+          // add necessary global var for applicationinsights
+          {
+            name: 'esm-shim',
+            renderChunk(code, _chunk, opts) {
+              if (code.includes('// transformed by esm-shim')) {
+                return
+              }
+              if (opts.format === 'es') {
+                const s = new MagicString(code)
+                s.prepend(`
+    // transformed by esm-shim
+    import { dirname as __pathDirname } from 'path';
+    import { fileURLToPath as __fileURLToPath } from 'url';
+    const __filename = __fileURLToPath(_import_meta_url_);
+    const __dirname = __pathDirname(__filename);`)
+                return {
+                  code: s.toString(),
+                  map: s.generateMap({ hires: true })
+                };
+              }
+
+              return undefined;
+            }
+          }
+        ]
       }
-    })
+    } as Partial<NitroConfig>)
   }
 }
