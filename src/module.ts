@@ -2,7 +2,6 @@ import type { NitroConfig, NitroModule } from 'nitropack'
 import { resolvePath } from "mlly"
 import defu from 'defu'
 import MagicString from 'magic-string'
-import plugin from './runtime/plugin'
 
 export default <NitroModule>{
   name: 'nitro-applicationinsights',
@@ -21,10 +20,6 @@ export default <NitroModule>{
       id.includes('nitro-applicationinsights/runtime/plugin')
       || id.includes('nitro-applicationinsights/dist/runtime/plugin')
     ))
-
-    nitro.options.externals.traceInclude = nitro.options.externals.traceInclude || []
-    // the main file doesn't seems to be traced
-    nitro.options.externals.traceInclude.push(await resolvePath('applicationinsights/out/applicationinsights.js'))
 
     nitro.options.plugins.push(await resolvePath('nitro-applicationinsights/runtime/plugin', {
       extensions: ['.ts', '.mjs', '.js']
@@ -48,10 +43,10 @@ export default <NitroModule>{
           {
             name: 'esm-shim',
             renderChunk(code, _chunk, opts) {
-              if (code.includes('// transformed by esm-shim')) {
+              if (opts.format !== 'es' || code.includes('// transformed by esm-shim')) {
                 return
               }
-              if (opts.format === 'es') {
+              if (code.includes('__dirname') || code.includes('__filename')) {
                 const s = new MagicString(code)
                 s.prepend(`
     // transformed by esm-shim
@@ -64,8 +59,6 @@ export default <NitroModule>{
                   map: s.generateMap({ hires: true })
                 };
               }
-
-              return undefined;
             }
           }
         ]
