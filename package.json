@@ -38,6 +38,7 @@
     "build": "unbuild",
     "dev:prepare": "pnpm build --stub && pnpm nitropack prepare && pnpm nitro prepare ./playground",
     "dev": "pnpm nitro dev ./playground",
+    "dev:build": "pnpm nitro build ./playground",
     "play": "jiti playground",
     "lint": "pnpm nitro prepare playground && eslint --cache .",
     "lint:fix": "pnpm nitro prepare playground && eslint --cache . --fix",
@@ -62,6 +63,7 @@
   "dependencies": {
     "applicationinsights": "^2.9.6",
     "defu": "^6.1.4",
+    "magic-string": "^0.30.12",
     "mlly": "^1.7.1",
     "nitro-test-utils": "^0.9.0",
     "pathe": "^1.1.2"
