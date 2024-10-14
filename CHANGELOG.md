@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.14.0...chore/0.14.1
+
+[compare changes](https://github.com/huang-julien/nitro-applicationinsights/compare/v0.14.0...chore/0.14.1)
+
+### 🩹 Fixes
+
+- Add missing CJS global var for applicationinsights ([#116](https://github.com/huang-julien/nitro-applicationinsights/pull/116))
+
+### ❤️ Contributors
+
+- Julien Huang ([@huang-julien](http://github.com/huang-julien))
+
 ## v0.13.0...chore/0.14.0
 
 [compare changes](https://github.com/huang-julien/nitro-applicationinsights/compare/v0.13.0...chore/0.14.0)
