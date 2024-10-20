@@ -1,1 +1,0 @@
-import{k as c,c as n,e as t,X as o}from"./DW19kyRT.js";const r={};function s(e,_){return n(),t("code",null,[o(e.$slots,"default",{},void 0,!0)])}const d=c(r,[["render",s],["__scopeId","data-v-5cfce8f3"]]);export{d as default};
