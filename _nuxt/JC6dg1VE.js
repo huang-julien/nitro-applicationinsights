@@ -1,1 +1,0 @@
-import{k as t,c as n,e as c,X as o}from"./CPvFx2lQ.js";const r={};function a(e,s){return n(),c("th",null,[o(e.$slots,"default",{},void 0,!0)])}const d=t(r,[["render",a],["__scopeId","data-v-b7c64dba"]]);export{d as default};
