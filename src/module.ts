@@ -11,7 +11,8 @@ export default <NitroModule>{
     }
 
     nitro.options.alias['#applicationinsights'] = await resolvePath('nitro-applicationinsights/runtime/applicationinsights', {
-      extensions: ['.ts', '.mjs', '.js']
+      extensions: ['.ts', '.mjs', '.js'],
+      url: [import.meta.url]
     })
 
     nitro.options.externals.inline = nitro.options.externals.inline || []
@@ -22,7 +23,8 @@ export default <NitroModule>{
     ))
 
     nitro.options.plugins.push(await resolvePath('nitro-applicationinsights/runtime/plugin', {
-      extensions: ['.ts', '.mjs', '.js']
+      extensions: ['.ts', '.mjs', '.js'],
+      url: [import.meta.url]
     }))
 
     nitro.options = defu(nitro.options, {
@@ -31,7 +33,8 @@ export default <NitroModule>{
           compilerOptions: {
             paths: {
               '#applicationinsights': [await resolvePath('nitro-applicationinsights/runtime/applicationinsights', {
-                extensions: ['.ts', '.mjs', '.js']
+                extensions: ['.ts', '.mjs', '.js'],
+                url: [import.meta.url]
               })]
             }
           }
