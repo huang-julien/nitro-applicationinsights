@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.14.1...chore/0.14.2
+
+[compare changes](https://github.com/huang-julien/nitro-applicationinsights/compare/v0.14.1...chore/0.14.2)
+
+### 🩹 Fixes
+
+- Specify url when resolving paths with mlly ([#122](https://github.com/huang-julien/nitro-applicationinsights/pull/122))
+
+### 🏡 Chore
+
+- 0.14.2 ([d1145c7](https://github.com/huang-julien/nitro-applicationinsights/commit/d1145c7))
+
+### ❤️ Contributors
+
+- Julien Huang ([@huang-julien](http://github.com/huang-julien))
+
 ## v0.14.0...chore/0.14.1
 
 [compare changes](https://github.com/huang-julien/nitro-applicationinsights/compare/v0.14.0...chore/0.14.1)
