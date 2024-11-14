@@ -22,18 +22,6 @@ export default <NitroModule>{
     }))
 
     nitro.options = defu(nitro.options, {
-      typescript: {
-        tsConfig: {
-          compilerOptions: {
-            paths: {
-              '#applicationinsights': [await resolvePath('nitro-applicationinsights/runtime/applicationinsights', {
-                extensions: ['.ts', '.mjs', '.js'],
-                url: [import.meta.url]
-              })]
-            }
-          }
-        }
-      },
       externals: {
         traceInclude: [
           // the main file doesn't seems to be traced
@@ -67,7 +55,7 @@ export default <NitroModule>{
           {
             name: 'applicationinsights-loader',
             resolveId(id) {
-              if (id === '#applicationinsights' || id === 'applicationinsights') {
+              if (id === 'applicationinsights') {
                 return {
                   id: 'applicationinsights',
                   moduleSideEffects: true,
