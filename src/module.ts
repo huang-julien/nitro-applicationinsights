@@ -67,7 +67,7 @@ export default <NitroModule>{
           {
             name: 'applicationinsights-loader',
             resolveId(id) {
-              if (id === '#applicationinsights') {
+              if (id === '#applicationinsights' || id === 'applicationinsights') {
                 return {
                   id: 'applicationinsights',
                   moduleSideEffects: true,
