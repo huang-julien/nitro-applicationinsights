@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.15.0
+
+[compare changes](https://github.com/huang-julien/nitro-applicationinsights/compare/v0.14.2...v0.15.0)
+
+### 🩹 Fixes
+
+- Mark `applicationinsights` as external and side-effects ([#125](https://github.com/huang-julien/nitro-applicationinsights/pull/125))
+
+### ❤️ Contributors
+
+- Julien Huang ([@huang-julien](http://github.com/huang-julien))
+
 ## v0.14.1...chore/0.14.2
 
 [compare changes](https://github.com/huang-julien/nitro-applicationinsights/compare/v0.14.1...chore/0.14.2)
