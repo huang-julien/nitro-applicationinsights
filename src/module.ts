@@ -9,12 +9,6 @@ export default <NitroModule>{
     if (!nitro.options.externals) {
       nitro.options.externals = {}
     }
-
-    nitro.options.alias['#applicationinsights'] = await resolvePath('nitro-applicationinsights/runtime/applicationinsights', {
-      extensions: ['.ts', '.mjs', '.js'],
-      url: [import.meta.url]
-    })
-
     nitro.options.externals.inline = nitro.options.externals.inline || []
     // force inline the plugin and the setup file
     nitro.options.externals.inline.push((id) => (
@@ -28,17 +22,11 @@ export default <NitroModule>{
     }))
 
     nitro.options = defu(nitro.options, {
-      typescript: {
-        tsConfig: {
-          compilerOptions: {
-            paths: {
-              '#applicationinsights': [await resolvePath('nitro-applicationinsights/runtime/applicationinsights', {
-                extensions: ['.ts', '.mjs', '.js'],
-                url: [import.meta.url]
-              })]
-            }
-          }
-        }
+      externals: {
+        traceInclude: [
+          // the main file doesn't seems to be traced
+          await resolvePath('applicationinsights/out/applicationinsights.js')
+        ]
       },
       rollupConfig: {
         plugins: [
@@ -63,6 +51,18 @@ export default <NitroModule>{
                 };
               }
             }
+          },
+          {
+            name: 'applicationinsights-loader',
+            resolveId(id) {
+              if (id === 'applicationinsights') {
+                return {
+                  id: 'applicationinsights',
+                  moduleSideEffects: true,
+                  external: true
+                }
+              }
+            },
           }
         ]
       }

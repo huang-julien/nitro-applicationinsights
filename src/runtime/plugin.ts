@@ -4,8 +4,8 @@ import type { NitroApp, NitroAppPlugin } from 'nitropack'
 import defu from 'defu'
 import type { TNitroAppInsightsConfig } from '../types'
 import { useRuntimeConfig } from '#imports'
-import _Applicationinsights from '#applicationinsights'
-import type { Contracts } from '#applicationinsights'
+import _Applicationinsights from 'applicationinsights'
+import type { Contracts } from 'applicationinsights'
 
 const Applicationinsights = _Applicationinsights as typeof import('applicationinsights')
 export default <NitroAppPlugin>(async (nitro) => {
