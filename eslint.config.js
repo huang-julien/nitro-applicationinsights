@@ -5,6 +5,7 @@ export default unjs({
     'node_modules',
     'coverage',
     'dist',
-    '**/.nitro'
+    '**/.nitro',
+    '**/.output'
   ]
-}, { rules: {} });
+});
