@@ -1,0 +1,1 @@
+import o from"./BPg-C885.js";import{d as r,e as t,V as n}from"./9D5SMUUE.js";const m=r({__name:"SourceLink",props:{source:{type:String,required:!0}},setup(_){return(c,p)=>{const e=o;return t(),n(e)}}});export{m as default};

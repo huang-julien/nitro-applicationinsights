@@ -1,0 +1,1 @@
+import{k as t,e as n,f as o,X as a}from"./9D5SMUUE.js";const r={};function c(e,s){return n(),o("thead",null,[a(e.$slots,"default",{},void 0,!0)])}const d=t(r,[["render",c],["__scopeId","data-v-ae747f66"]]);export{d as default};
