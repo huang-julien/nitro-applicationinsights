@@ -1,6 +1,6 @@
 {
   "name": "nitro-applicationinsights",
-  "version": "0.12.1",
+  "version": "0.14.2",
   "description": "Application insights plugin for nitro.",
   "repository": "huang-julien/nitro-applicationinsights",
   "license": "MIT",
@@ -38,6 +38,7 @@
     "build": "unbuild",
     "dev:prepare": "pnpm build --stub && pnpm nitropack prepare && pnpm nitro prepare ./playground",
     "dev": "pnpm nitro dev ./playground",
+    "dev:build": "pnpm nitro build ./playground",
     "play": "jiti playground",
     "lint": "pnpm nitro prepare playground && eslint --cache .",
     "lint:fix": "pnpm nitro prepare playground && eslint --cache . --fix",
@@ -47,22 +48,23 @@
     "test:types": "tsc --noEmit --skipLibCheck"
   },
   "devDependencies": {
-    "@types/node": "^20.16.10",
-    "@vitest/coverage-v8": "^2.1.2",
+    "@types/node": "^22.9.0",
+    "@vitest/coverage-v8": "^2.1.5",
     "changelogen": "^0.5.7",
-    "eslint": "^9.11.1",
+    "eslint": "^9.15.0",
     "eslint-config-unjs": "^0.4.1",
-    "jiti": "^2.2.1",
+    "jiti": "^2.4.0",
     "nitro-applicationinsights": "link:./",
-    "typescript": "^5.6.2",
+    "typescript": "^5.6.3",
     "unbuild": "^2.0.0",
-    "vitest": "^2.1.2"
+    "vitest": "^2.1.5"
   },
-  "packageManager": "pnpm@9.12.0",
+  "packageManager": "pnpm@9.13.2",
   "dependencies": {
     "applicationinsights": "^2.9.6",
     "defu": "^6.1.4",
-    "mlly": "^1.7.1",
+    "magic-string": "^0.30.12",
+    "mlly": "^1.7.3",
     "nitro-test-utils": "^0.9.0",
     "pathe": "^1.1.2"
   },
