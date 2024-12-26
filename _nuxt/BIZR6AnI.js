@@ -1,1 +1,0 @@
-import{k as t,e as a,f as s,g as n,X as o}from"./9D5SMUUE.js";const c={},r={class:"table-wrapper"};function _(e,d){return a(),s("div",r,[n("table",null,[o(e.$slots,"default",{},void 0,!0)])])}const f=t(c,[["render",_],["__scopeId","data-v-589a3fdc"]]);export{f as default};

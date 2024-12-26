@@ -1,1 +1,0 @@
-import{k as o,e as t,f as r,X as c}from"./9D5SMUUE.js";const n={};function s(e,a){return t(),r("blockquote",null,[c(e.$slots,"default",{},void 0,!0)])}const d=o(n,[["render",s],["__scopeId","data-v-34d21e03"]]);export{d as default};
