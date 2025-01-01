@@ -20,6 +20,10 @@ export default <NitroModule>{
       extensions: ['.ts', '.mjs', '.js'],
       url: [import.meta.url]
     }))
+    nitro.options.plugins.push(await resolvePath('nitro-opentelemetry/runtime/plugin', {
+      extensions: ['.ts', '.mjs', '.js'],
+      url: [import.meta.url]
+    }))
 
     nitro.options = defu(nitro.options, {
       externals: {

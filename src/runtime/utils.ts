@@ -7,9 +7,7 @@ import { NitroFetchOptions } from 'nitropack'
  * @param {Record<string, string>} headers - optional headers to add to the object
  */
 export function getTraceparentHeaders (event: H3Event, headers: HeadersInit = {}): HeadersInit {
-  return Object.assign(headers, {
-    traceparent: event.$appInsights.trace.toString()
-  })
+  return headers
 }
 
 /**
@@ -31,46 +29,9 @@ export function create$fetchInterceptors (event?: H3Event): NitroFetchOptions<an
   let startTime: number | undefined
   const contextObjects: Record<string, string> = {}
   if (event) {
-    contextObjects[event.$appInsights.client.context.keys.operationId] = event.$appInsights.trace.traceId
-    contextObjects[event.$appInsights.client.context.keys.operationParentId] = event.$appInsights.trace.spanId
+    // contextObjects[event.$appInsights.client.context.keys.operationId] = event.$appInsights.trace.traceId
+    // contextObjects[event.$appInsights.client.context.keys.operationParentId] = event.$appInsights.trace.spanId
   }
   return {
-    onRequest (context) {
-      if (event) {
-        context.options.headers = getTraceparentHeaders(event, context.options.headers ?? {})
-      }
-      startTime = Date.now()
-    },
-    onRequestError (context) {
-      event?.$appInsights.client.trackException(
-        {
-          contextObjects,
-          exception: context.error
-        })
-    },
-    onResponse (context) {
-      const requestPath = context.request.toString()
-      event?.$appInsights.client.trackDependency({
-        dependencyTypeName: 'HTTP',
-        duration: startTime ? (Date.now() - startTime) : 0,
-        name: `${context.options.method || 'GET'} ${requestPath}`,
-        data: requestPath,
-        resultCode: context.response.status,
-        success: true,
-        contextObjects
-      })
-    },
-    onResponseError (context) {
-      const requestPath = context.request.toString()
-      event?.$appInsights.client.trackDependency({
-        dependencyTypeName: 'HTTP',
-        duration: startTime ? (Date.now() - startTime) : 0,
-        name: `${context.options.method?.toUpperCase() || 'GET'} ${requestPath}`,
-        data: requestPath,
-        resultCode: context.response.status,
-        success: false,
-        contextObjects
-      })
-    }
   }
 }

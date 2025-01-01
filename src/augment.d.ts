@@ -1,29 +1,12 @@
 import type { TelemetryClient, Contracts } from 'applicationinsights'
-import type Traceparent from 'applicationinsights/out/Library/Traceparent'
 import type { H3Event } from 'h3'
 import type { TNitroAppInsightsConfig } from './types'
 import { CapturedErrorContext, NitroConfig } from 'nitropack';
  
 declare module 'h3' {
   interface H3Event {
-    $appInsights: {
-      startTime: number;
+    $appInsights: { 
       client: TelemetryClient;
-      trace: Traceparent;
-      initialTrace: string;
-      /**
-       * @deprecated use requestTelemetry.properties
-       */
-      properties: Record<string, string>;
-      /**
-       * set false to disable tracking for this request
-       */
-      shouldTrack: boolean
-      /**
-       * @deprecated use requestTelemetry.contextObject
-       */
-      tags: Record<string, string|undefined>
-      requestTelemetry: Contracts.RequestTelemetry & Contracts.Identified
     };
   }
 }
