@@ -32,6 +32,5 @@ export function create$fetchInterceptors (event?: H3Event): NitroFetchOptions<an
     // contextObjects[event.$appInsights.client.context.keys.operationId] = event.$appInsights.trace.traceId
     // contextObjects[event.$appInsights.client.context.keys.operationParentId] = event.$appInsights.trace.spanId
   }
-  return {
-  }
+  return {}
 }
