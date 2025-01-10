@@ -1,4 +1,4 @@
-import instrumentations from './instrumentations'
+import loadInstrumentations from './instrumentations'
 import type { NitroAppPlugin } from 'nitropack'
 import defu from 'defu'
 import type { TNitroAppInsightsConfig } from '../types'
@@ -9,7 +9,7 @@ import { metrics, trace, } from "@opentelemetry/api";
 import nitroOtelPlugin from "nitro-opentelemetry/runtime/plugin.mjs"
 import { registerInstrumentations } from "@opentelemetry/instrumentation";
 
-instrumentations()
+loadInstrumentations()
 
 const Applicationinsights = _Applicationinsights as typeof import('applicationinsights')
 

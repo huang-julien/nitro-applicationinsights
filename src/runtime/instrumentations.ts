@@ -6,9 +6,9 @@ const instrumentations = [
   new UndiciInstrumentation(),
   new HttpInstrumentation()
 ];
-const instrumentation = () => {registerInstrumentations({
+const loadInstrumentations = () => {registerInstrumentations({
     instrumentations,
   });
 }
   
-export default instrumentation;
+export default loadInstrumentations;
