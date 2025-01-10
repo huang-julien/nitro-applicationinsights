@@ -18,25 +18,25 @@ export default <NitroAppPlugin>(async (nitro) => {
 
   const config: TNitroAppInsightsConfig = defu(applicationinsights, {
     connectionString: undefined,
-    autoCollectRequests: true,
-    autoCollectConsole: true,
-    autoCollectDependencies: true,
-    autoCollectExceptions: true,
-    autoCollectPerformance: {
-      value: true,
+    autoCollectRequests: false,
+    autoCollectConsole: false,
+    autoCollectDependencies: false,
+    autoCollectExceptions: false,
+     autoCollectPerformance: {
+      value: false,
     },
-    autoCollectHeartbeat: true,
-    autoCollectIncomingRequestAzureFunctions: true,
-    autoCollectPreAggregatedMetrics: true,
-    autoDependencyCorrelation: true,
+    autoCollectHeartbeat: false,
+    autoCollectIncomingRequestAzureFunctions: false,
+    autoCollectPreAggregatedMetrics: false,
+    autoDependencyCorrelation: false,
     enableWebInstrumentation: false,
     distributedTracingMode: Applicationinsights.DistributedTracingModes.AI_AND_W3C,
-    sendLiveMetrics: true,
+    sendLiveMetrics: false,
     internalLogging: {
-      enableDebugLogging: true,
-      enableWarningLogging: true
+      enableDebugLogging: false,
+      enableWarningLogging: false
     },
-    useDiskRetryCaching: true
+    useDiskRetryCaching: false
   })
 
   await nitro.hooks.callHook('applicationinsights:config', config)
