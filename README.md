@@ -7,9 +7,8 @@ Application insight module for [Nitro](https://github.com/unjs/nitro)
 ## Current features
 
 - application insights configuration at startup
-- utilities for dependency correlation
 - auto-track requests
-- correlate traces to requests
+- nitro-opentelemetry runtime integration
 
 ## Usage
 
