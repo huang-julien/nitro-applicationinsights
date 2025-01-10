@@ -2,14 +2,6 @@ import type { TelemetryClient, Contracts } from 'applicationinsights'
 import type { H3Event } from 'h3'
 import type { TNitroAppInsightsConfig } from './types'
 import { CapturedErrorContext, NitroConfig } from 'nitropack';
- 
-declare module 'h3' {
-  interface H3Event {
-    $appInsights: { 
-      client: TelemetryClient;
-    };
-  }
-}
 
 declare module 'nitropack' {
   interface NitroRuntimeHooks {
