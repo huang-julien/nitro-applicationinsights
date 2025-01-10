@@ -1,29 +1,30 @@
-import "@azure/core-tracing"
-import { getResponseStatus, getHeader, getCookie, H3Event, getRequestHeader } from 'h3'
-import type { NitroApp, NitroAppPlugin } from 'nitropack'
+import instrumentations from './instrumentations'
+import type { NitroAppPlugin } from 'nitropack'
 import defu from 'defu'
 import type { TNitroAppInsightsConfig } from '../types'
 import { useRuntimeConfig } from '#imports'
 import _Applicationinsights from 'applicationinsights'
-import { diag, DiagConsoleLogger, DiagLogLevel, } from "@opentelemetry/api"
-import { metrics, trace } from "@opentelemetry/api";
+import { metrics, trace, } from "@opentelemetry/api";
+// @ts-ignore wat ??
+import nitroOtelPlugin from "nitro-opentelemetry/runtime/plugin.mjs"
 import { registerInstrumentations } from "@opentelemetry/instrumentation";
-import { UndiciInstrumentation } from "@opentelemetry/instrumentation-undici"
-import { HttpInstrumentation } from "@opentelemetry/instrumentation-http"
 
-
-diag.setLogger(new DiagConsoleLogger(), DiagLogLevel.DEBUG);
+instrumentations()
 
 const Applicationinsights = _Applicationinsights as typeof import('applicationinsights')
-export default <NitroAppPlugin>(() => {
+
+export default <NitroAppPlugin>(async (nitro) => {
   const { applicationinsights } = useRuntimeConfig()
+
   const config: TNitroAppInsightsConfig = defu(applicationinsights, {
     connectionString: undefined,
     autoCollectRequests: true,
     autoCollectConsole: true,
     autoCollectDependencies: true,
     autoCollectExceptions: true,
-    autoCollectPerformance: true,
+    autoCollectPerformance: {
+      value: true,
+    },
     autoCollectHeartbeat: true,
     autoCollectIncomingRequestAzureFunctions: true,
     autoCollectPreAggregatedMetrics: true,
@@ -38,18 +39,17 @@ export default <NitroAppPlugin>(() => {
     useDiskRetryCaching: true
   })
 
-  setup(config)
+  await nitro.hooks.callHook('applicationinsights:config', config)
 
-  const instrumentations = [
-    new UndiciInstrumentation(),
-    new HttpInstrumentation()
-  ];
+  setup(config)
 
   registerInstrumentations({
     tracerProvider: trace.getTracerProvider(),
     meterProvider: metrics.getMeterProvider(),
-    instrumentations: instrumentations,
   });
+  // run after setup
+  // we can't push it into nitro config until nitro allows for async plugins
+  nitroOtelPlugin(nitro)
 })
 
 
@@ -68,38 +68,33 @@ export function setup(config: TNitroAppInsightsConfig) {
     .setAutoCollectConsole(true, true) // Generate Trace telemetry for winston/bunyan and console logs
 
     .setUseDiskRetryCaching(config.useDiskRetryCaching)
-  // todo fix this
-  // if (typeof config.autoCollectPerformance === 'object') {
-  //   configuration.setAutoCollectPerformance(
-  //     config.autoCollectPerformance.value, config.autoCollectPerformance.collectExtendedMetrics)
-  // } else {
-  //   configuration.setAutoCollectPerformance(
-  //     config.autoCollectPerformance)
-  // }
 
-  // if (typeof config.autoDependencyCorrelation === 'object') {
-  //   configuration.setAutoDependencyCorrelation(config.autoDependencyCorrelation.value, config.autoDependencyCorrelation.useAsyncHooks)
-  // } else {
-  //   configuration.setAutoDependencyCorrelation(config.autoDependencyCorrelation)
-  // }
+  if (typeof config.autoCollectPerformance === 'object') {
+    configuration.setAutoCollectPerformance(config.autoCollectPerformance.value, config.autoCollectPerformance.collectExtendedMetrics)
+  }
+  if (typeof config.autoDependencyCorrelation === 'object') {
+    configuration.setAutoDependencyCorrelation(config.autoDependencyCorrelation.value, config.autoDependencyCorrelation.useAsyncHooks)
+  } else {
+    configuration.setAutoDependencyCorrelation(config.autoDependencyCorrelation)
+  }
 
-  // if (typeof config.enableWebInstrumentation === 'object') {
-  //   configuration.enableWebInstrumentation(config.enableWebInstrumentation.value, config.enableWebInstrumentation.WebSnippetConnectionString)
-  // } else {
-  //   configuration.enableWebInstrumentation(config.enableWebInstrumentation)
-  // }
+  if (typeof config.enableWebInstrumentation === 'object') {
+    configuration.enableWebInstrumentation(config.enableWebInstrumentation.value, config.enableWebInstrumentation.WebSnippetConnectionString)
+  } else {
+    configuration.enableWebInstrumentation(config.enableWebInstrumentation)
+  }
 
-  // if (typeof config.autoCollectConsole === 'object') {
-  //   configuration.setAutoCollectConsole(config.autoCollectConsole.value, config.autoCollectConsole.collectConsoleLogs)
-  // } else {
-  //   configuration.setAutoCollectConsole(config.autoCollectConsole)
-  // }
+  if (typeof config.autoCollectConsole === 'object') {
+    configuration.setAutoCollectConsole(config.autoCollectConsole.value, config.autoCollectConsole.collectConsoleLogs)
+  } else {
+    configuration.setAutoCollectConsole(config.autoCollectConsole)
+  }
 
-  // if (typeof config.internalLogging === 'object') {
-  //   configuration.setInternalLogging(config.internalLogging.enableDebugLogging, config.internalLogging.enableWarningLogging)
-  // } else {
-  //   configuration.setInternalLogging(config.internalLogging)
-  // }
+  if (typeof config.internalLogging === 'object') {
+    configuration.setInternalLogging(config.internalLogging.enableDebugLogging, config.internalLogging.enableWarningLogging)
+  } else {
+    configuration.setInternalLogging(config.internalLogging)
+  }
 
   return configuration.start()
 }

@@ -1,4 +1,5 @@
 /// <reference types="nitropack" />
+/// <reference types="nitro-opentelemetry" />
 import type { DistributedTracingModes } from 'applicationinsights'
 
 export type TNitroAppInsightsConfig = {
@@ -7,7 +8,7 @@ export type TNitroAppInsightsConfig = {
   autoCollectConsole: boolean | {value: boolean, collectConsoleLogs: boolean}
   autoCollectDependencies: boolean
   autoCollectExceptions: boolean
-  autoCollectPerformance: boolean| {value :boolean, collectExtendedMetrics: boolean}
+  autoCollectPerformance: {value :boolean, collectExtendedMetrics: boolean}
   autoCollectHeartbeat: boolean
   autoCollectIncomingRequestAzureFunctions: boolean
   autoCollectPreAggregatedMetrics: boolean

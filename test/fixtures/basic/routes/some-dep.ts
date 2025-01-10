@@ -1,8 +1,11 @@
 import { defineEventHandler } from "h3";
+import { context, propagation } from "@opentelemetry/api"
 
 
-export default defineEventHandler(async (event) => {
+export default defineTracedEventHandler(async (event) => {
+     const carrier: any = {} 
+    propagation.inject(context.active(), carrier)
     return {
-        trace: event.$appInsights.trace.toString(),
+        trace: carrier.traceparent,
     }
 })
