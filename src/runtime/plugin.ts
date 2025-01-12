@@ -1,4 +1,3 @@
-import loadInstrumentations from './instrumentations'
 import type { NitroAppPlugin } from 'nitropack'
 import defu from 'defu'
 import type { TNitroAppInsightsConfig } from '../types'
