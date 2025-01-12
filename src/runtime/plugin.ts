@@ -2,24 +2,29 @@ import type { NitroAppPlugin } from 'nitropack'
 import defu from 'defu'
 import type { TNitroAppInsightsConfig } from '../types'
 import { useRuntimeConfig } from '#imports'
-import _Applicationinsights from 'applicationinsights'
+import _Applicationinsights, { defaultClient } from 'applicationinsights'
 import { metrics, trace, } from "@opentelemetry/api";
 // @ts-ignore wat ??
 import nitroOtelPlugin from "nitro-opentelemetry/runtime/plugin.mjs"
 import { registerInstrumentations } from "@opentelemetry/instrumentation";
 import { UndiciInstrumentation } from "@opentelemetry/instrumentation-undici"
-import { HttpInstrumentation } from "@opentelemetry/instrumentation-http" 
+import { HttpInstrumentation } from "@opentelemetry/instrumentation-http"
+import {SemanticAttributes,  ATTR_HTTP_RESPONSE_STATUS_CODE ,SEMATTRS_HTTP_URL, SEMATTRS_HTTP_HOST, SEMATTRS_HTTP_METHOD, SEMATTRS_HTTP_ROUTE, SEMATTRS_HTTP_SCHEME, SEMATTRS_HTTP_STATUS_CODE, SEMATTRS_HTTP_TARGET, OTEL_STATUS_CODE_VALUE_OK, OTEL_STATUS_CODE_VALUE_ERROR } from "@opentelemetry/semantic-conventions"
 
+process.env.APPLICATIONINSIGHTS_INSTRUMENTATION_LOGGING_LEVEL = "VERBOSE";
+process.env.APPLICATIONINSIGHTS_LOG_DESTINATION = "file";
+process.env.APPLICATIONINSIGHTS_LOGDIR = "D:/repo/nitro-applicationinsights/logs";
 const instrumentations = [
   new UndiciInstrumentation(),
   new HttpInstrumentation()
 ];
-const loadInstrumentations = () => {registerInstrumentations({
+const loadInstrumentations = () => {
+  registerInstrumentations({
     instrumentations,
   });
 }
 loadInstrumentations()
-  
+
 
 const Applicationinsights = _Applicationinsights as typeof import('applicationinsights')
 
@@ -32,7 +37,7 @@ export default <NitroAppPlugin>(async (nitro) => {
     autoCollectConsole: false,
     autoCollectDependencies: false,
     autoCollectExceptions: false,
-     autoCollectPerformance: {
+    autoCollectPerformance: {
       value: false,
     },
     autoCollectHeartbeat: false,
@@ -57,9 +62,29 @@ export default <NitroAppPlugin>(async (nitro) => {
     tracerProvider: trace.getTracerProvider(),
     meterProvider: metrics.getMeterProvider(),
   });
+  
+  nitro.hooks.hook('beforeResponse', (event) => {
+    event.context.span.setAttributes({
+      [SEMATTRS_HTTP_STATUS_CODE]: getResponseStatus(event),
+      code: getResponseStatus(event) >= 400 ? OTEL_STATUS_CODE_VALUE_OK : OTEL_STATUS_CODE_VALUE_ERROR,
+    })
+  })
+
   // run after setup
   // we can't push it into nitro config until nitro allows for async plugins
   nitroOtelPlugin(nitro)
+
+  // azure app insights seems to be relying on the deprecated attributes
+  nitro.hooks.hook('request', (event) => {
+    const requestURL = getRequestURL(event)
+    event.context.span.setAttributes({
+      [SEMATTRS_HTTP_ROUTE]: event.context.matchedRoute?.path || event.path,
+      [SEMATTRS_HTTP_URL]: event.path,
+      [SEMATTRS_HTTP_METHOD]: event.method,
+      [SEMATTRS_HTTP_SCHEME]: getRequestProtocol(event),
+      [SEMATTRS_HTTP_HOST]: requestURL.host, 
+    })
+  })
 })
 
 
