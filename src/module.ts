@@ -21,12 +21,6 @@ export default <NitroModule>{
     }))
 
     nitro.options = defu(nitro.options, {
-      externals: {
-        traceInclude: [
-          // the main file doesn't seems to be traced
-          await resolvePath('applicationinsights/out/applicationinsights.js')
-        ]
-      },
       imports: {
         presets: [
           {
