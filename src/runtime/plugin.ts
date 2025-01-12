@@ -8,8 +8,19 @@ import { metrics, trace, } from "@opentelemetry/api";
 // @ts-ignore wat ??
 import nitroOtelPlugin from "nitro-opentelemetry/runtime/plugin.mjs"
 import { registerInstrumentations } from "@opentelemetry/instrumentation";
+import { UndiciInstrumentation } from "@opentelemetry/instrumentation-undici"
+import { HttpInstrumentation } from "@opentelemetry/instrumentation-http" 
 
+const instrumentations = [
+  new UndiciInstrumentation(),
+  new HttpInstrumentation()
+];
+const loadInstrumentations = () => {registerInstrumentations({
+    instrumentations,
+  });
+}
 loadInstrumentations()
+  
 
 const Applicationinsights = _Applicationinsights as typeof import('applicationinsights')
 
