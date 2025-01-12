@@ -11,9 +11,6 @@ import { UndiciInstrumentation } from "@opentelemetry/instrumentation-undici"
 import { HttpInstrumentation } from "@opentelemetry/instrumentation-http"
 import {SemanticAttributes,  ATTR_HTTP_RESPONSE_STATUS_CODE ,SEMATTRS_HTTP_URL, SEMATTRS_HTTP_HOST, SEMATTRS_HTTP_METHOD, SEMATTRS_HTTP_ROUTE, SEMATTRS_HTTP_SCHEME, SEMATTRS_HTTP_STATUS_CODE, SEMATTRS_HTTP_TARGET, OTEL_STATUS_CODE_VALUE_OK, OTEL_STATUS_CODE_VALUE_ERROR } from "@opentelemetry/semantic-conventions"
 
-process.env.APPLICATIONINSIGHTS_INSTRUMENTATION_LOGGING_LEVEL = "VERBOSE";
-process.env.APPLICATIONINSIGHTS_LOG_DESTINATION = "file";
-process.env.APPLICATIONINSIGHTS_LOGDIR = "D:/repo/nitro-applicationinsights/logs";
 const instrumentations = [
   new UndiciInstrumentation(),
   new HttpInstrumentation()
