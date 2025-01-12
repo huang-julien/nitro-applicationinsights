@@ -2,14 +2,14 @@ import type { NitroAppPlugin } from 'nitropack'
 import defu from 'defu'
 import type { TNitroAppInsightsConfig } from '../types'
 import { useRuntimeConfig } from '#imports'
-import _Applicationinsights, { defaultClient } from 'applicationinsights'
+import _Applicationinsights from 'applicationinsights'
 import { metrics, trace, } from "@opentelemetry/api";
 // @ts-ignore wat ??
 import nitroOtelPlugin from "nitro-opentelemetry/runtime/plugin.mjs"
 import { registerInstrumentations } from "@opentelemetry/instrumentation";
 import { UndiciInstrumentation } from "@opentelemetry/instrumentation-undici"
 import { HttpInstrumentation } from "@opentelemetry/instrumentation-http"
-import {SemanticAttributes,  ATTR_HTTP_RESPONSE_STATUS_CODE ,SEMATTRS_HTTP_URL, SEMATTRS_HTTP_HOST, SEMATTRS_HTTP_METHOD, SEMATTRS_HTTP_ROUTE, SEMATTRS_HTTP_SCHEME, SEMATTRS_HTTP_STATUS_CODE, SEMATTRS_HTTP_TARGET, OTEL_STATUS_CODE_VALUE_OK, OTEL_STATUS_CODE_VALUE_ERROR } from "@opentelemetry/semantic-conventions"
+import { SEMATTRS_HTTP_URL, SEMATTRS_HTTP_HOST, SEMATTRS_HTTP_METHOD, SEMATTRS_HTTP_ROUTE, SEMATTRS_HTTP_SCHEME, SEMATTRS_HTTP_STATUS_CODE, OTEL_STATUS_CODE_VALUE_OK, OTEL_STATUS_CODE_VALUE_ERROR } from "@opentelemetry/semantic-conventions"
 
 const instrumentations = [
   new UndiciInstrumentation(),
