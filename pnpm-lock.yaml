@@ -33,8 +33,8 @@ importers:
         specifier: ^1.7.3
         version: 1.7.3
       nitro-opentelemetry:
-        specifier: ^0.5.0
-        version: 0.5.0(@baselime/node-opentelemetry@0.5.8(@trpc/server@10.45.2))(@microlabs/otel-cf-workers@1.0.0-rc.49(@opentelemetry/api@1.9.0))
+        specifier: ^0.5.1
+        version: 0.5.1(@baselime/node-opentelemetry@0.5.8(@trpc/server@10.45.2))(@microlabs/otel-cf-workers@1.0.0-rc.49(@opentelemetry/api@1.9.0))
       nitro-test-utils:
         specifier: ^0.9.0
         version: 0.9.0(nitropack@2.9.7(@azure/identity@4.5.0)(@opentelemetry/api@1.9.0)(magicast@0.3.5))(vitest@2.1.5)
@@ -2292,9 +2292,6 @@ packages:
   '@types/resolve@1.20.2':
     resolution: {integrity: sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==}
 
-  '@types/shimmer@1.0.2':
-    resolution: {integrity: sha512-dKkr1bTxbEsFlh2ARpKzcaAmsYixqt9UyCdoEZk8rHyE4iQYcDCyvSjDSf7JUWJHlJiTtbIoQjxKh6ViywqDAg==}
-
   '@types/shimmer@1.2.0':
     resolution: {integrity: sha512-UE7oxhQLLd9gub6JKIAhDq06T0F6FnztwMNRvYgjeQSBeMc1ZG/tA47EwfduvkuQS8apbkM/lpLpWsaCeYsXVg==}
 
@@ -3907,8 +3904,8 @@ packages:
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
 
-  nitro-opentelemetry@0.5.0:
-    resolution: {integrity: sha512-yxAxKPcBMUtTna0M8QZV0ViSuEWDhxQGNKO3ZAHcj4Rs7uKWmC5BYkiBdxfmmqUUeqxiuswuB/xcrDO0cIRV6Q==}
+  nitro-opentelemetry@0.5.1:
+    resolution: {integrity: sha512-4do++Yrt8IXW1Yn2TZDaPRtkU3/Fi5qu50QOthw89Vvfgt6j6doyqVFs345N+bmRuoakZdx1uyaYflBYPVfSFw==}
     peerDependencies:
       '@baselime/node-opentelemetry': ^0.5.8
       '@microlabs/otel-cf-workers': 1.0.0-rc.49
@@ -6595,7 +6592,7 @@ snapshots:
   '@opentelemetry/instrumentation@0.41.2(@opentelemetry/api@1.9.0)':
     dependencies:
       '@opentelemetry/api': 1.9.0
-      '@types/shimmer': 1.0.2
+      '@types/shimmer': 1.2.0
       import-in-the-middle: 1.4.2
       require-in-the-middle: 7.2.0
       semver: 7.6.3
@@ -7530,8 +7527,6 @@ snapshots:
       pg-types: 2.2.0
 
   '@types/resolve@1.20.2': {}
-
-  '@types/shimmer@1.0.2': {}
 
   '@types/shimmer@1.2.0': {}
 
@@ -9350,7 +9345,7 @@ snapshots:
 
   natural-compare@1.4.0: {}
 
-  nitro-opentelemetry@0.5.0(@baselime/node-opentelemetry@0.5.8(@trpc/server@10.45.2))(@microlabs/otel-cf-workers@1.0.0-rc.49(@opentelemetry/api@1.9.0)):
+  nitro-opentelemetry@0.5.1(@baselime/node-opentelemetry@0.5.8(@trpc/server@10.45.2))(@microlabs/otel-cf-workers@1.0.0-rc.49(@opentelemetry/api@1.9.0)):
     dependencies:
       '@azure/monitor-opentelemetry': 1.8.0
       '@baselime/node-opentelemetry': 0.5.8(@trpc/server@10.45.2)
