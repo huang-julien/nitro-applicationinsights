@@ -1,7 +1,6 @@
 import type { NitroConfig, NitroModule } from 'nitropack'
 import { resolvePath } from "mlly"
 import defu from 'defu'
-import MagicString from 'magic-string'
 
 export default <NitroModule>{
   name: 'nitro-applicationinsights',
@@ -28,44 +27,13 @@ export default <NitroModule>{
           await resolvePath('applicationinsights/out/applicationinsights.js')
         ]
       },
-      rollupConfig: {
-        plugins: [
-          // add necessary global var for applicationinsights
+      imports: {
+        presets: [
           {
-            name: 'esm-shim',
-            renderChunk(code, _chunk, opts) {
-              if (opts.format !== 'es' || code.includes('// transformed by esm-shim')) {
-                return
-              }
-              if (code.includes('__dirname') || code.includes('__filename')) {
-                const s = new MagicString(code)
-                s.prepend(`
-    // transformed by esm-shim
-    import { dirname as __pathDirname } from 'path';
-    import { fileURLToPath as __fileURLToPath } from 'url';
-    const __filename = __fileURLToPath(_import_meta_url_);
-    const __dirname = __pathDirname(__filename);`)
-                return {
-                  code: s.toString(),
-                  map: s.generateMap({ hires: true })
-                };
-              }
-            }
-          },
-          {
-            name: 'applicationinsights-loader',
-            resolveId(id) {
-              if (id === 'applicationinsights') {
-                return {
-                  id: 'applicationinsights',
-                  moduleSideEffects: true,
-                  external: true
-                }
-              }
-            },
+            package: 'nitro-opentelemetry/runtime/utils.mjs'
           }
         ]
       }
-    } as Partial<NitroConfig>)
+    } as Partial<NitroConfig>);
   }
 }

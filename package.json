@@ -18,10 +18,6 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     },
-    "./runtime": {
-      "types": "./dist/runtime/index.d.ts",
-      "import": "./dist/runtime/index.mjs"
-    },
     "./runtime/*": {
       "types": "./dist/runtime/*",
       "import": "./dist/runtime/*",
@@ -48,23 +44,33 @@
     "test:types": "tsc --noEmit --skipLibCheck"
   },
   "devDependencies": {
+    "@opentelemetry/api": "^1.9.0",
+    "@opentelemetry/context-async-hooks": "^1.30.0",
+    "@opentelemetry/sdk-trace-node": "^1.30.0",
     "@types/node": "^22.9.0",
     "@vitest/coverage-v8": "^2.1.5",
+    "@vitest/ui": "^2.1.8",
     "changelogen": "^0.5.7",
     "eslint": "9.13.0",
     "eslint-config-unjs": "^0.4.1",
     "jiti": "^2.4.0",
     "nitro-applicationinsights": "link:./",
+    "ofetch": "^1.4.1",
+    "rollup": "^4.29.2",
     "typescript": "^5.6.3",
     "unbuild": "^3.0.1",
     "vitest": "^2.1.5"
   },
   "packageManager": "pnpm@9.13.2",
   "dependencies": {
-    "applicationinsights": "^2.9.6",
+    "@opentelemetry/instrumentation": "^0.57.0",
+    "@opentelemetry/instrumentation-http": "^0.57.0",
+    "@opentelemetry/instrumentation-undici": "^0.10.0",
+    "applicationinsights": "^3.4.0",
     "defu": "^6.1.4",
     "magic-string": "^0.30.12",
     "mlly": "^1.7.3",
+    "nitro-opentelemetry": "^0.5.0",
     "nitro-test-utils": "^0.9.0",
     "pathe": "^1.1.2"
   },

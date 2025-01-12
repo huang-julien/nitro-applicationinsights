@@ -1,12 +1,11 @@
-import { defineEventHandler } from "h3"
-import { getTraceparentHeaders} from "../../../../src/runtime/utils"
-export default defineEventHandler(async (event) => {
-    const { trace } = await $fetch<{trace: string}>('/some-dep', {
-        headers: getTraceparentHeaders(event)
-    })
+ import { context, propagation } from "@opentelemetry/api"
 
+export default defineTracedEventHandler(async () => {
+    const { trace } = await $fetch<{ trace: string }>('/some-dep') 
+    const carrier: any = {}
+    propagation.inject(context.active(), carrier)
     return {
-        trace: event.$appInsights.trace.toString(),
-        dependencyTrace: trace
+        trace: carrier.traceparent,
+        dependencyTrace: trace,
     }
 })

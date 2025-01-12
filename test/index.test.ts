@@ -10,13 +10,13 @@ await setup({
     url: import.meta.url
   }))
 })
-
+ 
 describe('trace', () => {
   it('expect to have the same trace id', async () => {
     await new Promise((resolve) => setTimeout(resolve, 1000))
     const { data } = await $fetch<{
       trace: string
-      initialTrace: string
+      parentSpanId: string
     }>('/', {
       headers: {
         'traceparent': dummyTrace
@@ -24,7 +24,7 @@ describe('trace', () => {
     })
 
     expect(data).toBeDefined()
-    expect(data?.initialTrace).toBe(dummyTrace)
+    expect(data?.parentSpanId).toBe('b7ad6b7169203331')
     // should have the same op id
     expect(data!.trace.split('-')[1]).toBe(dummyTrace.split('-')[1])
   })
