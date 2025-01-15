@@ -5,9 +5,6 @@ import defu from 'defu'
 export default <NitroModule>{
   name: 'nitro-applicationinsights',
   async setup(nitro) {
-    if (!nitro.options.externals) {
-      nitro.options.externals = {}
-    }
     nitro.options.externals.inline = nitro.options.externals.inline || []
     // force inline the plugin and the setup file
     nitro.options.externals.inline.push((id) => (
