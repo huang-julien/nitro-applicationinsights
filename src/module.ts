@@ -1,26 +1,29 @@
-import type { NitroConfig, NitroModule } from 'nitropack'
+import type { NitroModule } from 'nitropack'
 import { resolvePath } from "mlly"
 import defu from 'defu'
+import { NitroOptions } from 'nitropack/types'
 
 export default <NitroModule>{
   name: 'nitro-applicationinsights',
   async setup(nitro) {
-    nitro.options.externals = defu({
-      inline: [
-        // force inline the plugin and the setup file
-        (id) => (
-          id.includes('nitro-applicationinsights/runtime/plugin')
-          || id.includes('nitro-applicationinsights/dist/runtime/plugin')
-        )
-      ]
-    }, nitro.options.externals)
-
-    nitro.options.plugins.push(await resolvePath('nitro-applicationinsights/runtime/plugin', {
-      extensions: ['.ts', '.mjs', '.js'],
-      url: [import.meta.url]
-    }))
-
     nitro.options = defu(nitro.options, {
+      externals: {
+        inline: [
+          // force inline the plugin and the setup file
+          (id) => (
+            id.includes('nitro-applicationinsights/runtime/plugin')
+            || id.includes('nitro-applicationinsights/dist/runtime/plugin')
+          )
+        ]
+      },
+      
+      plugins: [
+        await resolvePath('nitro-applicationinsights/runtime/plugin', {
+          extensions: ['.ts', '.mjs', '.js'],
+          url: [import.meta.url]
+        })
+      ],
+
       imports: {
         presets: [
           {
@@ -28,6 +31,6 @@ export default <NitroModule>{
           }
         ]
       }
-    } as Partial<NitroConfig>);
+    } as Partial<NitroOptions>)
   }
 }
