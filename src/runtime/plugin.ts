@@ -10,6 +10,7 @@ import { registerInstrumentations } from "@opentelemetry/instrumentation";
 import { UndiciInstrumentation } from "@opentelemetry/instrumentation-undici"
 import { HttpInstrumentation } from "@opentelemetry/instrumentation-http"
 import { SEMATTRS_HTTP_URL, SEMATTRS_HTTP_HOST, SEMATTRS_HTTP_METHOD, SEMATTRS_HTTP_ROUTE, SEMATTRS_HTTP_SCHEME, SEMATTRS_HTTP_STATUS_CODE, OTEL_STATUS_CODE_VALUE_OK, OTEL_STATUS_CODE_VALUE_ERROR } from "@opentelemetry/semantic-conventions"
+import { getResponseStatus, getRequestURL, getRequestProtocol } from 'h3'
 
 const instrumentations = [
   new UndiciInstrumentation(),
