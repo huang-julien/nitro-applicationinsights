@@ -1,1 +1,0 @@
-import{k as c,c as r,e as t,X as n}from"./deqCMA7v.js";const o={};function s(e,a){return r(),t("em",null,[n(e.$slots,"default",{},void 0,!0)])}const l=c(o,[["render",s],["__scopeId","data-v-c9ceb758"]]);export{l as default};
