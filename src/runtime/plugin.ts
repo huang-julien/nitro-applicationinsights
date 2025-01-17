@@ -4,8 +4,6 @@ import type { TNitroAppInsightsConfig } from '../types'
 import { useRuntimeConfig } from '#imports'
 import _Applicationinsights from 'applicationinsights'
 import { metrics, trace, } from "@opentelemetry/api";
-// @ts-ignore wat ??
-import nitroOtelPlugin from "nitro-opentelemetry/runtime/plugin.mjs"
 import { registerInstrumentations } from "@opentelemetry/instrumentation";
 import { UndiciInstrumentation } from "@opentelemetry/instrumentation-undici"
 import { HttpInstrumentation } from "@opentelemetry/instrumentation-http"
@@ -67,10 +65,6 @@ export default <NitroAppPlugin>(async (nitro) => {
       code: getResponseStatus(event) >= 400 ? OTEL_STATUS_CODE_VALUE_OK : OTEL_STATUS_CODE_VALUE_ERROR,
     })
   })
-
-  // run after setup
-  // we can't push it into nitro config until nitro allows for async plugins
-  nitroOtelPlugin(nitro)
 
   // azure app insights seems to be relying on the deprecated attributes
   nitro.hooks.hook('request', (event) => {
