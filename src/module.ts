@@ -12,19 +12,26 @@ export default <NitroModule>{
           id.includes('nitro-applicationinsights/runtime/plugin')
           || id.includes('nitro-applicationinsights/dist/runtime/plugin')
         )
-      ]
+      ], 
     }, nitro.options.externals)
-
+   
     nitro.options.plugins.push(await resolvePath('nitro-applicationinsights/runtime/plugin', {
+      extensions: ['.ts', '.mjs', '.js'],
+      url: [import.meta.url]
+    }))
+    nitro.options.plugins.push(await resolvePath('nitro-opentelemetry/runtime/plugin', {
       extensions: ['.ts', '.mjs', '.js'],
       url: [import.meta.url]
     }))
 
     nitro.options = defu(nitro.options, {
       imports: {
-        presets: [
+        imports:  [
           {
-            package: 'nitro-opentelemetry/runtime/utils.mjs'
+            from:  await resolvePath('nitro-opentelemetry/runtime/utils', {
+              extensions: ['.ts', '.mjs', '.js'],
+              url: [import.meta.url]
+            }),
           }
         ]
       }
