@@ -1,0 +1,1 @@
+{"id":"905e6200-01e5-4be4-a827-ee1fef7d5b7f","timestamp":1737156111595,"matcher":{"static":{"/api/search":{"prerender":true}},"wildcard":{},"dynamic":{}},"prerendered":["/","/guide/getting-started","/guide/migration","/api/hooks","/guide/how-does-it-work","/guide/runtime-configuration"]}
