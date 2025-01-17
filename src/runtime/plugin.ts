@@ -67,10 +67,10 @@ export default <NitroAppPlugin>(async (nitro) => {
   })
 
   // azure app insights seems to be relying on the deprecated attributes
-  nitro.hooks.hook('request', (event) => {
+  nitro.hooks.hook('request', async (event) => {
     const requestURL = getRequestURL(event)
     event.context.span.setAttributes({
-      [SEMATTRS_HTTP_ROUTE]: event.context.matchedRoute?.path || event.path,
+      [SEMATTRS_HTTP_ROUTE]: (await nitro.h3App.resolve(event.path))?.route || event.path,
       [SEMATTRS_HTTP_URL]: event.path,
       [SEMATTRS_HTTP_METHOD]: event.method,
       [SEMATTRS_HTTP_SCHEME]: getRequestProtocol(event),
