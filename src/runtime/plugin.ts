@@ -4,12 +4,11 @@ import type { TNitroAppInsightsConfig } from '../types'
 import { useRuntimeConfig } from '#imports'
 import _Applicationinsights from 'applicationinsights'
 import { metrics, trace, } from "@opentelemetry/api";
-// @ts-ignore wat ??
-import nitroOtelPlugin from "nitro-opentelemetry/runtime/plugin.mjs"
 import { registerInstrumentations } from "@opentelemetry/instrumentation";
 import { UndiciInstrumentation } from "@opentelemetry/instrumentation-undici"
 import { HttpInstrumentation } from "@opentelemetry/instrumentation-http"
 import { SEMATTRS_HTTP_URL, SEMATTRS_HTTP_HOST, SEMATTRS_HTTP_METHOD, SEMATTRS_HTTP_ROUTE, SEMATTRS_HTTP_SCHEME, SEMATTRS_HTTP_STATUS_CODE, OTEL_STATUS_CODE_VALUE_OK, OTEL_STATUS_CODE_VALUE_ERROR } from "@opentelemetry/semantic-conventions"
+import { getResponseStatus, getRequestURL, getRequestProtocol } from 'h3'
 
 const instrumentations = [
   new UndiciInstrumentation(),
@@ -60,22 +59,18 @@ export default <NitroAppPlugin>(async (nitro) => {
     meterProvider: metrics.getMeterProvider(),
   });
   
-  nitro.hooks.hook('beforeResponse', (event) => {
+  nitro.hooks.hook('otel:span:end', ({event}) => {
     event.context.span.setAttributes({
       [SEMATTRS_HTTP_STATUS_CODE]: getResponseStatus(event),
       code: getResponseStatus(event) >= 400 ? OTEL_STATUS_CODE_VALUE_OK : OTEL_STATUS_CODE_VALUE_ERROR,
     })
   })
 
-  // run after setup
-  // we can't push it into nitro config until nitro allows for async plugins
-  nitroOtelPlugin(nitro)
-
   // azure app insights seems to be relying on the deprecated attributes
-  nitro.hooks.hook('request', (event) => {
+  nitro.hooks.hook('request', async (event) => {
     const requestURL = getRequestURL(event)
     event.context.span.setAttributes({
-      [SEMATTRS_HTTP_ROUTE]: event.context.matchedRoute?.path || event.path,
+      [SEMATTRS_HTTP_ROUTE]: (await nitro.h3App.resolve(event.path))?.route || event.path,
       [SEMATTRS_HTTP_URL]: event.path,
       [SEMATTRS_HTTP_METHOD]: event.method,
       [SEMATTRS_HTTP_SCHEME]: getRequestProtocol(event),
