@@ -59,7 +59,7 @@ export default <NitroAppPlugin>(async (nitro) => {
     meterProvider: metrics.getMeterProvider(),
   });
   
-  nitro.hooks.hook('beforeResponse', (event) => {
+  nitro.hooks.hook('otel:span:end', ({event}) => {
     event.context.span.setAttributes({
       [SEMATTRS_HTTP_STATUS_CODE]: getResponseStatus(event),
       code: getResponseStatus(event) >= 400 ? OTEL_STATUS_CODE_VALUE_OK : OTEL_STATUS_CODE_VALUE_ERROR,
