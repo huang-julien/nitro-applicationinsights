@@ -60,7 +60,7 @@ export default <NitroAppPlugin>(async (nitro) => {
   });
   
   nitro.hooks.hook('otel:span:end', ({event}) => {
-    event.context.span.setAttributes({
+    event.otel.span.setAttributes({
       [SEMATTRS_HTTP_STATUS_CODE]: getResponseStatus(event),
       code: getResponseStatus(event) >= 400 ? OTEL_STATUS_CODE_VALUE_OK : OTEL_STATUS_CODE_VALUE_ERROR,
     })
@@ -69,7 +69,7 @@ export default <NitroAppPlugin>(async (nitro) => {
   // azure app insights seems to be relying on the deprecated attributes
   nitro.hooks.hook('request', async (event) => {
     const requestURL = getRequestURL(event)
-    event.context.span.setAttributes({
+    event.otel.span.setAttributes({
       [SEMATTRS_HTTP_ROUTE]: (await nitro.h3App.resolve(event.path))?.route || event.path,
       [SEMATTRS_HTTP_URL]: event.path,
       [SEMATTRS_HTTP_METHOD]: event.method,
