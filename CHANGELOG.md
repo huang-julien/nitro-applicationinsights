@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v1.0.1
+
+[compare changes](https://github.com/huang-julien/nitro-applicationinsights/compare/v1.0.0...v1.0.1)
+
+### 🩹 Fixes
+
+- ⚠️  Update nitro-opentelemetry to 0.7.0 ([031501f3](https://github.com/huang-julien/nitro-applicationinsights/commit/031501f3))
+
+#### ⚠️ Breaking Changes
+
+- ⚠️  Update nitro-opentelemetry to 0.7.0 ([031501f3](https://github.com/huang-julien/nitro-applicationinsights/commit/031501f3))
+
+### ❤️ Contributors
+
+- Julien Huang ([@huang-julien](http://github.com/huang-julien))
+
 ## v0.15.0...v1.0.0
 
 [compare changes](https://github.com/huang-julien/nitro-applicationinsights/compare/v0.15.0...v1.0.0)
