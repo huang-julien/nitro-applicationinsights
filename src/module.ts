@@ -7,9 +7,9 @@ export default <NitroModule>{
   name: 'nitro-applicationinsights',
   async setup(nitro) {
     // applicationinsights with initialize the NodeSDK itself
-    nitro.options.otel = defu({
+    nitro.options.otel = defu(nitro.options.otel, {
       preset: false
-    } as const, nitro.options.otel) 
+    } as const) 
 
     await nitroOtel(nitro, undefined)
 
