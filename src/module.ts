@@ -9,7 +9,7 @@ export default <NitroModule>{
     // applicationinsights with initialize the NodeSDK itself
     nitro.options.otel = defu(nitro.options.otel, {
       preset: false
-    } as const) 
+    } as const)
 
     await nitroOtel(nitro, undefined)
 
