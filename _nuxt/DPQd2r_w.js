@@ -1,0 +1,1 @@
+import{k as r,c as t,e as n,X as o}from"./BRIAzrDS.js";const c={};function s(e,a){return t(),n("strong",null,[o(e.$slots,"default",{},void 0,!0)])}const f=r(c,[["render",s],["__scopeId","data-v-c2f7cde2"]]);export{f as default};
