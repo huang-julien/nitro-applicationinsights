@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v1.0.2
+
+[compare changes](https://github.com/huang-julien/nitro-applicationinsights/compare/v1.0.1...v1.0.2)
+
+### 🩹 Fixes
+
+- Run nitro-otel ([#139](https://github.com/huang-julien/nitro-applicationinsights/pull/139))
+
+### 🏡 Chore
+
+- **release:** V1.0.1 ([17e3cccb](https://github.com/huang-julien/nitro-applicationinsights/commit/17e3cccb))
+
+### ❤️ Contributors
+
+- Julien Huang ([@huang-julien](http://github.com/huang-julien))
+
 ## v1.0.1
 
 [compare changes](https://github.com/huang-julien/nitro-applicationinsights/compare/v1.0.0...v1.0.1)
