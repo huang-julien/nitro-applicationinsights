@@ -1,1 +1,0 @@
-import{k as t,c as o,e as s,X as c}from"./BWwKHauB.js";const r={},a={class:"preview-layout"};function n(e,d){return o(),s("div",a,[c(e.$slots,"default",{},void 0,!0)])}const f=t(r,[["render",n],["__scopeId","data-v-fc192d47"]]);export{f as default};
