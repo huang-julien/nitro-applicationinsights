@@ -1,8 +1,3 @@
 {
-  "extends": "./.nitro/types/tsconfig.json",
-  "compilerOptions": {
-    "types": [
-      "nitro-applicationinsights"
-    ]
-  }
+  "extends": "./.nitro/types/tsconfig.json"
 }
