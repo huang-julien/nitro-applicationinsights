@@ -17,5 +17,5 @@ export default defineBuildConfig({
   rollup: {
     emitCJS: true,
   },
-  externals: ['#imports'],
+  externals: ['#imports', 'nitro-applicationinsights'],
 })
