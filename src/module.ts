@@ -23,6 +23,12 @@ export default <NitroModule>{
       ],
     }, nitro.options.externals)
 
+    nitro.options.typescript.tsConfig = defu(nitro.options.typescript.tsConfig, {
+      compilerOptions: {
+        types: ['nitro-applicationinsights'],
+      },
+    })
+
     nitro.options.plugins.push(await resolvePath('nitro-applicationinsights/runtime/plugin', {
       extensions: ['.ts', '.mjs', '.js'],
       url: [import.meta.url]

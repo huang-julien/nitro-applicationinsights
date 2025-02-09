@@ -32,6 +32,9 @@ importers:
       mlly:
         specifier: ^1.7.4
         version: 1.7.4
+      nitro-applicationinsights:
+        specifier: link:./
+        version: 'link:'
       nitro-opentelemetry:
         specifier: ^0.7.1
         version: 0.7.2(@baselime/node-opentelemetry@0.5.8(@trpc/server@10.45.2))(@microlabs/otel-cf-workers@1.0.0-rc.49(@opentelemetry/api@1.9.0))
@@ -78,9 +81,6 @@ importers:
       jiti:
         specifier: ^2.4.2
         version: 2.4.2
-      nitro-applicationinsights:
-        specifier: link:./
-        version: 'link:'
       ofetch:
         specifier: ^1.4.1
         version: 1.4.1
