@@ -1,6 +1,28 @@
 # Changelog
 
 
+## v1.0.3
+
+[compare changes](https://github.com/huang-julien/nitro-applicationinsights/compare/v1.0.2...v1.0.3)
+
+### 🩹 Fixes
+
+- Add package in generated tsconfig ([#145](https://github.com/huang-julien/nitro-applicationinsights/pull/145))
+
+### 🏡 Chore
+
+- **release:** V1.0.2 ([5f1dcabe](https://github.com/huang-julien/nitro-applicationinsights/commit/5f1dcabe))
+- Update pnpm ([4324c287](https://github.com/huang-julien/nitro-applicationinsights/commit/4324c287))
+
+### 🤖 CI
+
+- Remove corepack ([e303bc29](https://github.com/huang-julien/nitro-applicationinsights/commit/e303bc29))
+- Pnpm version ([808a5198](https://github.com/huang-julien/nitro-applicationinsights/commit/808a5198))
+
+### ❤️ Contributors
+
+- Julien Huang ([@huang-julien](http://github.com/huang-julien))
+
 ## v1.0.2
 
 [compare changes](https://github.com/huang-julien/nitro-applicationinsights/compare/v1.0.1...v1.0.2)
