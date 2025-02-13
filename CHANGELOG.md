@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v1.0.4
+
+[compare changes](https://github.com/huang-julien/nitro-applicationinsights/compare/v1.0.3...v1.0.4)
+
+### 🩹 Fixes
+
+- Remove link deps ([#149](https://github.com/huang-julien/nitro-applicationinsights/pull/149))
+
+### 🏡 Chore
+
+- **release:** V1.0.3 ([09d8e67b](https://github.com/huang-julien/nitro-applicationinsights/commit/09d8e67b))
+
+### ❤️ Contributors
+
+- Julien Huang ([@huang-julien](http://github.com/huang-julien))
+
 ## v1.0.3
 
 [compare changes](https://github.com/huang-julien/nitro-applicationinsights/compare/v1.0.2...v1.0.3)
