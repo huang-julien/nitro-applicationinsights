@@ -1,1 +1,0 @@
-import{k as o,c as r,e as t,X as a}from"./CrSfzWc_.js";const n={};function s(e,c){return t(),r("ol",null,[a(e.$slots,"default",{},void 0,!0)])}const d=o(n,[["render",s],["__scopeId","data-v-e61afae7"]]);export{d as default};
