@@ -52,7 +52,9 @@ export default <NitroAppPlugin>(async (nitro) => {
 
   await nitro.hooks.callHook('applicationinsights:config', config)
 
-  setup(config)
+  const configuration = setup(config)
+  await nitro.hooks.callHook('applicationinsights:setup', { client: Applicationinsights.defaultClient, configuration })
+  configuration.start()
 
   registerInstrumentations({
     tracerProvider: trace.getTracerProvider(),
@@ -123,5 +125,5 @@ export function setup(config: TNitroAppInsightsConfig) {
     configuration.setInternalLogging(config.internalLogging)
   }
 
-  return configuration.start()
+  return configuration
 }
