@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v1.1.0
+
+[compare changes](https://github.com/huang-julien/nitro-applicationinsights/compare/v1.0.4...v1.1.0)
+
+### 🚀 Enhancements
+
+- Setup and ready hooks ([#152](https://github.com/huang-julien/nitro-applicationinsights/pull/152))
+
+### 🏡 Chore
+
+- **release:** V1.0.4 ([ef9c4388](https://github.com/huang-julien/nitro-applicationinsights/commit/ef9c4388))
+
+### ❤️ Contributors
+
+- Julien Huang ([@huang-julien](http://github.com/huang-julien))
+
 ## v1.0.4
 
 [compare changes](https://github.com/huang-julien/nitro-applicationinsights/compare/v1.0.3...v1.0.4)
