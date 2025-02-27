@@ -8,12 +8,12 @@ declare module 'nitropack' {
      */
     'applicationinsights:config': (config: TNitroAppInsightsConfig) => void
     /**
-     * Run when the applicationinsights client is setup but not started
+     * Triggered when the applicationinsights client is setup but not started
      * If you want to modify azure monitors options you can do it here
      */
     'applicationinsights:setup': (context: { client: TelemetryClient, configuration: Configuration }) => void
     /**
-     * Run when the applicationinsights client is ready and initialized
+     * Triggered when the applicationinsights client is ready and initialized
      */
     'applicationinsights:ready': (context: { client: TelemetryClient }) => void
   }
