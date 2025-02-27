@@ -1,5 +1,4 @@
 import type { NitroAppPlugin } from 'nitropack'
-import defu from 'defu'
 import type { TNitroAppInsightsConfig } from '../types'
 import { useRuntimeConfig } from '#imports'
 import _Applicationinsights from 'applicationinsights'
@@ -25,30 +24,7 @@ loadInstrumentations()
 const Applicationinsights = _Applicationinsights as typeof import('applicationinsights')
 
 export default <NitroAppPlugin>(async (nitro) => {
-  const { applicationinsights } = useRuntimeConfig()
-
-  const config: TNitroAppInsightsConfig = defu(applicationinsights, {
-    connectionString: undefined,
-    autoCollectRequests: false,
-    autoCollectConsole: false,
-    autoCollectDependencies: false,
-    autoCollectExceptions: false,
-    autoCollectPerformance: {
-      value: false,
-    },
-    autoCollectHeartbeat: false,
-    autoCollectIncomingRequestAzureFunctions: false,
-    autoCollectPreAggregatedMetrics: false,
-    autoDependencyCorrelation: false,
-    enableWebInstrumentation: false,
-    distributedTracingMode: Applicationinsights.DistributedTracingModes.AI_AND_W3C,
-    sendLiveMetrics: false,
-    internalLogging: {
-      enableDebugLogging: false,
-      enableWarningLogging: false
-    },
-    useDiskRetryCaching: false
-  })
+  const { applicationinsights: config } = useRuntimeConfig()
 
   await nitro.hooks.callHook('applicationinsights:config', config)
 
@@ -84,19 +60,43 @@ export default <NitroAppPlugin>(async (nitro) => {
 
 export function setup(config: TNitroAppInsightsConfig) {
   // Setup Application Insights using the instrumentation key from the environment variables
-  const configuration = Applicationinsights
-    .setup(config.connectionString)
-    .setAutoCollectRequests(config.autoCollectRequests)
-    .setAutoCollectDependencies(config.autoCollectDependencies)
-    .setAutoCollectExceptions(config.autoCollectExceptions)
-    .setAutoCollectHeartbeat(config.autoCollectHeartbeat)
-    .setAutoCollectIncomingRequestAzureFunctions(config.autoCollectIncomingRequestAzureFunctions)
-    .setAutoCollectPreAggregatedMetrics(config.autoCollectPreAggregatedMetrics)
-    .setDistributedTracingMode(config.distributedTracingMode)
-    .setSendLiveMetrics(config.sendLiveMetrics).setInternalLogging(true, true) // Enable both debug and warning logging
-    .setAutoCollectConsole(true, true) // Generate Trace telemetry for winston/bunyan and console logs
+  const configuration = Applicationinsights.setup(config.connectionString)
 
-    .setUseDiskRetryCaching(config.useDiskRetryCaching)
+  if (config.autoCollectRequests !== undefined) {
+    configuration.setAutoCollectRequests(config.autoCollectRequests)
+  }
+
+  if (config.autoCollectDependencies !== undefined) {
+    configuration.setAutoCollectDependencies(config.autoCollectDependencies)
+  }
+
+  if (config.autoCollectExceptions !== undefined) {
+    configuration.setAutoCollectExceptions(config.autoCollectExceptions)
+  }
+
+  if (config.autoCollectHeartbeat !== undefined) {
+    configuration.setAutoCollectHeartbeat(config.autoCollectHeartbeat)
+  }
+
+  if (config.autoCollectIncomingRequestAzureFunctions !== undefined) {
+    configuration.setAutoCollectIncomingRequestAzureFunctions(config.autoCollectIncomingRequestAzureFunctions)
+  }
+
+  if (config.autoCollectPreAggregatedMetrics !== undefined) {
+    configuration.setAutoCollectPreAggregatedMetrics(config.autoCollectPreAggregatedMetrics)
+  }
+
+  if (config.distributedTracingMode !== undefined) {
+    configuration.setDistributedTracingMode(config.distributedTracingMode)
+  }
+
+  if (config.sendLiveMetrics !== undefined) {
+    configuration.setSendLiveMetrics(config.sendLiveMetrics)
+  }
+
+  if (config.useDiskRetryCaching !== undefined) {
+    configuration.setUseDiskRetryCaching(config.useDiskRetryCaching)
+  }
 
   if (typeof config.autoCollectPerformance === 'object') {
     configuration.setAutoCollectPerformance(config.autoCollectPerformance.value, config.autoCollectPerformance.collectExtendedMetrics)
