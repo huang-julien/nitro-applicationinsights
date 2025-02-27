@@ -1,1 +1,0 @@
-import{k as o,c as r,e as t,X as c}from"./ixrieH3v.js";const n={};function s(e,a){return t(),r("ol",null,[c(e.$slots,"default",{},void 0,!0)])}const d=o(n,[["render",s],["__scopeId","data-v-7efbe3cb"]]);export{d as default};
