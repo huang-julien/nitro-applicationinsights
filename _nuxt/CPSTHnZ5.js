@@ -1,1 +1,0 @@
-import{k as o,c as t,e as c,X as r}from"./BX-u_DCU.js";const n={};function s(e,a){return c(),t("blockquote",null,[r(e.$slots,"default",{},void 0,!0)])}const d=o(n,[["render",s],["__scopeId","data-v-6e2346f4"]]);export{d as default};

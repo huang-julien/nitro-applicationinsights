@@ -1,1 +1,0 @@
-import{k as c,c as r,e as t,X as n}from"./BX-u_DCU.js";const o={};function s(e,a){return t(),r("li",null,[n(e.$slots,"default",{},void 0,!0)])}const d=c(o,[["render",s],["__scopeId","data-v-e1c125bc"]]);export{d as default};
