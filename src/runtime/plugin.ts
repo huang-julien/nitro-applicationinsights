@@ -31,6 +31,7 @@ export default <NitroAppPlugin>(async (nitro) => {
   const configuration = setup(config)
   await nitro.hooks.callHook('applicationinsights:setup', { client: Applicationinsights.defaultClient, configuration })
   configuration.start()
+  await nitro.hooks.callHook('applicationinsights:ready', { client: Applicationinsights.defaultClient })
 
   registerInstrumentations({
     tracerProvider: trace.getTracerProvider(),
