@@ -8,6 +8,7 @@ import { UndiciInstrumentation } from "@opentelemetry/instrumentation-undici"
 import { HttpInstrumentation } from "@opentelemetry/instrumentation-http"
 import { SEMATTRS_HTTP_URL, SEMATTRS_HTTP_HOST, SEMATTRS_HTTP_METHOD, SEMATTRS_HTTP_ROUTE, SEMATTRS_HTTP_SCHEME, SEMATTRS_HTTP_STATUS_CODE, OTEL_STATUS_CODE_VALUE_OK, OTEL_STATUS_CODE_VALUE_ERROR } from "@opentelemetry/semantic-conventions"
 import { getResponseStatus, getRequestURL, getRequestProtocol } from 'h3'
+import { defu } from 'defu';
 
 const instrumentations = [
   new UndiciInstrumentation(),
@@ -26,7 +27,7 @@ const Applicationinsights = _Applicationinsights as typeof import('applicationin
 export default <NitroAppPlugin>(async (nitro) => {
   const { applicationinsights: config } = useRuntimeConfig()
 
-  await nitro.hooks.callHook('applicationinsights:config', config)
+  await nitro.hooks.callHook('applicationinsights:config', defu(config, {}))
 
   const configuration = setup(config)
   await nitro.hooks.callHook('applicationinsights:setup', { client: Applicationinsights.defaultClient, configuration })
