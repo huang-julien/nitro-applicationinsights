@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v1.1.2
+
+[compare changes](https://github.com/huang-julien/nitro-applicationinsights/compare/v1.1.1...v1.1.2)
+
+### 🩹 Fixes
+
+- Remove attribute ([#156](https://github.com/huang-julien/nitro-applicationinsights/pull/156))
+
+### 🏡 Chore
+
+- **release:** V1.1.1 ([7267fb08](https://github.com/huang-julien/nitro-applicationinsights/commit/7267fb08))
+
+### ❤️ Contributors
+
+- Julien Huang ([@huang-julien](https://github.com/huang-julien))
+
 ## v1.1.1
 
 [compare changes](https://github.com/huang-julien/nitro-applicationinsights/compare/v1.1.0...v1.1.1)
