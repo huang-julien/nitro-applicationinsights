@@ -12,21 +12,19 @@ jobs:
   autofix:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda
         name: Install pnpm
         with:
-          version: 9.15.6
+          version: 9.15.4
           run_install: false
       - name: Install Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e
         with:
           node-version: 22
           cache: 'pnpm'
       - run: pnpm install
-      - run: pnpm build --stub
-      - name: Fix lint issues
-        run: pnpm run lint:fix
-      - uses: autofix-ci/action@551dded8c6cc8a1054039c8bc0b8b48c51dfc6ef
+      - run: pnpm lint:fix
+      - uses: autofix-ci/action@ea32e3a12414e6d3183163c3424a7d7a8631ad84
         with:
-          commit-message: "chore: apply automated fixes"
+          commit-message: "chore: apply automated updates"
