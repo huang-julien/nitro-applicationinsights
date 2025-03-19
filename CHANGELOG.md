@@ -1,6 +1,71 @@
 # Changelog
 
 
+## v1.1.2
+
+[compare changes](https://github.com/huang-julien/nitro-applicationinsights/compare/v1.1.1...v1.1.2)
+
+### 🩹 Fixes
+
+- Remove attribute ([#156](https://github.com/huang-julien/nitro-applicationinsights/pull/156))
+
+### 🏡 Chore
+
+- **release:** V1.1.1 ([7267fb08](https://github.com/huang-julien/nitro-applicationinsights/commit/7267fb08))
+
+### ❤️ Contributors
+
+- Julien Huang ([@huang-julien](https://github.com/huang-julien))
+
+## v1.1.1
+
+[compare changes](https://github.com/huang-julien/nitro-applicationinsights/compare/v1.1.0...v1.1.1)
+
+### 🩹 Fixes
+
+- Reuse defu ([#153](https://github.com/huang-julien/nitro-applicationinsights/pull/153))
+- Call missing hook ([#154](https://github.com/huang-julien/nitro-applicationinsights/pull/154))
+
+### 🏡 Chore
+
+- **release:** V1.1.0 ([14590cbd](https://github.com/huang-julien/nitro-applicationinsights/commit/14590cbd))
+
+### ❤️ Contributors
+
+- Julien Huang ([@huang-julien](https://github.com/huang-julien))
+
+## v1.1.0
+
+[compare changes](https://github.com/huang-julien/nitro-applicationinsights/compare/v1.0.4...v1.1.0)
+
+### 🚀 Enhancements
+
+- Setup and ready hooks ([#152](https://github.com/huang-julien/nitro-applicationinsights/pull/152))
+
+### 🏡 Chore
+
+- **release:** V1.0.4 ([ef9c4388](https://github.com/huang-julien/nitro-applicationinsights/commit/ef9c4388))
+
+### ❤️ Contributors
+
+- Julien Huang ([@huang-julien](http://github.com/huang-julien))
+
+## v1.0.4
+
+[compare changes](https://github.com/huang-julien/nitro-applicationinsights/compare/v1.0.3...v1.0.4)
+
+### 🩹 Fixes
+
+- Remove link deps ([#149](https://github.com/huang-julien/nitro-applicationinsights/pull/149))
+
+### 🏡 Chore
+
+- **release:** V1.0.3 ([09d8e67b](https://github.com/huang-julien/nitro-applicationinsights/commit/09d8e67b))
+
+### ❤️ Contributors
+
+- Julien Huang ([@huang-julien](http://github.com/huang-julien))
+
 ## v1.0.3
 
 [compare changes](https://github.com/huang-julien/nitro-applicationinsights/compare/v1.0.2...v1.0.3)
