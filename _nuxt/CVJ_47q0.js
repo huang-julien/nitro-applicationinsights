@@ -1,0 +1,1 @@
+import{k as t,c as a,e as s,h as c,X as n}from"./CO8CxmrT.js";const o={},r={class:"table-wrapper"};function _(e,d){return s(),a("div",r,[c("table",null,[n(e.$slots,"default",{},void 0,!0)])])}const f=t(o,[["render",_],["__scopeId","data-v-3ec04584"]]);export{f as default};

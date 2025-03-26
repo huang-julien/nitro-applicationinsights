@@ -1,0 +1,1 @@
+import{k as n,c as t,e as o,X as c}from"./CO8CxmrT.js";const r={};function s(e,_){return o(),t("code",null,[c(e.$slots,"default",{},void 0,!0)])}const d=n(r,[["render",s],["__scopeId","data-v-7e0df836"]]);export{d as default};
