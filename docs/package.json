@@ -1,21 +1,29 @@
 {
-  "name": "docus-starter",
-  "version": "0.1.0",
+  "name": "nuxt-ui-pro-template-docs",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "nuxi dev",
-    "build": "nuxi build",
-    "generate": "nuxi generate",
-    "preview": "nuxi preview",
-    "lint": "eslint ."
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "lint": "eslint .",
+    "typecheck": "nuxt typecheck"
+  },
+  "dependencies": {
+    "@iconify-json/heroicons": "^1.1.24",
+    "@iconify-json/simple-icons": "^1.1.114",
+    "@nuxt/content": "^3.0.0",
+    "@nuxt/fonts": "^0.10.3",
+    "@nuxt/image": "^1.9.0",
+    "@nuxt/ui-pro": "^1.7.0",
+    "nuxt": "^3.13.2",
+    "nuxt-og-image": "^4.0.0"
   },
   "devDependencies": {
-    "@nuxt-themes/docus": "latest",
-    "@nuxt/devtools": "^1.7.0",
-    "@nuxt/eslint-config": "^1.2.0",
-    "@nuxtjs/plausible": "^1.2.0",
-    "@types/node": "^22.13.10",
-    "eslint": "^9.22.0",
-    "nuxt": "^3.16.1"
+    "@nuxt/eslint": "^1.0.0",
+    "@nuxthq/studio": "^2.1.0",
+    "eslint": "^9.9.0",
+    "vue-tsc": "^2.0.29"
   }
 }
