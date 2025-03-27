@@ -23,7 +23,9 @@ export default defineNuxtConfig({
     'components:extend': (components) => {
       const globals = components.filter(c => ['UButton', 'UIcon'].includes(c.pascalName))
 
-      globals.forEach(c => c.global = true)
+      for(const c of globals) {
+        c.global = true
+      }
     }
   },
 
