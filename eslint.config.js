@@ -6,6 +6,7 @@ export default unjs({
     'coverage',
     'dist',
     '**/.nitro',
-    '**/.output'
+    '**/.output',
+    './docs/**'
   ]
 });
