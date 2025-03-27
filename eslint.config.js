@@ -7,6 +7,6 @@ export default unjs({
     'dist',
     '**/.nitro',
     '**/.output',
-    './docs/**'
+    './docs'
   ]
 });
