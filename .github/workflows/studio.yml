@@ -6,7 +6,7 @@ on:
   # Runs on pushes targeting the default branch
   push:
     branches:
-      - 'main'
+      - 'master'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -35,22 +35,22 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
 
       - name: Identify package manager
         id: pkgman
         run: |
-          cache=`[ -f "docs/pnpm-lock.yaml" ] && echo "pnpm" || ([ -f "docs/package-lock.json" ] && echo "npm" || ([ -f "docs/yarn.lock" ] && echo "yarn" || echo ""))`
+          cache=`[ -f "pnpm-lock.yaml" ] && echo "pnpm" || ([ -f "package-lock.json" ] && echo "npm" || ([ -f "yarn.lock" ] && echo "yarn" || echo ""))`
           package_manager=`[ ! -z "$cache" ] && echo "$cache" || echo "pnpm"`
           echo "cache=$cache" >> $GITHUB_OUTPUT
           echo "package_manager=$package_manager" >> $GITHUB_OUTPUT
 
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda
         if: ${{ steps.pkgman.outputs.package_manager == 'pnpm' }}
         name: Install pnpm
         id: pnpm-install
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e
         with:
           version: ${{ matrix.node }}
           cache: ${{ steps.pkgman.outputs.cache }}
@@ -61,11 +61,12 @@ jobs:
       - name: Generate
         run: npx nuxi build --preset github_pages
         env:
-          NUXT_CONTENT_PREVIEW_API: https://api.nuxt.studio
+          NUXT_PUBLIC_STUDIO_API_URL: https://api.nuxt.studio
           NUXT_UI_PRO_LICENSE: ${{ secrets.NUXT_UI_PRO_LICENSE }}
+          NODE_OPTIONS: --max_old_space_size=8192
 
       # Deployment job
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4
+        uses: JamesIves/github-pages-deploy-action@047981260465117a420d282651123a7d5e2bdd7e
         with:
-          folder: docs/.output/public
+          folder: docs/dist
