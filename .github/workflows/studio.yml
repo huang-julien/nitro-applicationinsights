@@ -49,10 +49,6 @@ jobs:
         if: ${{ steps.pkgman.outputs.package_manager == 'pnpm' }}
         name: Install pnpm
         id: pnpm-install
-        
-      - name: Approve build for deps build-scripts
-        run: |
-          pnpm approve-builds
 
       - uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e
         with:
@@ -62,6 +58,11 @@ jobs:
       - name: Install dependencies
         run: ${{ steps.pkgman.outputs.package_manager }} install
 
+      - name: Approve build for deps build-scripts
+        if: ${{ steps.pkgman.outputs.package_manager == 'pnpm' }}
+        run: |
+          pnpm approve-builds
+      
       - name: Generate
         run: npx nuxi build --preset github_pages
         env:
