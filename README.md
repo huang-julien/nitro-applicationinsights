@@ -37,7 +37,7 @@ Et voilà ! You now have application insights node for Nitro
 
 ## Docs
 
-[Read more nitro-applicationinsights documentation](https://huang-julien-nitro-applicationinsights.nuxt.space/)
+[You can read the documentation here](https://nitro-applicationinsights.julien-huang.dev/)
 
 ## Development
 
