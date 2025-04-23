@@ -1,0 +1,43 @@
+# Getting Started
+
+Get applicationinsights on nitro in a few minutes.
+
+## Play online
+
+You can start playing with nitro-applicationinsights in your browser using Stackblitz:
+
+::button-link
+---
+blank: true
+href: https://stackblitz.com/edit/unjs-nitro-ybsjga
+icon: IconStackBlitz
+size: small
+---
+Play on StackBlitz
+::
+
+## Install it on your project
+
+1. Add the module to your dependencies
+
+::code-group
+```bash [npm]
+npm install nitro-applicationinsights
+```
+
+```bash [yarn]
+yarn install nitro-applicationinsights
+```
+
+```bash [pnpm]
+pnpm install nitro-applicationinsights
+```
+::
+
+2. Add the module into your config
+
+```ts [nitro.config.ts]
+export default defineNitroConfig({
+  modules: ['nitro-applicationinsights']
+})
+```

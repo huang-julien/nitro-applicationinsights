@@ -1,0 +1,11 @@
+# nitro-applicationinsights
+
+> applicationinsights for nitro
+
+## Documentation Sets
+
+- [nitro-applicationinsights](https://docs-template.nuxt.dev//llms-full.txt): documentation of nitro-applicationinsights
+
+## Getting Started
+
+- [Getting Started](https://docs-template.nuxt.dev/guide/getting-started): Get applicationinsights on nitro in a few minutes.
