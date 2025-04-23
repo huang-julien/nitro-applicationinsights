@@ -76,5 +76,8 @@
   "peerDependencies": {
     "h3": ">=1.15.1",
     "nitropack": ">=2.11.9"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["better-sqlite3"]
   }
 }
