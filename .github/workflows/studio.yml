@@ -49,8 +49,10 @@ jobs:
         if: ${{ steps.pkgman.outputs.package_manager == 'pnpm' }}
         name: Install pnpm
         id: pnpm-install
-        with:
-          version: 9.15.4
+        
+      - name: Approve build for deps build-scripts
+        run: |
+          pnpm approve-builds
 
       - uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e
         with:
