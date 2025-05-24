@@ -7,6 +7,6 @@
   },
   "dependencies": {
     "nitro-applicationinsights": "workspace:*",
-    "nitropack": "2.11.11"
+    "nitropack": "2.11.12"
   }
 }
