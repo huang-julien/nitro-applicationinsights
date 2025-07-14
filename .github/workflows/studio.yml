@@ -45,7 +45,7 @@ jobs:
           echo "cache=$cache" >> $GITHUB_OUTPUT
           echo "package_manager=$package_manager" >> $GITHUB_OUTPUT
 
-      - uses: pnpm/action-setup@77504a59bc222656ff0605f120aea22f630873cb
+      - uses: pnpm/action-setup@f2b2b233b538f500472c7274c7012f57857d8ce0
         if: ${{ steps.pkgman.outputs.package_manager == 'pnpm' }}
         name: Install pnpm
         id: pnpm-install
