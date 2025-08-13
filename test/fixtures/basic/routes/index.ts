@@ -6,6 +6,6 @@ export default defineTracedEventHandler((event) => {
     return {
         trace: carrier.traceparent,
 
-         parentSpanId: event.otel.span.parentSpanId,
+         parentSpanId: event.otel.span.parentSpanContext.spanId,
     }
 })
