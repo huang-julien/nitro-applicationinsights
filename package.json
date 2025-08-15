@@ -46,7 +46,7 @@
     "@opentelemetry/context-async-hooks": "^2.0.1",
     "@opentelemetry/sdk-trace-node": "^2.0.1",
     "@opentelemetry/semantic-conventions": "^1.36.0",
-    "@types/node": "^22.17.1",
+    "@types/node": "^22.17.2",
     "@vitest/coverage-v8": "^3.2.4",
     "@vitest/ui": "^3.2.4",
     "changelogen": "^0.6.2",
@@ -57,7 +57,7 @@
     "ofetch": "^1.4.1",
     "rollup": "^4.46.2",
     "typescript": "^5.9.2",
-    "unbuild": "^3.6.0",
+    "unbuild": "^3.6.1",
     "vitest": "^3.2.4"
   },
   "packageManager": "pnpm@10.14.0",
