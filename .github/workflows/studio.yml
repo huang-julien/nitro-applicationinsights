@@ -45,12 +45,12 @@ jobs:
           echo "cache=$cache" >> $GITHUB_OUTPUT
           echo "package_manager=$package_manager" >> $GITHUB_OUTPUT
 
-      - uses: pnpm/action-setup@f2b2b233b538f500472c7274c7012f57857d8ce0
+      - uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061
         if: ${{ steps.pkgman.outputs.package_manager == 'pnpm' }}
         name: Install pnpm
         id: pnpm-install
 
-      - uses: actions/setup-node@5e2628c959b9ade56971c0afcebbe5332d44b398
+      - uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903
         with:
           version: ${{ matrix.node }}
           cache: ${{ steps.pkgman.outputs.cache }}
@@ -67,6 +67,6 @@ jobs:
 
       # Deployment job
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@5faf170fee96090bac488007f5181f76944ed188
+        uses: JamesIves/github-pages-deploy-action@9c4279f072d81e90e37e4847f01512390c92509d
         with:
           folder: docs/dist
