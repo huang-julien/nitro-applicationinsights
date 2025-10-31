@@ -46,7 +46,7 @@
     "@opentelemetry/context-async-hooks": "^2.2.0",
     "@opentelemetry/sdk-trace-node": "^2.2.0",
     "@opentelemetry/semantic-conventions": "^1.37.0",
-    "@types/node": "^22.18.13",
+    "@types/node": "^24.9.2",
     "@vitest/coverage-v8": "^4.0.6",
     "@vitest/ui": "^4.0.6",
     "changelogen": "^0.6.2",
