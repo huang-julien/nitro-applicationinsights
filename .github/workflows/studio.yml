@@ -67,6 +67,6 @@ jobs:
 
       # Deployment job
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@9fa3b18fe9b1acc7b4d6abccb59b2e50afd9e305
+        uses: JamesIves/github-pages-deploy-action@3d4d9b15f58f36c5083a7af35b40e8b2c7078144
         with:
           folder: docs/dist
