@@ -55,12 +55,12 @@
     "jiti": "^2.6.1",
     "nitro-applicationinsights": "link:./",
     "ofetch": "^1.5.1",
-    "rollup": "^4.56.0",
+    "rollup": "^4.57.0",
     "typescript": "^5.9.3",
     "unbuild": "^3.6.1",
     "vitest": "^4.0.18"
   },
-  "packageManager": "pnpm@10.28.1",
+  "packageManager": "pnpm@10.28.2",
   "dependencies": {
     "@opentelemetry/instrumentation": "^0.211.0",
     "@opentelemetry/instrumentation-http": "^0.211.0",
@@ -69,8 +69,8 @@
     "defu": "^6.1.4",
     "magic-string": "^0.30.21",
     "mlly": "^1.8.0",
-    "nitro-opentelemetry": "^0.10.1",
-    "nitro-test-utils": "^0.10.1",
+    "nitro-opentelemetry": "^0.10.2",
+    "nitro-test-utils": "^0.11.2",
     "pathe": "^2.0.3"
   },
   "peerDependencies": {
