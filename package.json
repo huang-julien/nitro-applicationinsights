@@ -55,7 +55,7 @@
     "jiti": "^2.6.1",
     "nitro-applicationinsights": "link:./",
     "ofetch": "^1.5.1",
-    "rollup": "^4.57.0",
+    "rollup": "^4.57.1",
     "typescript": "^5.9.3",
     "unbuild": "^3.6.1",
     "vitest": "^4.0.18"
