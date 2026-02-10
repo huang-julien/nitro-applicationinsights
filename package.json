@@ -46,7 +46,7 @@
     "@opentelemetry/context-async-hooks": "^2.5.0",
     "@opentelemetry/sdk-trace-node": "^2.5.0",
     "@opentelemetry/semantic-conventions": "^1.39.0",
-    "@types/node": "^24.10.9",
+    "@types/node": "^24.10.12",
     "@vitest/coverage-v8": "^4.0.18",
     "@vitest/ui": "^4.0.18",
     "changelogen": "^0.6.2",
@@ -60,7 +60,7 @@
     "unbuild": "^3.6.1",
     "vitest": "^4.0.18"
   },
-  "packageManager": "pnpm@10.28.2",
+  "packageManager": "pnpm@10.29.2",
   "dependencies": {
     "@opentelemetry/instrumentation": "^0.211.0",
     "@opentelemetry/instrumentation-http": "^0.211.0",
