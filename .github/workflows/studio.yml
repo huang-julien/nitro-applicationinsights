@@ -50,7 +50,7 @@ jobs:
         name: Install pnpm
         id: pnpm-install
 
-      - uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238
+      - uses: actions/setup-node@d02c89dce7e1ba9ef629ce0680989b3a1cc72edb
         with:
           version: ${{ matrix.node }}
           cache: ${{ steps.pkgman.outputs.cache }}
