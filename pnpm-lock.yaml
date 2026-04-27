@@ -36,8 +36,8 @@ importers:
         specifier: ^0.10.2
         version: 0.10.2(@microlabs/otel-cf-workers@1.0.0-rc.52(@opentelemetry/api@1.9.1))(@opentelemetry/core@2.7.0(@opentelemetry/api@1.9.1))
       nitro-test-utils:
-        specifier: ^0.11.2
-        version: 0.11.2(nitropack@2.13.3(@azure/identity@4.6.0)(@netlify/blobs@9.1.2)(better-sqlite3@11.9.1))(vitest@4.1.5)
+        specifier: ^3.0.0
+        version: 3.0.0(nitro@3.0.0(@azure/identity@4.6.0)(@netlify/blobs@9.1.2)(better-sqlite3@11.9.1)(chokidar@4.0.3)(ioredis@5.10.1)(lru-cache@11.3.5)(vite@7.3.1(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.37.0)(yaml@2.8.2)))(vitest@4.1.5)
       nitropack:
         specifier: '>=2.13.3'
         version: 2.13.3(@azure/identity@4.6.0)(@netlify/blobs@9.1.2)(better-sqlite3@11.9.1)
@@ -68,7 +68,7 @@ importers:
         version: 4.1.5(vitest@4.1.5)
       changelogen:
         specifier: ^0.6.2
-        version: 0.6.2(magicast@0.5.2)
+        version: 0.6.2
       eslint:
         specifier: 9.39.4
         version: 9.39.4(jiti@2.6.1)
@@ -4724,9 +4724,6 @@ packages:
   convert-source-map@2.0.0:
     resolution: {integrity: sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg==}
 
-  cookie-es@1.2.2:
-    resolution: {integrity: sha512-+W7VmiVINB+ywl1HGXJXmrqkOhpKrIiVZV6tQuV54ZyQC7MMuBt81Vc336GMLoHBq5hV/F9eXgt5Mnx0Rha5Fg==}
-
   cookie-es@1.2.3:
     resolution: {integrity: sha512-lXVyvUvrNXblMqzIRrxHb57UUVmqsSWlxqt3XIjCkUP0wDAf6uicO6KMbEgYrMNtEvWgWHwe42CKxPu9MYAnWw==}
 
@@ -4771,6 +4768,14 @@ packages:
 
   crossws@0.3.5:
     resolution: {integrity: sha512-ojKiDvcmByhwa8YYqbQI/hg7MEU0NC03+pSdEq4ZUnZR9xXpwk7E43SMNGkn+JxJGPFtNvQ48+vV2p+P1ml5PA==}
+
+  crossws@0.4.5:
+    resolution: {integrity: sha512-wUR89x/Rw7/8t+vn0CmGDYM9TD6VtARGb0LD5jq2wjtMy1vCP4M+sm6N6TigWeTYvnA8MoW29NqqXD0ep0rfBA==}
+    peerDependencies:
+      srvx: '>=0.11.5'
+    peerDependenciesMeta:
+      srvx:
+        optional: true
 
   css-background-parser@0.1.0:
     resolution: {integrity: sha512-2EZLisiZQ+7m4wwur/qiYJRniHX4K5Tc9w93MT3AS0WS1u5kaZ4FKXlOTBhOjc+CgEgPiGY+fX1yWD8UwpEqUA==}
@@ -5041,10 +5046,6 @@ packages:
 
   dotenv@16.6.1:
     resolution: {integrity: sha512-uBq4egWHTcTt33a72vpSG0z3HnPuIl6NqYcTrKEg2azoEyl2hpW0zqlxysq2pK9HlDIHyHyakeYaYnSAwd8bow==}
-    engines: {node: '>=12'}
-
-  dotenv@17.2.3:
-    resolution: {integrity: sha512-JVUnt+DUIzu87TABbhPmNfVdBDt18BLOWjMUFJMSi/Qqg7NTYtabbvSNJGOJ7afbRuv9D/lngizHtP7QyLQ+9w==}
     engines: {node: '>=12'}
 
   dotenv@17.4.2:
@@ -5473,6 +5474,9 @@ packages:
     resolution: {integrity: sha512-7yAQpD2UMJzLi1Dqv7qFYnPbaPx7ZfFK6PiIxQ4PfkGPyNyl2Ugx+a/umUonmKqjhM4DnfbMvdX6otXq83soQQ==}
     engines: {node: ^12.20 || >= 14.13}
 
+  fetchdts@0.1.7:
+    resolution: {integrity: sha512-YoZjBdafyLIop9lSxXVI33oLD5kN31q4Td+CasofLLYeLXRFeOsuOw0Uo+XNRi9PZlbfdlN2GmRtm4tCEQ9/KA==}
+
   fflate@0.7.4:
     resolution: {integrity: sha512-5u2V/CDW15QM1XbbgS+0DfPxVB+jUKhWEKuuFuHncbk3tEEqzmoXL+2KyOFuKGqOnmdIy0/davWF1CkuwtibCw==}
 
@@ -5732,6 +5736,15 @@ packages:
 
   h3@1.15.9:
     resolution: {integrity: sha512-H7UPnyIupUOYUQu7f2x7ABVeMyF/IbJjqn20WSXpMdnQB260luADUkSgJU7QTWLutq8h3tUayMQ1DdbSYX5LkA==}
+
+  h3@2.0.1-rc.2:
+    resolution: {integrity: sha512-2vS7OETzPDzGQxmmcs6ttu7p0NW25zAdkPXYOr43dn4GZf81uUljJvupa158mcpUGpsQUqIy4O4THWUQT1yVeA==}
+    engines: {node: '>=20.11.1'}
+    peerDependencies:
+      crossws: ^0.4.1
+    peerDependenciesMeta:
+      crossws:
+        optional: true
 
   has-flag@4.0.0:
     resolution: {integrity: sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==}
@@ -6704,16 +6717,36 @@ packages:
     resolution: {integrity: sha512-Nc3loyVASW59W+8fLDZT1lncpG7llffyZ2o0UQLx/Fr20i7P8oP+lE7+TEcFvXj9IUWU6LjB9P3BH+iFGyp+mg==}
     engines: {node: ^14.16.0 || >=16.0.0}
 
+  nf3@0.1.12:
+    resolution: {integrity: sha512-qbMXT7RTGh74MYWPeqTIED8nDW70NXOULVHpdWcdZ7IVHVnAsMV9fNugSNnvooipDc1FMOzpis7T9nXJEbJhvQ==}
+
   nitro-opentelemetry@0.10.2:
     resolution: {integrity: sha512-EuvzH7fX1GQQYOFv3gm20mANYriObMqtyocTW8V6rmLNiDzhFuGWkwzw5ayPcPaULJXWdhWAhM51ZyZsOxsJCw==}
     peerDependencies:
       '@microlabs/otel-cf-workers': 1.0.0-rc.52
 
-  nitro-test-utils@0.11.2:
-    resolution: {integrity: sha512-GR/RJyIedF5abjb0seGHgL5AIEtrdBUuBuciEpOin+aMYWrfND8bS545wxCvZWdsP85GjNpnD+SQcO22GX5sVg==}
+  nitro-test-utils@3.0.0:
+    resolution: {integrity: sha512-iy4UeXZtC60OC4hZAmTP54zu1Ae8HQlOAZE0b2s3r25VbTRDe1WPORQIi90QIKQt+EpqGI1tdFhLK/QUod7/ZA==}
     peerDependencies:
-      nitropack: ^2
+      nitro: ^3
       vitest: ^4
+
+  nitro@3.0.0:
+    resolution: {integrity: sha512-pPrH77/oiYz3q1xGgOYQPEkXERsCi4PkErL2DpHhg4raag3EX7Zh41KFJ0ploSmflmDOPRPeAtC1/19fVrOqoQ==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    deprecated: 'IMPORTANT: please use nitro@3.0.1'
+    hasBin: true
+    peerDependencies:
+      rolldown: '*'
+      vite: ^7
+      xml2js: ^0.6.2
+    peerDependenciesMeta:
+      rolldown:
+        optional: true
+      vite:
+        optional: true
+      xml2js:
+        optional: true
 
   nitropack@2.13.3:
     resolution: {integrity: sha512-C8vO7RxkU0AQ3HbYUumuG6MVM5JjRaBchke/rYFOp3EvrLtTBHZYhDVGECdpa27vNuOYRzm3GtQMn2YDOjDJLA==}
@@ -7561,6 +7594,10 @@ packages:
   remark-stringify@11.0.0:
     resolution: {integrity: sha512-1OSmLd3awB/t8qdoEOMazZkNsfVTeY4fTsgzcQFdXNq8ToTN4ZGwrMnlda4K6smTFKD+GRV6O48i6Z4iKgPPpw==}
 
+  rendu@0.0.6:
+    resolution: {integrity: sha512-nZ512Dw0MxKiIYfCVv8DPe6ig4m0Qt3FOYBJEXrammjIYBBPuHaudc0AGfYx+iyOw2q0itAtPywiVZXtTFCsig==}
+    hasBin: true
+
   require-directory@2.1.1:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}
     engines: {node: '>=0.10.0'}
@@ -7628,6 +7665,9 @@ packages:
     resolution: {integrity: sha512-J9qZyW++QK/09NyN/zeO0dG/1GdGfyp9lV8ajHnRVLfo/uFsbji5mHnDgn/qYdUHyCkM2N+8VyspgZclfAh0eQ==}
     engines: {node: '>=18.0.0', npm: '>=8.0.0'}
     hasBin: true
+
+  rou3@0.7.12:
+    resolution: {integrity: sha512-iFE4hLDuloSWcD7mjdCDhx2bKcIsYbtOTpfH5MHHLSKMOUyjqQXTeZVa289uuwEGEKFoE/BAPbhaU4B774nceg==}
 
   rou3@0.8.1:
     resolution: {integrity: sha512-ePa+XGk00/3HuCqrEnK3LxJW7I0SdNg6EFzKUJG73hMAdDcOUC/i/aSz7LSDwLrGr33kal/rqOGydzwl6U7zBA==}
@@ -7843,6 +7883,11 @@ packages:
 
   srvx@0.11.9:
     resolution: {integrity: sha512-97wWJS6F0KTKAhDlHVmBzMvlBOp5FiNp3XrLoodIgYJpXxgG5tE9rX4Pg7s46n2shI4wtEsMATTS1+rI3/ubzA==}
+    engines: {node: '>=20.16.0'}
+    hasBin: true
+
+  srvx@0.8.16:
+    resolution: {integrity: sha512-hmcGW4CgroeSmzgF1Ihwgl+Ths0JqAJ7HwjP2X7e3JzY7u4IydLMcdnlqGQiQGUswz+PO9oh/KtCpOISIvs9QQ==}
     engines: {node: '>=20.16.0'}
     hasBin: true
 
@@ -8165,6 +8210,13 @@ packages:
   undici-types@7.16.0:
     resolution: {integrity: sha512-Zz+aZWSj8LE6zoxD+xrjh4VfkIG8Ya6LvYkZqtUQGJPZjYl53ypCaUwWqo7eI0x66KBGeRo+mlBEkMSeSZ38Nw==}
 
+  undici@7.25.0:
+    resolution: {integrity: sha512-xXnp4kTyor2Zq+J1FfPI6Eq3ew5h6Vl0F/8d9XU5zZQf1tX9s2Su1/3PiMmUANFULpmksxkClamIZcaUqryHsQ==}
+    engines: {node: '>=20.18.1'}
+
+  unenv@2.0.0-rc.21:
+    resolution: {integrity: sha512-Wj7/AMtE9MRnAXa6Su3Lk0LNCfqDYgfwVjwRFVum9U7wsto1imuHqk4kTm7Jni+5A0Hn7dttL6O/zjvUvoo+8A==}
+
   unenv@2.0.0-rc.24:
     resolution: {integrity: sha512-i7qRCmY42zmCwnYlh9H2SvLEypEFGye5iRmEMKjcGi7zk9UquigRjFtTLz0TYqr0ZGLZhaMHl/foy1bZR+Cwlw==}
 
@@ -8402,6 +8454,80 @@ packages:
       idb-keyval:
         optional: true
       ioredis:
+        optional: true
+      uploadthing:
+        optional: true
+
+  unstorage@2.0.0-alpha.3:
+    resolution: {integrity: sha512-BeoqISVh8jxqnPseHH7/92twe2VkQztrudXg8RFZVbXb4ckkFdpLk1LnNvsUndDltyodBMVxgI6V7JcbJYt2VQ==}
+    peerDependencies:
+      '@azure/app-configuration': ^1.8.0
+      '@azure/cosmos': ^4.2.0
+      '@azure/data-tables': ^13.3.0
+      '@azure/identity': ^4.6.0
+      '@azure/keyvault-secrets': ^4.9.0
+      '@azure/storage-blob': ^12.26.0
+      '@capacitor/preferences': ^6.0.3 || ^7.0.0
+      '@deno/kv': '>=0.9.0'
+      '@netlify/blobs': ^6.5.0 || ^7.0.0 || ^8.1.0 || ^9.0.0 || ^10.0.0
+      '@planetscale/database': ^1.19.0
+      '@upstash/redis': ^1.34.3
+      '@vercel/blob': '>=0.27.1'
+      '@vercel/functions': ^2.2.12 || ^3.0.0
+      '@vercel/kv': ^1.0.1
+      aws4fetch: ^1.0.20
+      chokidar: ^4.0.3
+      db0: '>=0.2.1'
+      idb-keyval: ^6.2.1
+      ioredis: ^5.4.2
+      lru-cache: ^11.2.2
+      mongodb: ^6.20.0
+      ofetch: ^1.4.1
+      uploadthing: ^7.4.4
+    peerDependenciesMeta:
+      '@azure/app-configuration':
+        optional: true
+      '@azure/cosmos':
+        optional: true
+      '@azure/data-tables':
+        optional: true
+      '@azure/identity':
+        optional: true
+      '@azure/keyvault-secrets':
+        optional: true
+      '@azure/storage-blob':
+        optional: true
+      '@capacitor/preferences':
+        optional: true
+      '@deno/kv':
+        optional: true
+      '@netlify/blobs':
+        optional: true
+      '@planetscale/database':
+        optional: true
+      '@upstash/redis':
+        optional: true
+      '@vercel/blob':
+        optional: true
+      '@vercel/functions':
+        optional: true
+      '@vercel/kv':
+        optional: true
+      aws4fetch:
+        optional: true
+      chokidar:
+        optional: true
+      db0:
+        optional: true
+      idb-keyval:
+        optional: true
+      ioredis:
+        optional: true
+      lru-cache:
+        optional: true
+      mongodb:
+        optional: true
+      ofetch:
         optional: true
       uploadthing:
         optional: true
@@ -14030,7 +14156,7 @@ snapshots:
       esbuild: 0.27.3
       load-tsconfig: 0.2.5
 
-  c12@3.0.4(magicast@0.5.2):
+  c12@3.0.4:
     dependencies:
       chokidar: 4.0.3
       confbox: 0.2.4
@@ -14044,15 +14170,13 @@ snapshots:
       perfect-debounce: 1.0.0
       pkg-types: 2.3.0
       rc9: 2.1.2
-    optionalDependencies:
-      magicast: 0.5.2
 
   c12@3.3.3(magicast@0.5.2):
     dependencies:
       chokidar: 5.0.0
       confbox: 0.2.4
       defu: 6.1.7
-      dotenv: 17.2.3
+      dotenv: 17.4.2
       exsolve: 1.0.8
       giget: 2.0.0
       jiti: 2.6.1
@@ -14131,9 +14255,9 @@ snapshots:
 
   change-case@5.4.4: {}
 
-  changelogen@0.6.2(magicast@0.5.2):
+  changelogen@0.6.2:
     dependencies:
-      c12: 3.0.4(magicast@0.5.2)
+      c12: 3.0.4
       confbox: 0.2.2
       consola: 3.4.2
       convert-gitmoji: 0.1.5
@@ -14287,8 +14411,6 @@ snapshots:
 
   convert-source-map@2.0.0: {}
 
-  cookie-es@1.2.2: {}
-
   cookie-es@1.2.3: {}
 
   cookie-es@2.0.0: {}
@@ -14329,6 +14451,10 @@ snapshots:
   crossws@0.3.5:
     dependencies:
       uncrypto: 0.1.3
+
+  crossws@0.4.5(srvx@0.8.16):
+    optionalDependencies:
+      srvx: 0.8.16
 
   css-background-parser@0.1.0: {}
 
@@ -14608,8 +14734,6 @@ snapshots:
     optional: true
 
   dotenv@16.6.1: {}
-
-  dotenv@17.2.3: {}
 
   dotenv@17.4.2: {}
 
@@ -15185,6 +15309,8 @@ snapshots:
       web-streams-polyfill: 3.3.3
     optional: true
 
+  fetchdts@0.1.7: {}
+
   fflate@0.7.4: {}
 
   fflate@0.8.2: {}
@@ -15467,7 +15593,7 @@ snapshots:
 
   h3@1.15.9:
     dependencies:
-      cookie-es: 1.2.2
+      cookie-es: 1.2.3
       crossws: 0.3.5
       defu: 6.1.7
       destr: 2.0.5
@@ -15476,6 +15602,15 @@ snapshots:
       radix3: 1.1.2
       ufo: 1.6.3
       uncrypto: 0.1.3
+
+  h3@2.0.1-rc.2(crossws@0.4.5(srvx@0.8.16)):
+    dependencies:
+      cookie-es: 2.0.1
+      fetchdts: 0.1.7
+      rou3: 0.7.12
+      srvx: 0.8.16
+    optionalDependencies:
+      crossws: 0.4.5(srvx@0.8.16)
 
   has-flag@4.0.0: {}
 
@@ -16732,6 +16867,8 @@ snapshots:
       qs: 6.15.1
     optional: true
 
+  nf3@0.1.12: {}
+
   nitro-opentelemetry@0.10.2(@microlabs/otel-cf-workers@1.0.0-rc.52(@opentelemetry/api@1.9.1))(@opentelemetry/core@2.7.0(@opentelemetry/api@1.9.1)):
     dependencies:
       '@azure/monitor-opentelemetry': 1.15.1
@@ -16760,15 +16897,63 @@ snapshots:
       - encoding
       - supports-color
 
-  nitro-test-utils@0.11.2(nitropack@2.13.3(@azure/identity@4.6.0)(@netlify/blobs@9.1.2)(better-sqlite3@11.9.1))(vitest@4.1.5):
+  nitro-test-utils@3.0.0(nitro@3.0.0(@azure/identity@4.6.0)(@netlify/blobs@9.1.2)(better-sqlite3@11.9.1)(chokidar@4.0.3)(ioredis@5.10.1)(lru-cache@11.3.5)(vite@7.3.1(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.37.0)(yaml@2.8.2)))(vitest@4.1.5):
     dependencies:
-      dotenv: 17.2.3
-      listhen: 1.9.0
-      nitropack: 2.13.3(@azure/identity@4.6.0)(@netlify/blobs@9.1.2)(better-sqlite3@11.9.1)
-      ofetch: 1.5.1
-      pathe: 2.0.3
-      ufo: 1.6.3
+      cookie-es: 2.0.1
+      dotenv: 17.4.2
+      nitro: 3.0.0(@azure/identity@4.6.0)(@netlify/blobs@9.1.2)(better-sqlite3@11.9.1)(chokidar@4.0.3)(ioredis@5.10.1)(lru-cache@11.3.5)(vite@7.3.1(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.37.0)(yaml@2.8.2))
+      ofetch: 2.0.0-alpha.3
       vitest: 4.1.5(@opentelemetry/api@1.9.1)(@types/node@24.12.2)(@vitest/coverage-v8@4.1.5)(@vitest/ui@4.1.5)(vite@7.3.1(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.37.0)(yaml@2.8.2))
+
+  nitro@3.0.0(@azure/identity@4.6.0)(@netlify/blobs@9.1.2)(better-sqlite3@11.9.1)(chokidar@4.0.3)(ioredis@5.10.1)(lru-cache@11.3.5)(vite@7.3.1(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.37.0)(yaml@2.8.2)):
+    dependencies:
+      consola: 3.4.2
+      cookie-es: 2.0.1
+      crossws: 0.4.5(srvx@0.8.16)
+      db0: 0.3.4(better-sqlite3@11.9.1)
+      esbuild: 0.25.12
+      fetchdts: 0.1.7
+      h3: 2.0.1-rc.2(crossws@0.4.5(srvx@0.8.16))
+      jiti: 2.6.1
+      nf3: 0.1.12
+      ofetch: 1.5.1
+      ohash: 2.0.11
+      rendu: 0.0.6
+      rollup: 4.60.2
+      srvx: 0.8.16
+      undici: 7.25.0
+      unenv: 2.0.0-rc.21
+      unstorage: 2.0.0-alpha.3(@azure/identity@4.6.0)(@netlify/blobs@9.1.2)(chokidar@4.0.3)(db0@0.3.4(better-sqlite3@11.9.1))(ioredis@5.10.1)(lru-cache@11.3.5)(ofetch@1.5.1)
+    optionalDependencies:
+      vite: 7.3.1(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.37.0)(yaml@2.8.2)
+    transitivePeerDependencies:
+      - '@azure/app-configuration'
+      - '@azure/cosmos'
+      - '@azure/data-tables'
+      - '@azure/identity'
+      - '@azure/keyvault-secrets'
+      - '@azure/storage-blob'
+      - '@capacitor/preferences'
+      - '@deno/kv'
+      - '@electric-sql/pglite'
+      - '@libsql/client'
+      - '@netlify/blobs'
+      - '@planetscale/database'
+      - '@upstash/redis'
+      - '@vercel/blob'
+      - '@vercel/functions'
+      - '@vercel/kv'
+      - aws4fetch
+      - better-sqlite3
+      - chokidar
+      - drizzle-orm
+      - idb-keyval
+      - ioredis
+      - lru-cache
+      - mongodb
+      - mysql2
+      - sqlite3
+      - uploadthing
 
   nitropack@2.13.3(@azure/identity@4.6.0)(@netlify/blobs@9.1.2)(better-sqlite3@11.9.1):
     dependencies:
@@ -18136,6 +18321,11 @@ snapshots:
       mdast-util-to-markdown: 2.1.2
       unified: 11.0.5
 
+  rendu@0.0.6:
+    dependencies:
+      cookie-es: 2.0.1
+      srvx: 0.8.16
+
   require-directory@2.1.1: {}
 
   require-in-the-middle@7.5.2:
@@ -18222,6 +18412,8 @@ snapshots:
       '@rollup/rollup-win32-x64-gnu': 4.60.2
       '@rollup/rollup-win32-x64-msvc': 4.60.2
       fsevents: 2.3.3
+
+  rou3@0.7.12: {}
 
   rou3@0.8.1: {}
 
@@ -18483,6 +18675,8 @@ snapshots:
   spdx-license-ids@3.0.21: {}
 
   srvx@0.11.9: {}
+
+  srvx@0.8.16: {}
 
   stable-hash-x@0.2.0: {}
 
@@ -18841,6 +19035,16 @@ snapshots:
 
   undici-types@7.16.0: {}
 
+  undici@7.25.0: {}
+
+  unenv@2.0.0-rc.21:
+    dependencies:
+      defu: 6.1.7
+      exsolve: 1.0.8
+      ohash: 2.0.11
+      pathe: 2.0.3
+      ufo: 1.6.3
+
   unenv@2.0.0-rc.24:
     dependencies:
       pathe: 2.0.3
@@ -19113,6 +19317,16 @@ snapshots:
       '@netlify/blobs': 9.1.2
       db0: 0.3.4(better-sqlite3@11.9.1)
       ioredis: 5.10.1
+
+  unstorage@2.0.0-alpha.3(@azure/identity@4.6.0)(@netlify/blobs@9.1.2)(chokidar@4.0.3)(db0@0.3.4(better-sqlite3@11.9.1))(ioredis@5.10.1)(lru-cache@11.3.5)(ofetch@1.5.1):
+    optionalDependencies:
+      '@azure/identity': 4.6.0
+      '@netlify/blobs': 9.1.2
+      chokidar: 4.0.3
+      db0: 0.3.4(better-sqlite3@11.9.1)
+      ioredis: 5.10.1
+      lru-cache: 11.3.5
+      ofetch: 1.5.1
 
   untun@0.1.3:
     dependencies:
@@ -19572,7 +19786,7 @@ snapshots:
       '@poppinss/colors': 4.1.6
       '@poppinss/dumper': 0.7.0
       '@speed-highlight/core': 1.2.14
-      cookie-es: 2.0.0
+      cookie-es: 2.0.1
       youch-core: 0.3.3
 
   youch@4.1.1:
