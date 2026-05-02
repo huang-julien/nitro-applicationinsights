@@ -11,13 +11,13 @@
     "typecheck": "nuxt typecheck"
   },
   "dependencies": {
-    "@iconify-json/lucide": "^1.2.103",
-    "@iconify-json/simple-icons": "^1.2.79",
-    "@iconify-json/vscode-icons": "^1.2.46",
+    "@iconify-json/lucide": "^1.2.105",
+    "@iconify-json/simple-icons": "^1.2.80",
+    "@iconify-json/vscode-icons": "^1.2.47",
     "@nuxt/content": "^3.13.0",
     "@nuxt/image": "^1.11.0",
     "@nuxt/ui-pro": "^3.3.7",
-    "nuxt": "^4.4.2",
+    "nuxt": "^4.4.4",
     "nuxt-llms": "0.2.0",
     "nuxt-og-image": "^5.1.13"
   },
