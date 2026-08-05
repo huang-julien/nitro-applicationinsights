@@ -35,6 +35,7 @@ export default <NitroAppPlugin>(async (nitro) => {
   await nitro.hooks.callHook('applicationinsights:ready', { client: Applicationinsights.defaultClient })
 
   registerInstrumentations({
+    instrumentations,
     tracerProvider: trace.getTracerProvider(),
     meterProvider: metrics.getMeterProvider(),
   });
