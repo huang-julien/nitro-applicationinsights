@@ -60,7 +60,7 @@
     "unbuild": "^3.6.1",
     "vitest": "^4.1.10"
   },
-  "packageManager": "pnpm@10.34.5",
+  "packageManager": "pnpm@11.21.0",
   "dependencies": {
     "@opentelemetry/instrumentation": "^0.221.0",
     "@opentelemetry/instrumentation-http": "^0.221.0",
