@@ -13,14 +13,7 @@ import { defu } from 'defu';
 const instrumentations = [
   new UndiciInstrumentation(),
   new HttpInstrumentation()
-];
-const loadInstrumentations = () => {
-  registerInstrumentations({
-    instrumentations,
-  });
-}
-loadInstrumentations()
-
+]; 
 
 const Applicationinsights = _Applicationinsights as typeof import('applicationinsights')
 
