@@ -2,3 +2,52 @@ packages:
   - './'
   - './docs'
   - './playground'
+catalog:
+  '@iconify-json/lucide': ^1.2.123
+  '@iconify-json/simple-icons': ^1.2.93
+  '@iconify-json/vscode-icons': ^1.2.71
+  '@nuxt/content': ^3.15.2
+  '@nuxt/eslint': ^1.17.0
+  '@nuxt/image': ^1.11.0
+  '@nuxt/ui-pro': ^3.3.7
+  '@opentelemetry/api': ^1.9.1
+  '@opentelemetry/context-async-hooks': ^2.10.0
+  '@opentelemetry/instrumentation': ^0.221.0
+  '@opentelemetry/instrumentation-http': ^0.221.0
+  '@opentelemetry/instrumentation-undici': ^0.31.0
+  '@opentelemetry/sdk-trace-node': ^2.10.0
+  '@opentelemetry/semantic-conventions': ^1.43.0
+  '@types/node': ^24.13.3
+  '@vitest/coverage-v8': ^4.1.10
+  '@vitest/ui': ^4.1.10
+  applicationinsights: ^3.15.1
+  changelogen: ^0.6.2
+  defu: ^6.1.7
+  eslint: 9.39.5
+  eslint-config-unjs: ^0.6.2
+  jiti: ^2.7.0
+  magic-string: ^1.1.1
+  mlly: ^1.8.2
+  nitro-opentelemetry: ^0.10.2
+  nitro-test-utils: ^0.11.2
+  nitropack: 2.13.4
+  nuxt: ^4.4.4
+  nuxt-llms: 0.2.0
+  nuxt-og-image: ^6.0.0
+  ofetch: ^1.5.1
+  pathe: ^2.0.3
+  rollup: ^4.62.4
+  typescript: ^5.9.3
+  unbuild: ^3.6.1
+  vitest: ^4.1.10
+  vue-tsc: ^3.3.9
+allowBuilds:
+  '@parcel/watcher': false
+  better-sqlite3: true
+  esbuild: false
+  protobufjs: false
+  sharp: false
+  unrs-resolver: false
+  vue-demi: false
+overrides:
+  'electron-to-chromium': 1.5.400
