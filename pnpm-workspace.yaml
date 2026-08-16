@@ -10,3 +10,5 @@ allowBuilds:
   sharp: false
   unrs-resolver: false
   vue-demi: false
+overrides:
+  'electron-to-chromium': 1.5.400
