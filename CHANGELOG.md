@@ -1,6 +1,52 @@
 # Changelog
 
 
+## v1.2.0
+
+[compare changes](https://github.com/huang-julien/nitro-applicationinsights/compare/v1.1.2...v1.2.0)
+
+### 🚀 Enhancements
+
+- **docs:** Update template ([23ad10f](https://github.com/huang-julien/nitro-applicationinsights/commit/23ad10f))
+
+### 🩹 Fixes
+
+- **docs:** Fix ui pro ([f2f3758](https://github.com/huang-julien/nitro-applicationinsights/commit/f2f3758))
+- Bind instrumentations to the tracer provider after setup ([#290](https://github.com/huang-julien/nitro-applicationinsights/pull/290))
+
+### 📖 Documentation
+
+- Create SECURITY.md ([eb9a65e](https://github.com/huang-julien/nitro-applicationinsights/commit/eb9a65e))
+- Move to nuxt ui pro template ([#163](https://github.com/huang-julien/nitro-applicationinsights/pull/163))
+- Update documentation link ([91174af](https://github.com/huang-julien/nitro-applicationinsights/commit/91174af))
+
+### 🏡 Chore
+
+- Byebye CJS ([#158](https://github.com/huang-julien/nitro-applicationinsights/pull/158))
+- **deployment:** Remove workflow file ([98e73fd](https://github.com/huang-julien/nitro-applicationinsights/commit/98e73fd))
+- **deployment:** Add workflow file ([2587c91](https://github.com/huang-julien/nitro-applicationinsights/commit/2587c91))
+- Up nuxt ([#166](https://github.com/huang-julien/nitro-applicationinsights/pull/166))
+- Set workspace ([55db66b](https://github.com/huang-julien/nitro-applicationinsights/commit/55db66b))
+- **playground:** Remove prepare ([7f6690b](https://github.com/huang-julien/nitro-applicationinsights/commit/7f6690b))
+- **deployment:** Update workflow file ([a5b2f85](https://github.com/huang-julien/nitro-applicationinsights/commit/a5b2f85))
+
+### 🤖 CI
+
+- Update license date and add @huang-julien ([5072c5b](https://github.com/huang-julien/nitro-applicationinsights/commit/5072c5b))
+- Use hash commit to reference action ([#159](https://github.com/huang-julien/nitro-applicationinsights/pull/159))
+- **studio:** Fix ci ([85954eb](https://github.com/huang-julien/nitro-applicationinsights/commit/85954eb))
+- **studio:** Fix deployement ([33a7c1e](https://github.com/huang-julien/nitro-applicationinsights/commit/33a7c1e))
+- **studio:** Fix branch trigger ([c3a6ba4](https://github.com/huang-julien/nitro-applicationinsights/commit/c3a6ba4))
+- **studio:** Set pnpm to 9 ([04acbac](https://github.com/huang-julien/nitro-applicationinsights/commit/04acbac))
+- **studio:** Run pnpm approve-builds ([714cac0](https://github.com/huang-julien/nitro-applicationinsights/commit/714cac0))
+- **studio:** Fix approve-builds order ([cc4e2d3](https://github.com/huang-julien/nitro-applicationinsights/commit/cc4e2d3))
+- **studio:** Use onlyBuiltDependencies ([19f547f](https://github.com/huang-julien/nitro-applicationinsights/commit/19f547f))
+
+### ❤️ Contributors
+
+- Joel Fillmore ([@joelfillmore](https://github.com/joelfillmore))
+- Julien Huang ([@huang-julien](https://github.com/huang-julien))
+
 ## v1.1.2
 
 [compare changes](https://github.com/huang-julien/nitro-applicationinsights/compare/v1.1.1...v1.1.2)
