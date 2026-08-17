@@ -1,66 +1,77 @@
-import type { NitroAppPlugin } from 'nitropack'
+import type { NitroApp, NitroAppPlugin } from 'nitropack'
 import type { TNitroAppInsightsConfig } from '../types'
 import { useRuntimeConfig } from '#imports'
-import _Applicationinsights from 'applicationinsights'
 import { metrics, trace, } from "@opentelemetry/api";
-import { registerInstrumentations } from "@opentelemetry/instrumentation";
-import { UndiciInstrumentation } from "@opentelemetry/instrumentation-undici"
-import { HttpInstrumentation } from "@opentelemetry/instrumentation-http"
-import { SEMATTRS_HTTP_URL, SEMATTRS_HTTP_HOST, SEMATTRS_HTTP_METHOD, SEMATTRS_HTTP_ROUTE, SEMATTRS_HTTP_SCHEME, SEMATTRS_HTTP_STATUS_CODE, OTEL_STATUS_CODE_VALUE_OK, OTEL_STATUS_CODE_VALUE_ERROR } from "@opentelemetry/semantic-conventions"
+import { SEMATTRS_HTTP_URL, SEMATTRS_HTTP_HOST, SEMATTRS_HTTP_METHOD, SEMATTRS_HTTP_ROUTE, SEMATTRS_HTTP_SCHEME, SEMATTRS_HTTP_STATUS_CODE } from "@opentelemetry/semantic-conventions"
 import { getResponseStatus, getRequestURL, getRequestProtocol } from 'h3'
 import { defu } from 'defu';
 
-const instrumentations = [
-  new UndiciInstrumentation(),
-  new HttpInstrumentation()
-];
-const loadInstrumentations = () => {
-  registerInstrumentations({
-    instrumentations,
-  });
-}
-loadInstrumentations()
-
-
-const Applicationinsights = _Applicationinsights as typeof import('applicationinsights')
-
-export default <NitroAppPlugin>(async (nitro) => {
-  const { applicationinsights: config } = useRuntimeConfig()
-
-  await nitro.hooks.callHook('applicationinsights:config', defu(config, {}))
-
-  const configuration = setup(config)
-  await nitro.hooks.callHook('applicationinsights:setup', { client: Applicationinsights.defaultClient, configuration })
-  configuration.start()
-  await nitro.hooks.callHook('applicationinsights:ready', { client: Applicationinsights.defaultClient })
-
-  registerInstrumentations({
-    instrumentations,
-    tracerProvider: trace.getTracerProvider(),
-    meterProvider: metrics.getMeterProvider(),
-  });
-  
-  nitro.hooks.hook('otel:span:end', ({event}) => {
-    event.otel.span.setAttributes({
-      [SEMATTRS_HTTP_STATUS_CODE]: getResponseStatus(event),
+export default <NitroAppPlugin>((nitro) => {
+  let enabled = false
+  const ready = initialize(nitro)
+    .then((started) => { enabled = started === true })
+    .catch((error) => {
+      nitro.captureError(error, { tags: ['applicationinsights'] })
     })
-  })
 
-  // azure app insights seems to be relying on the deprecated attributes
-  nitro.hooks.hook('request', async (event) => {
+  // block requests until the SDK is initialized
+  const unhook = nitro.hooks.hook('request', () => ready)
+  ready.finally(unhook)
+ 
+  nitro.hooks.hook('otel:span:end', async ({ event }) => {
+    if (!enabled) { return }
+
     const requestURL = getRequestURL(event)
     event.otel.span.setAttributes({
       [SEMATTRS_HTTP_ROUTE]: (await nitro.h3App.resolve(event.path))?.route || event.path,
       [SEMATTRS_HTTP_URL]: event.path,
       [SEMATTRS_HTTP_METHOD]: event.method,
       [SEMATTRS_HTTP_SCHEME]: getRequestProtocol(event),
-      [SEMATTRS_HTTP_HOST]: requestURL.host, 
+      [SEMATTRS_HTTP_HOST]: requestURL.host,
+      [SEMATTRS_HTTP_STATUS_CODE]: getResponseStatus(event),
     })
   })
 })
 
+async function initialize(nitro: NitroApp): Promise<boolean> {
+  const config = defu(useRuntimeConfig().applicationinsights, {}) as TNitroAppInsightsConfig
 
-export function setup(config: TNitroAppInsightsConfig) {
+  await nitro.hooks.callHook('applicationinsights:config', config)
+
+  // applicationinsights use the connection string from the config or from the environment variables
+  const connectionString = config.connectionString
+    || process.env.APPLICATIONINSIGHTS_CONNECTION_STRING
+    || process.env.APPINSIGHTS_INSTRUMENTATIONKEY
+
+  // skip loading the whole applicationinsights graph when telemetry cannot be sent anywhere
+  if (!connectionString) { return false }
+
+  const [appInsightsModule, { registerInstrumentations }, { UndiciInstrumentation }, { HttpInstrumentation }] = await Promise.all([
+    import('applicationinsights'),
+    import('@opentelemetry/instrumentation'),
+    import('@opentelemetry/instrumentation-undici'),
+    import('@opentelemetry/instrumentation-http'),
+  ])
+  const Applicationinsights = (appInsightsModule.default ?? appInsightsModule) as typeof import('applicationinsights')
+
+  const configuration = setup(Applicationinsights, config)
+  await nitro.hooks.callHook('applicationinsights:setup', { client: Applicationinsights.defaultClient, configuration })
+  configuration.start()
+  await nitro.hooks.callHook('applicationinsights:ready', { client: Applicationinsights.defaultClient })
+
+  registerInstrumentations({
+    instrumentations: [
+      new UndiciInstrumentation(),
+      new HttpInstrumentation(),
+    ],
+    tracerProvider: trace.getTracerProvider(),
+    meterProvider: metrics.getMeterProvider(),
+  });
+  return true
+}
+
+
+function setup(Applicationinsights: typeof import('applicationinsights'), config: TNitroAppInsightsConfig) {
   // Setup Application Insights using the instrumentation key from the environment variables
   const configuration = Applicationinsights.setup(config.connectionString)
 
