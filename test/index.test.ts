@@ -50,3 +50,11 @@ describe('trace', () => {
     expect(data!.dependencyTrace.split('-')[1]).toBe(data!.trace.split('-')[1])
   })
 })
+
+describe('hooks', () => {
+  it('expect config, setup and ready hooks to be called in order with their payloads', async () => {
+    const { data } = await $fetch<{ hooks: string[] }>('/hooks')
+
+    expect(data!.hooks).toEqual(['config:true', 'setup:true', 'ready:true'])
+  })
+})
