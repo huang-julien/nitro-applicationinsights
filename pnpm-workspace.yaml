@@ -18,8 +18,8 @@ catalog:
   '@opentelemetry/sdk-trace-node': ^2.10.0
   '@opentelemetry/semantic-conventions': ^1.43.0
   '@types/node': ^24.13.3
-  '@vitest/coverage-v8': ^4.1.11
-  '@vitest/ui': ^4.1.11
+  '@vitest/coverage-v8': ^5.0.0
+  '@vitest/ui': ^5.0.0
   applicationinsights: ^3.16.0
   changelogen: ^0.6.2
   defu: ^6.1.7
@@ -39,7 +39,7 @@ catalog:
   rollup: ^4.62.5
   typescript: ^5.9.3
   unbuild: ^3.6.1
-  vitest: ^4.1.11
+  vitest: ^5.0.0
   vue-tsc: ^3.3.10
 allowBuilds:
   '@parcel/watcher': false
