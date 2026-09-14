@@ -37,7 +37,7 @@ catalog:
   ofetch: ^1.5.1
   pathe: ^2.0.3
   rollup: ^4.63.1
-  typescript: ^5.9.3
+  typescript: ^7.0.2
   unbuild: ^3.6.1
   vitest: ^5.0.0
   vue-tsc: ^3.3.11
