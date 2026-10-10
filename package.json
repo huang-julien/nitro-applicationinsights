@@ -74,7 +74,7 @@
     "pathe": "catalog:"
   },
   "peerDependencies": {
-    "h3": ">=1.15.11",
+    "h3": ">=2.0.2",
     "nitropack": ">=2.13.4"
   }
 }
