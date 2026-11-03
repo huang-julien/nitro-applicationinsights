@@ -17,7 +17,7 @@ catalog:
   '@opentelemetry/instrumentation-undici': ^0.32.0
   '@opentelemetry/sdk-trace-node': ^2.11.0
   '@opentelemetry/semantic-conventions': ^1.43.0
-  '@types/node': ^24.13.4
+  '@types/node': ^26.6.6
   '@vitest/coverage-v8': ^5.0.0
   '@vitest/ui': ^5.0.0
   applicationinsights: ^3.16.0
